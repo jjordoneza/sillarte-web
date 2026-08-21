@@ -6,7 +6,7 @@ usadas en los bloques grandes/inmersivos del sitio, con estos nombres exactos:
 - `hero.jpg` — conjunto completo, sección Hero
 - `feature.jpg` — detalle de materiales, sección "Por qué Sillarte"
 - `closing.jpg` — mesa Cálida, sección de cierre
-- `pieza-mesa-tulipa-calida.jpg`
+- `pieza-mesa-perla.jpg`
 - `pieza-banco-alto-calida.jpg`
 - `pieza-silla-concha-camel.jpg`
 - `pieza-silla-concha-gris.jpg`
