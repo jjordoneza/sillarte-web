@@ -9,17 +9,39 @@ export type Product = {
   detail: string;
   image: string;
   scene: string;
+  // Ficha técnica y descripciones completas (opcionales): se van llenando
+  // pieza por pieza a medida que llega la información real de cada producto.
+  // Aún no se muestran en la landing; quedan listas para una futura página
+  // de detalle de producto.
+  ficha?: Record<string, string>;
+  descripcionCorta?: string;
+  descripcionLarga?: string;
 };
 
 export const products: Product[] = [
   {
-    slug: "mesa-tulipa-calida",
-    name: 'Mesa tulipa "Cálida"',
+    slug: "mesa-perla",
+    name: 'Mesa "Perla"',
     ref: "SM-01",
     category: "Mesas",
-    detail: "Mármol + base negra",
-    image: "/products/mesa-tulipa-calida.png",
-    scene: "/scenes/pieza-mesa-tulipa-calida.jpg",
+    detail: "Tablero marmoleado hueso, base negra",
+    image: "/products/mesa-perla.png",
+    scene: "/scenes/pieza-mesa-perla.jpg",
+    ficha: {
+      Alto: "74 cm",
+      "Diámetro tablero": "70 cm",
+      "Grosor del tablero": "1,8 cm",
+      "Peso de la pieza": "8,3 kg",
+      "Material tablero": "MDF de alta densidad, acabado marmoleado tono hueso",
+      "Material base": "Acero, pedestal único, recubrimiento en polvo negro",
+      "Protección de piso": "Sí, borde plástico en la base",
+      Ensamble: "Requiere ensamble, herramientas incluidas",
+      "Colores disponibles": "Tablero marmoleado hueso / Base negra",
+    },
+    descripcionCorta:
+      "Mesa redonda de pedestal con tablero marmoleado en tono hueso y base en acero negro. Compacta, resistente y lista para combinar con el resto de la familia Cálida.",
+    descripcionLarga:
+      'Redonda, marmoleada, de pedestal — la protagonista compacta de cualquier montaje. Una mesa de líneas limpias pensada para espacios donde cada centímetro cuenta. Su tablero de 70 cm de diámetro con acabado marmoleado en tono hueso se apoya sobre una base pedestal única en acero negro, liberando espacio y facilitando el movimiento a su alrededor. Tablero en MDF de alta densidad, resistente a golpes, humedad y deformaciones. Base en acero con recubrimiento en polvo, antióxido, con protectores de piso que evitan rayones en porcelanato o madera. Ensamble sencillo con herramientas incluidas, lista para usar en minutos. Hace parte de la familia Cálida: combina directamente con las banquetas de barra, la banca y las sillas de la colección, permitiendo a distribuidores y tiendas ofrecer un conjunto completo con una sola paleta (hueso, camel, gris, negro y detalles dorados). Disponible con condiciones especiales de precio por volumen para reventa.',
   },
   {
     slug: "banco-alto-calida",

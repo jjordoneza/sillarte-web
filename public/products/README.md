@@ -3,7 +3,7 @@
 Coloca aquí los recortes PNG con fondo transparente usados en tarjetas de
 producto sobre fondos de color, con estos nombres exactos:
 
-- `mesa-tulipa-calida.png`
+- `mesa-perla.png`
 - `banco-alto-calida.png`
 - `silla-concha-camel.png`
 - `silla-concha-gris.png`
