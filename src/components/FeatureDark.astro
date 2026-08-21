@@ -1,0 +1,93 @@
+---
+import Medio from "@/components/Medio.astro";
+
+const puntos = [
+  {
+    titulo: "Colección coordinada",
+    texto: "Mesas, bancos y sillas diseñados para combinar entre sí en un mismo espacio, sin esfuerzo.",
+  },
+  {
+    titulo: "Materiales que se ven costosos",
+    texto: "Mármol, metal y tapizados seleccionados para lograr un acabado premium a un precio accesible.",
+  },
+  {
+    titulo: "Respaldo de stock",
+    texto: "Inventario disponible para pedidos de mayoreo, con reposición constante de la colección.",
+  },
+];
+---
+
+<section class="feature seccion seccion--oscura sobre-oscuro" id="destacados-intro">
+  <div class="contenedor feature__grid">
+    <div class="feature__texto">
+      <p class="etiqueta etiqueta--sobre-oscuro reveal">Por qué Sillarte</p>
+      <h2 class="titular feature__titulo reveal">
+        Una colección construida para verse <em>impecable</em> desde la primera pieza.
+      </h2>
+
+      <ul class="feature__lista reveal">
+        {puntos.map((punto) => (
+          <li>
+            <h3>{punto.titulo}</h3>
+            <p>{punto.texto}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <Medio
+      src="/scenes/feature.jpg"
+      alt="Conjunto de la colección Cálida mostrando materiales y acabados en detalle"
+      marcador="Escena de estudio — Detalle de materiales"
+      class="feature__medio reveal"
+    />
+  </div>
+</section>
+
+<style>
+  .feature__grid {
+    display: grid;
+    gap: clamp(2.5rem, 5vw, 4rem);
+    align-items: center;
+  }
+
+  .feature__titulo {
+    margin-top: 1rem;
+    font-size: clamp(2rem, 4vw, 3.25rem);
+    max-width: 16ch;
+  }
+
+  .feature__lista {
+    margin-top: 2.5rem;
+    display: grid;
+    gap: 1.75rem;
+  }
+
+  .feature__lista li {
+    border-top: 1px solid rgba(242, 235, 222, 0.16);
+    padding-top: 1.25rem;
+  }
+
+  .feature__lista h3 {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    color: var(--hueso);
+  }
+
+  .feature__lista p {
+    margin-top: 0.5rem;
+    color: var(--hueso-suave);
+    max-width: 42ch;
+  }
+
+  .feature :global(.feature__medio) {
+    aspect-ratio: 4 / 5;
+    border-radius: 1rem;
+  }
+
+  @media (min-width: 900px) {
+    .feature__grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+</style>

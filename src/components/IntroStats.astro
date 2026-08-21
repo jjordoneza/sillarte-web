@@ -1,0 +1,68 @@
+---
+const stats = [
+  { valor: "04", etiqueta: "Tonos que combinan entre sí" },
+  { valor: "06+", etiqueta: "Piezas en la colección" },
+  { valor: "02", etiqueta: "Canales: mayoreo y detal" },
+];
+---
+
+<section class="intro seccion seccion--clara">
+  <div class="contenedor intro__grid">
+    <p class="etiqueta reveal">La colección</p>
+
+    <h2 class="titular intro__titulo reveal">
+      Cálida es una colección pensada para que cada pieza combine con las demás:
+      <em class="acento-dorado">un solo lenguaje</em>, cuatro tonos, infinitas combinaciones.
+    </h2>
+
+    <dl class="intro__stats reveal">
+      {stats.map((stat) => (
+        <div class="intro__stat">
+          <dt class="intro__valor">{stat.valor}</dt>
+          <dd class="intro__etiqueta">{stat.etiqueta}</dd>
+        </div>
+      ))}
+    </dl>
+  </div>
+</section>
+
+<style>
+  .intro__grid {
+    display: grid;
+    gap: 3rem;
+  }
+
+  .intro__titulo {
+    font-size: clamp(1.75rem, 3.6vw, 3rem);
+    max-width: 42ch;
+  }
+
+  .intro__stats {
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid var(--linea);
+  }
+
+  .intro__valor {
+    font-family: var(--font-display);
+    font-size: clamp(2.25rem, 5vw, 3.5rem);
+    color: var(--dorado-texto);
+  }
+
+  .intro__etiqueta {
+    margin: 0.5rem 0 0;
+    font-size: 0.85rem;
+    color: var(--gris);
+    max-width: 22ch;
+  }
+
+  @media (max-width: 700px) {
+    .intro__stats {
+      grid-template-columns: 1fr;
+      gap: 1.75rem;
+    }
+  }
+</style>

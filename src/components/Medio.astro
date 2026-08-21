@@ -1,0 +1,30 @@
+---
+// Componente de imagen con marcador de posición.
+// Mientras las fotos reales no existan en /public/products o /public/scenes,
+// muestra una etiqueta descriptiva en lugar del ícono de imagen rota.
+interface Props {
+  src: string;
+  alt: string;
+  marcador: string;
+  class?: string;
+  loading?: "lazy" | "eager";
+  fetchpriority?: "high" | "low" | "auto";
+}
+
+const { src, alt, marcador, class: clase = "", loading = "lazy", fetchpriority = "auto" } = Astro.props;
+---
+
+<div class:list={["medio", clase]}>
+  <img
+    src={src}
+    alt={alt}
+    loading={loading}
+    fetchpriority={fetchpriority}
+    decoding="async"
+    onerror="this.classList.add('medio__img--error')"
+  />
+  <div class="medio__marcador" aria-hidden="true">
+    <span>Foto pendiente</span>
+    <span>{marcador}</span>
+  </div>
+</div>
