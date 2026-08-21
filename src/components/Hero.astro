@@ -1,0 +1,162 @@
+---
+import Medio from "@/components/Medio.astro";
+import { whatsappLink } from "@/data/site";
+---
+
+<section class="hero" aria-label="Presentación de la colección Cálida">
+  <Medio
+    src="/scenes/hero.jpg"
+    alt="Conjunto de mesa, banco y sillas de la colección Cálida en un estudio con luz cálida"
+    marcador="Escena de estudio — Hero, conjunto completo"
+    class="hero__medio medio--sobre-oscuro"
+    loading="eager"
+    fetchpriority="high"
+  />
+  <div class="hero__degradado" aria-hidden="true"></div>
+
+  <div class="hero__contenido contenedor sobre-oscuro">
+    <p class="etiqueta etiqueta--sobre-oscuro reveal">Colección 2026 — Neutros contemporáneos</p>
+
+    <h1 class="titular hero__titulo reveal">
+      Diseño que se ve <em>caro</em>,<br />cuesta accesible.
+    </h1>
+
+    <p class="hero__subtitulo reveal"><em>Una colección que combina entre sí.</em></p>
+
+    <div class="hero__acciones reveal">
+      <a href="#destacados" class="boton boton--dorado">Ver la colección</a>
+      <a
+        href={whatsappLink("Hola, quiero comprar al por mayor la colección Cálida de Sillarte.")}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="boton boton--claro"
+      >
+        Comprar al por mayor
+      </a>
+    </div>
+  </div>
+
+  <div class="hero__scroll" aria-hidden="true">
+    <span></span>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    min-height: 100svh;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+    color: var(--hueso);
+  }
+
+  .hero :global(.hero__medio) {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  .hero :global(.hero__medio img) {
+    animation: zoom-lento 18s var(--ease) forwards;
+  }
+
+  @keyframes zoom-lento {
+    from {
+      transform: scale(1);
+    }
+    to {
+      transform: scale(1.08);
+    }
+  }
+
+  .hero__degradado {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(
+      to top,
+      rgba(20, 18, 16, 0.92) 0%,
+      rgba(20, 18, 16, 0.55) 40%,
+      rgba(20, 18, 16, 0.15) 65%,
+      rgba(20, 18, 16, 0.35) 100%
+    );
+  }
+
+  .hero__contenido {
+    position: relative;
+    z-index: 2;
+    padding-block: clamp(6rem, 16vw, 9rem) clamp(3.5rem, 8vw, 5rem);
+  }
+
+  .hero__titulo {
+    margin-top: 1.25rem;
+    font-size: clamp(2.75rem, 7vw, 6.5rem);
+    max-width: 20ch;
+  }
+
+  .hero__subtitulo {
+    margin-top: 1.5rem;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(1.15rem, 2vw, 1.5rem);
+    color: var(--dorado-claro);
+  }
+
+  .hero__acciones {
+    margin-top: 2.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .hero__scroll {
+    position: absolute;
+    bottom: 1.75rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    width: 1px;
+    height: 46px;
+    background: rgba(242, 235, 222, 0.3);
+    overflow: hidden;
+  }
+
+  .hero__scroll span {
+    position: absolute;
+    top: -100%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--dorado-claro);
+    animation: recorrer 2.4s ease-in-out infinite;
+  }
+
+  @keyframes recorrer {
+    50% {
+      top: 0;
+    }
+    100% {
+      top: 100%;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero :global(.hero__medio img) {
+      animation: none;
+    }
+    .hero__scroll span {
+      animation: none;
+      top: 0;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .hero__acciones {
+      flex-direction: column;
+    }
+    .hero__acciones .boton {
+      width: 100%;
+    }
+  }
+</style>

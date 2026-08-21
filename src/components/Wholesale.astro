@@ -1,0 +1,232 @@
+---
+import { siteConfig } from "@/data/site";
+
+const beneficios = [
+  "Precios de mayoreo desde 6 unidades por referencia",
+  "Catálogo con fichas técnicas, medidas y materiales",
+  "Asesoría para combinar piezas según tu espacio",
+  "Despachos a todo el país con seguimiento del pedido",
+];
+---
+
+<section class="mayoreo seccion seccion--oscura sobre-oscuro" id="mayoreo">
+  <div class="contenedor mayoreo__grid">
+    <div class="mayoreo__texto">
+      <p class="etiqueta etiqueta--sobre-oscuro reveal">Mayoreo</p>
+      <h2 class="titular mayoreo__titulo reveal">
+        Amoblamos tu <em class="acento-dorado">café, restaurante u hotel</em> con una colección que ya combina.
+      </h2>
+      <p class="mayoreo__copy reveal">
+        Trabajamos con revendedores, cafés, restaurantes y hoteles que buscan mobiliario con diseño
+        coordinado, buenos tiempos de entrega y precios competitivos por volumen.
+      </p>
+
+      <ul class="mayoreo__beneficios reveal">
+        {beneficios.map((beneficio) => (
+          <li>{beneficio}</li>
+        ))}
+      </ul>
+
+      <!-- El catálogo PDF aún no existe: colocar el archivo final en /public/catalogo.pdf -->
+      <a href="/catalogo.pdf" class="boton boton--claro mayoreo__descarga reveal" download>
+        Descargar catálogo PDF
+      </a>
+    </div>
+
+    <form class="mayoreo__form reveal" id="form-cotizacion" aria-labelledby="form-titulo">
+      <h3 id="form-titulo">Solicita tu cotización</h3>
+
+      <div class="mayoreo__campo">
+        <label for="nombre-negocio">Nombre y negocio</label>
+        <input type="text" id="nombre-negocio" name="nombre-negocio" required autocomplete="name" />
+      </div>
+
+      <div class="mayoreo__campo">
+        <label for="contacto">Teléfono o correo de contacto</label>
+        <input type="text" id="contacto" name="contacto" required autocomplete="tel" />
+      </div>
+
+      <div class="mayoreo__campo">
+        <label for="interes">Pieza de interés</label>
+        <select id="interes" name="interes" required>
+          <option value="">Selecciona una opción</option>
+          <option value="Conjuntos">Conjuntos</option>
+          <option value="Mesa tulipa Cálida (SM-01)">Mesa tulipa Cálida (SM-01)</option>
+          <option value="Banco alto Cálida (SB-01)">Banco alto Cálida (SB-01)</option>
+          <option value="Silla Concha (SC-02)">Silla Concha (SC-02)</option>
+          <option value="Silla Barril (SA-03)">Silla Barril (SA-03)</option>
+          <option value="Silla Abanico (SF-04)">Silla Abanico (SF-04)</option>
+          <option value="Toda la colección">Toda la colección</option>
+        </select>
+      </div>
+
+      <div class="mayoreo__campo">
+        <label for="cantidad">Cantidad aproximada</label>
+        <input type="number" id="cantidad" name="cantidad" min="1" required />
+      </div>
+
+      <div class="mayoreo__acciones">
+        <button type="submit" class="boton boton--dorado" data-envio="whatsapp">Enviar por WhatsApp</button>
+        <button type="submit" class="boton boton--linea mayoreo__boton-mail" data-envio="mail">Enviar por correo</button>
+      </div>
+
+      <p class="mayoreo__precio-nota">Precios de mayoreo: <strong>$—</strong> (según referencia y cantidad).</p>
+    </form>
+  </div>
+</section>
+
+<style>
+  .mayoreo__grid {
+    display: grid;
+    gap: clamp(2.5rem, 5vw, 4rem);
+  }
+
+  .mayoreo__titulo {
+    margin-top: 1rem;
+    font-size: clamp(2rem, 4.5vw, 3.5rem);
+    max-width: 18ch;
+  }
+
+  .mayoreo__copy {
+    margin-top: 1.5rem;
+    max-width: 46ch;
+    color: var(--hueso-suave);
+    font-size: 1.05rem;
+    line-height: 1.7;
+  }
+
+  .mayoreo__beneficios {
+    margin-top: 2rem;
+    display: grid;
+    gap: 0.9rem;
+  }
+
+  .mayoreo__beneficios li {
+    padding-left: 1.5rem;
+    position: relative;
+    color: var(--hueso-suave);
+    font-size: 0.95rem;
+  }
+
+  .mayoreo__beneficios li::before {
+    content: "✦";
+    position: absolute;
+    left: 0;
+    color: var(--dorado-claro);
+    font-size: 0.75rem;
+    top: 0.35rem;
+  }
+
+  .mayoreo__descarga {
+    margin-top: 2.5rem;
+  }
+
+  .mayoreo__form {
+    background: var(--carbon-2);
+    border: 1px solid rgba(242, 235, 222, 0.12);
+    border-radius: 1.25rem;
+    padding: clamp(1.75rem, 4vw, 2.5rem);
+    display: grid;
+    gap: 1.25rem;
+    align-self: start;
+  }
+
+  .mayoreo__form h3 {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    color: var(--hueso);
+  }
+
+  .mayoreo__campo {
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  .mayoreo__campo label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--hueso-suave);
+  }
+
+  .mayoreo__campo input,
+  .mayoreo__campo select {
+    width: 100%;
+    padding: 0.85rem 1rem;
+    border-radius: 0.6rem;
+    border: 1px solid rgba(242, 235, 222, 0.22);
+    background: var(--carbon);
+    color: var(--hueso);
+    font-family: var(--font-ui);
+    font-size: 0.95rem;
+  }
+
+  .mayoreo__campo select {
+    appearance: none;
+  }
+
+  .mayoreo__campo input::placeholder {
+    color: var(--gris);
+  }
+
+  .mayoreo__acciones {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem;
+    margin-top: 0.5rem;
+  }
+
+  .mayoreo__boton-mail {
+    color: var(--hueso);
+    border-color: rgba(242, 235, 222, 0.4);
+  }
+
+  .mayoreo__boton-mail:hover {
+    background: rgba(242, 235, 222, 0.12);
+  }
+
+  .mayoreo__precio-nota {
+    font-size: 0.78rem;
+    color: var(--hueso-suave);
+  }
+
+  @media (min-width: 960px) {
+    .mayoreo__grid {
+      grid-template-columns: 1.05fr 0.95fr;
+    }
+  }
+</style>
+
+<script is:inline define:vars={{ whatsappNumber: siteConfig.whatsappNumber, email: siteConfig.email }}>
+  // Envía la solicitud de cotización por WhatsApp o correo, según el botón usado.
+  // NOTA: `whatsappNumber` y `email` vienen de src/data/site.ts — actualizarlos ahí.
+  const form = document.getElementById("form-cotizacion");
+
+  form?.addEventListener("submit", (event) => {
+    const submitter = event.submitter;
+    const via = submitter?.dataset.envio ?? "whatsapp";
+    event.preventDefault();
+
+    const data = new FormData(form);
+    const nombre = data.get("nombre-negocio");
+    const contacto = data.get("contacto");
+    const interes = data.get("interes");
+    const cantidad = data.get("cantidad");
+
+    const mensaje =
+      `Hola, quiero cotizar al por mayor la colección Cálida de Sillarte.\n` +
+      `Nombre/negocio: ${nombre}\n` +
+      `Contacto: ${contacto}\n` +
+      `Interés: ${interes}\n` +
+      `Cantidad aproximada: ${cantidad}`;
+
+    if (via === "mail") {
+      window.location.href = `mailto:${email}?subject=${encodeURIComponent(
+        "Cotización de mayoreo — Colección Cálida"
+      )}&body=${encodeURIComponent(mensaje)}`;
+    } else {
+      window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(mensaje)}`, "_blank", "noopener");
+    }
+  });
+</script>

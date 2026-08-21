@@ -1,0 +1,30 @@
+---
+// Barra de anuncio delgada, siempre visible sobre el nav.
+---
+
+<div class="anuncio">
+  <p>Colección Cálida 2026 · Envíos a todo el país · Precios de mayoreo desde 6 unidades</p>
+</div>
+
+<style>
+  .anuncio {
+    background: var(--carbon);
+    color: var(--hueso-suave);
+    text-align: center;
+    padding: 0.55rem 1rem;
+  }
+
+  .anuncio p {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 640px) {
+    .anuncio p {
+      font-size: 0.62rem;
+      letter-spacing: 0.08em;
+    }
+  }
+</style>

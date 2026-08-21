@@ -1,0 +1,127 @@
+---
+import { siteConfig, whatsappLink } from "@/data/site";
+
+const metodosPago = ["Transferencia", "Efectivo contraentrega", "Tarjeta (próximamente)"];
+const anio = new Date().getFullYear();
+---
+
+<footer class="footer seccion--oscura sobre-oscuro" id="contacto">
+  <div class="contenedor footer__grid">
+    <div class="footer__marca">
+      <p class="footer__logo">{siteConfig.name}<span>Cálida</span></p>
+      <p class="footer__slogan">{siteConfig.slogan}</p>
+    </div>
+
+    <div class="footer__col">
+      <h3>Contacto</h3>
+      <ul>
+        <li>
+          <a href={whatsappLink("Hola, vi la página de la colección Cálida de Sillarte y quiero más información.")} target="_blank" rel="noopener noreferrer">
+            WhatsApp
+          </a>
+        </li>
+        <li><a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a></li>
+        <li><a href={siteConfig.instagram} target="_blank" rel="noopener noreferrer">Instagram</a></li>
+        <li><a href={siteConfig.tiktok} target="_blank" rel="noopener noreferrer">TikTok</a></li>
+      </ul>
+    </div>
+
+    <div class="footer__col">
+      <h3>Explorar</h3>
+      <ul>
+        <li><a href="#destacados">Colección</a></li>
+        <li><a href="#categorias">Categorías</a></li>
+        <li><a href="#mayoreo">Mayoreo</a></li>
+        <li><a href="#faq">Preguntas frecuentes</a></li>
+      </ul>
+    </div>
+
+    <div class="footer__col">
+      <h3>Métodos de pago</h3>
+      <ul>
+        {metodosPago.map((metodo) => (
+          <li>{metodo}</li>
+        ))}
+      </ul>
+    </div>
+  </div>
+
+  <div class="contenedor footer__linea">
+    <p>© {anio} {siteConfig.name}. Todos los derechos reservados.</p>
+    <p>Colección Cálida {siteConfig.year}</p>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    padding-block: clamp(3rem, 6vw, 5rem) 2rem;
+  }
+
+  .footer__grid {
+    display: grid;
+    gap: 2.5rem;
+  }
+
+  .footer__logo {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    display: flex;
+    align-items: baseline;
+    gap: 0.4rem;
+  }
+
+  .footer__logo span {
+    font-style: italic;
+    color: var(--dorado-claro);
+    font-size: 1rem;
+  }
+
+  .footer__slogan {
+    margin-top: 0.75rem;
+    color: var(--hueso-suave);
+    max-width: 30ch;
+  }
+
+  .footer__col h3 {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--dorado-claro);
+    margin-bottom: 1rem;
+  }
+
+  .footer__col ul {
+    display: grid;
+    gap: 0.6rem;
+  }
+
+  .footer__col li,
+  .footer__col a {
+    font-size: 0.9rem;
+    color: var(--hueso-suave);
+  }
+
+  .footer__col a:hover {
+    color: var(--hueso);
+    text-decoration: underline;
+  }
+
+  .footer__linea {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(242, 235, 222, 0.14);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.5rem;
+    font-size: 0.78rem;
+    color: var(--gris);
+  }
+
+  @media (min-width: 700px) {
+    .footer__grid {
+      grid-template-columns: 1.4fr 1fr 1fr 1fr;
+    }
+  }
+</style>

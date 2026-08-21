@@ -1,0 +1,75 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import AnnouncementBar from "@/components/AnnouncementBar.astro";
+import Nav from "@/components/Nav.astro";
+import Hero from "@/components/Hero.astro";
+import Marquee from "@/components/Marquee.astro";
+import IntroStats from "@/components/IntroStats.astro";
+import FeatureDark from "@/components/FeatureDark.astro";
+import Destacados from "@/components/Destacados.astro";
+import Categorias from "@/components/Categorias.astro";
+import TrustBand from "@/components/TrustBand.astro";
+import Testimonials from "@/components/Testimonials.astro";
+import Wholesale from "@/components/Wholesale.astro";
+import FAQ from "@/components/FAQ.astro";
+import ClosingCTA from "@/components/ClosingCTA.astro";
+import Footer from "@/components/Footer.astro";
+---
+
+<Layout>
+  <div class="header-fijo">
+    <AnnouncementBar />
+    <Nav />
+  </div>
+
+  <main id="contenido">
+    <Hero />
+    <Marquee />
+    <IntroStats />
+    <FeatureDark />
+    <Destacados />
+    <Categorias />
+    <TrustBand />
+    <Testimonials />
+    <Wholesale />
+    <FAQ />
+    <ClosingCTA />
+  </main>
+
+  <Footer />
+</Layout>
+
+<script>
+  // Reveal al hacer scroll: agrega la clase reveal--visible cuando el
+  // elemento entra en el viewport. Un solo observer para todo el sitio.
+  const elementos = document.querySelectorAll<HTMLElement>(".reveal");
+
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver(
+      (entradas) => {
+        entradas.forEach((entrada) => {
+          if (entrada.isIntersecting) {
+            entrada.target.classList.add("reveal--visible");
+            observer.unobserve(entrada.target);
+          }
+        });
+      },
+      { threshold: 0.15, rootMargin: "0px 0px -60px 0px" }
+    );
+
+    elementos.forEach((el) => observer.observe(el));
+  } else {
+    elementos.forEach((el) => el.classList.add("reveal--visible"));
+  }
+</script>
+
+<style>
+  /* Agrupa barra de anuncio + nav en un solo bloque fijo, uno debajo del otro. */
+  .header-fijo {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+  }
+</style>

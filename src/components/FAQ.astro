@@ -1,0 +1,109 @@
+---
+import { faq } from "@/data/products";
+---
+
+<section class="faq seccion seccion--clara" id="faq">
+  <div class="contenedor faq__grid">
+    <div class="faq__cabecera reveal">
+      <p class="etiqueta">Preguntas frecuentes</p>
+      <h2 class="titular faq__titulo">Resolvemos tus dudas.</h2>
+    </div>
+
+    <div class="faq__lista">
+      {faq.map((item) => (
+        <details class="faq__item reveal" name="faq-acordeon">
+          <summary>
+            <span>{item.question}</span>
+            <span class="faq__icono" aria-hidden="true"></span>
+          </summary>
+          <p>{item.answer}</p>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq__grid {
+    display: grid;
+    gap: clamp(2rem, 5vw, 4rem);
+  }
+
+  .faq__titulo {
+    margin-top: 1rem;
+    font-size: clamp(2rem, 4.5vw, 3rem);
+    max-width: 16ch;
+  }
+
+  .faq__lista {
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .faq__item {
+    border: 1px solid var(--linea);
+    border-radius: 0.85rem;
+    padding: 1.25rem 1.5rem;
+    background: var(--marmol);
+  }
+
+  .faq__item summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    cursor: pointer;
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    list-style: none;
+  }
+
+  .faq__item summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq__icono {
+    position: relative;
+    flex: 0 0 auto;
+    width: 22px;
+    height: 22px;
+  }
+
+  .faq__icono::before,
+  .faq__icono::after {
+    content: "";
+    position: absolute;
+    background: var(--dorado-texto);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: transform 0.3s var(--ease);
+  }
+
+  .faq__icono::before {
+    width: 14px;
+    height: 1.5px;
+  }
+
+  .faq__icono::after {
+    width: 1.5px;
+    height: 14px;
+  }
+
+  .faq__item[open] .faq__icono::after {
+    transform: translate(-50%, -50%) rotate(90deg) scale(0);
+  }
+
+  .faq__item p {
+    margin-top: 1rem;
+    color: var(--gris);
+    line-height: 1.7;
+    max-width: 60ch;
+  }
+
+  @media (min-width: 900px) {
+    .faq__grid {
+      grid-template-columns: 0.8fr 1.2fr;
+    }
+  }
+</style>

@@ -1,0 +1,89 @@
+---
+import { testimonials } from "@/data/products";
+---
+
+<section class="resenas seccion seccion--marmol" aria-labelledby="resenas-titulo">
+  <div class="contenedor">
+    <div class="resenas__cabecera">
+      <p class="etiqueta reveal">Lo que dicen nuestros clientes</p>
+      <h2 id="resenas-titulo" class="titular resenas__titulo reveal">Confían en Sillarte.</h2>
+    </div>
+
+    <!--
+      NOTA: estas reseñas son de ejemplo (placeholder) para maquetar la sección.
+      Reemplazar por testimonios reales antes de publicar el sitio.
+    -->
+    <div class="resenas__carrusel reveal" tabindex="0" role="region" aria-label="Carrusel de reseñas de clientes">
+      {testimonials.map((testimonial) => (
+        <figure class="resenas__tarjeta">
+          <blockquote>
+            <p>“{testimonial.quote}”</p>
+          </blockquote>
+          <figcaption>
+            <span class="resenas__autor">{testimonial.author}</span>
+            <span class="resenas__rol">{testimonial.role}</span>
+          </figcaption>
+        </figure>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .resenas__cabecera {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 40ch;
+    margin-bottom: clamp(2.5rem, 5vw, 3.5rem);
+  }
+
+  .resenas__titulo {
+    font-size: clamp(2rem, 4.5vw, 3.5rem);
+  }
+
+  .resenas__carrusel {
+    display: flex;
+    gap: 1.5rem;
+    overflow-x: auto;
+    padding-bottom: 1rem;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .resenas__tarjeta {
+    flex: 0 0 min(85%, 420px);
+    scroll-snap-align: start;
+    background: var(--hueso);
+    border: 1px solid var(--linea);
+    border-radius: 1rem;
+    padding: 2rem;
+    margin: 0;
+  }
+
+  .resenas__tarjeta blockquote {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    font-style: italic;
+    line-height: 1.5;
+    color: var(--carbon);
+  }
+
+  .resenas__tarjeta figcaption {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+
+  .resenas__autor {
+    font-weight: 600;
+    font-size: 0.85rem;
+  }
+
+  .resenas__rol {
+    font-size: 0.78rem;
+    color: var(--gris);
+  }
+</style>

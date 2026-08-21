@@ -1,0 +1,76 @@
+---
+import Medio from "@/components/Medio.astro";
+import { whatsappLink } from "@/data/site";
+---
+
+<section class="cierre" aria-label="Invitación final a explorar la colección">
+  <Medio
+    src="/scenes/closing.jpg"
+    alt="Mesa tulipa Cálida en un espacio con luz natural cálida"
+    marcador="Escena de estudio — Cierre, mesa Cálida"
+    class="cierre__medio medio--sobre-oscuro"
+  />
+  <div class="cierre__degradado" aria-hidden="true"></div>
+
+  <div class="cierre__contenido contenedor sobre-oscuro">
+    <h2 class="titular cierre__titulo reveal">Tu espacio <em class="acento-dorado">Cálida</em> te espera.</h2>
+    <div class="cierre__acciones reveal">
+      <a href="#destacados" class="boton boton--dorado">Ver la colección</a>
+      <a
+        href={whatsappLink("Hola, quiero cotizar la colección Cálida de Sillarte.")}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="boton boton--claro"
+      >
+        Cotizar ahora
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cierre {
+    position: relative;
+    min-height: 90svh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    color: var(--hueso);
+    text-align: center;
+  }
+
+  .cierre :global(.cierre__medio) {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  .cierre__degradado {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: rgba(20, 18, 16, 0.55);
+  }
+
+  .cierre__contenido {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.25rem;
+  }
+
+  .cierre__titulo {
+    font-size: clamp(2.25rem, 6vw, 4.5rem);
+    max-width: 18ch;
+  }
+
+  .cierre__acciones {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+  }
+</style>
