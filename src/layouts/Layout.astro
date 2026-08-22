@@ -5,14 +5,18 @@ import { siteConfig } from "@/data/site";
 interface Props {
   title?: string;
   description?: string;
+  image?: string;
+  type?: "website" | "product";
 }
 
 const {
   title = `${siteConfig.name} — Colección ${siteConfig.collection} ${siteConfig.year}`,
   description = siteConfig.description,
+  image = "/scenes/hero.jpg",
+  type = "website",
 } = Astro.props;
 
-const ogImage = new URL("/scenes/hero.jpg", Astro.site ?? "https://sillarte.co").toString();
+const ogImage = new URL(image, Astro.site ?? "https://sillarte.co").toString();
 ---
 
 <!doctype html>
@@ -28,7 +32,7 @@ const ogImage = new URL("/scenes/hero.jpg", Astro.site ?? "https://sillarte.co")
     <meta name="theme-color" content="#141210" />
 
     <!-- Open Graph -->
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={type} />
     <meta property="og:site_name" content={siteConfig.name} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />

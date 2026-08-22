@@ -15,9 +15,9 @@ import { products } from "@/data/products";
     <div class="destacados__masonry">
       {products.map((product, index) => (
         <a
-          href={`#mayoreo`}
+          href={`/productos/${product.slug}/`}
           class:list={["destacados__pieza", "reveal", { "destacados__pieza--alta": index % 3 === 1 }]}
-          aria-label={`${product.name}, referencia ${product.ref}. Ir a cotización de mayoreo.`}
+          aria-label={`Ver el detalle de ${product.name}, referencia ${product.ref}.`}
         >
           <Medio
             src={product.scene}

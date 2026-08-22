@@ -1,18 +1,20 @@
 ---
 import { siteConfig, whatsappLink } from "@/data/site";
 
+// Rutas absolutas (con "/" al inicio) para que funcionen igual desde la
+// portada que desde una página de detalle de producto.
 const links = [
-  { href: "#destacados", label: "Colección" },
-  { href: "#destacados", label: "Destacados" },
-  { href: "#categorias", label: "Categorías" },
-  { href: "#mayoreo", label: "Mayoreo" },
-  { href: "#faq", label: "FAQ" },
+  { href: "/#destacados", label: "Colección" },
+  { href: "/#destacados", label: "Destacados" },
+  { href: "/#categorias", label: "Categorías" },
+  { href: "/#mayoreo", label: "Mayoreo" },
+  { href: "/#faq", label: "FAQ" },
 ];
 ---
 
 <header class="nav" id="nav" data-nav>
   <div class="contenedor nav__barra">
-    <a href="#contenido" class="nav__logo">{siteConfig.name}<span>Cálida</span></a>
+    <a href="/" class="nav__logo">{siteConfig.name}<span>Cálida</span></a>
 
     <nav class="nav__links" aria-label="Navegación principal">
       <ul>
