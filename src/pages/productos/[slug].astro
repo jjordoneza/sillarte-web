@@ -124,6 +124,15 @@ const jsonLd = {
               <li>Envíos a todo Colombia</li>
               <li>Respuesta en máximo 24 horas</li>
             </ul>
+
+            <div class="producto__extendida reveal">
+              <h2>Sobre esta pieza</h2>
+              <p>
+                {product.descripcionLarga ?? (
+                  `${product.detail}. Hace parte de la colección Cálida: pensada para combinar directamente con el resto de mesas, bancos y sillas de la familia, con un mismo lenguaje de materiales y tonos. Escríbenos para conocer fichas técnicas, tiempos de entrega y condiciones de compra al detal o al por mayor.`
+                )}
+              </p>
+            </div>
           </div>
         </div>
       </div>
@@ -148,17 +157,6 @@ const jsonLd = {
         </div>
       </section>
     )}
-
-    <section class="descripcion seccion seccion--oscura sobre-oscuro">
-      <div class="contenedor descripcion__grid">
-        <p class="etiqueta etiqueta--sobre-oscuro reveal">Sobre esta pieza</p>
-        <p class="descripcion__texto reveal">
-          {product.descripcionLarga ?? (
-            `${product.detail}. Hace parte de la colección Cálida: pensada para combinar directamente con el resto de mesas, bancos y sillas de la familia, con un mismo lenguaje de materiales y tonos. Escríbenos para conocer fichas técnicas, tiempos de entrega y condiciones de compra al detal o al por mayor.`
-          )}
-        </p>
-      </div>
-    </section>
 
     {relacionados.length > 0 && (
       <section class="relacionados seccion seccion--marmol" aria-labelledby="relacionados-titulo">
@@ -330,6 +328,31 @@ const jsonLd = {
     font-size: 0.75rem;
   }
 
+  /* "Sobre esta pieza": va debajo de la lista de confianza, discreta,
+     no como bloque oscuro aparte. */
+  .producto__extendida {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--linea);
+  }
+
+  .producto__extendida h2 {
+    font-family: var(--font-ui);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gris);
+  }
+
+  .producto__extendida p {
+    margin-top: 0.75rem;
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--gris);
+    max-width: 52ch;
+  }
+
   @media (min-width: 900px) {
     .producto__grid {
       grid-template-columns: 1.1fr 1fr;
@@ -381,19 +404,6 @@ const jsonLd = {
     .ficha__grid {
       grid-template-columns: 0.8fr 1.2fr;
     }
-  }
-
-  /* Descripción larga */
-  .descripcion__grid {
-    max-width: 68ch;
-  }
-
-  .descripcion__texto {
-    margin-top: 1.5rem;
-    font-family: var(--font-display);
-    font-size: clamp(1.15rem, 2vw, 1.4rem);
-    line-height: 1.7;
-    color: var(--hueso-suave);
   }
 
   /* Relacionados */
