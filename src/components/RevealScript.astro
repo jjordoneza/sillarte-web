@@ -1,0 +1,27 @@
+---
+// Script compartido de reveal al hacer scroll (usado en todas las páginas).
+---
+
+<script>
+  // Reveal al hacer scroll: agrega la clase reveal--visible cuando el
+  // elemento entra en el viewport. Un solo observer por página.
+  const elementos = document.querySelectorAll<HTMLElement>(".reveal");
+
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver(
+      (entradas) => {
+        entradas.forEach((entrada) => {
+          if (entrada.isIntersecting) {
+            entrada.target.classList.add("reveal--visible");
+            observer.unobserve(entrada.target);
+          }
+        });
+      },
+      { threshold: 0.15, rootMargin: "0px 0px -60px 0px" }
+    );
+
+    elementos.forEach((el) => observer.observe(el));
+  } else {
+    elementos.forEach((el) => el.classList.add("reveal--visible"));
+  }
+</script>

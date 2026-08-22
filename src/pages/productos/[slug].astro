@@ -1,0 +1,475 @@
+---
+// Página de detalle de producto: una por cada pieza del catálogo.
+// Astro genera una ruta estática por cada `slug` en /src/data/products.ts.
+import Layout from "@/layouts/Layout.astro";
+import AnnouncementBar from "@/components/AnnouncementBar.astro";
+import Nav from "@/components/Nav.astro";
+import Footer from "@/components/Footer.astro";
+import Medio from "@/components/Medio.astro";
+import RevealScript from "@/components/RevealScript.astro";
+import { products, type Product } from "@/data/products";
+import { siteConfig, whatsappLink } from "@/data/site";
+
+export function getStaticPaths() {
+  return products.map((product) => ({
+    params: { slug: product.slug },
+    props: { product },
+  }));
+}
+
+const { product } = Astro.props as { product: Product };
+
+// Descripciones con respaldo mientras no llegue la ficha completa de cada pieza.
+const resumen = product.descripcionCorta ?? product.detail;
+const relacionados = products
+  .filter((p) => p.category === product.category && p.slug !== product.slug)
+  .slice(0, 3);
+
+const galeria = [product.image, ...(product.galeria ?? [])];
+
+const tituloSeo = `${product.name} — Colección Cálida | ${siteConfig.name}`;
+const descripcionSeo = `${resumen} Ref. ${product.ref}. Disponible al detal y al por mayor desde 6 unidades, envíos a todo Colombia.`;
+
+const mensajeWhatsapp = `Hola, quiero cotizar la pieza ${product.name} (ref. ${product.ref}) de la colección Cálida de Sillarte.`;
+
+// Datos estructurados para buscadores (schema.org/Product).
+// Se omite "offers" a propósito: todavía no hay precio real publicado.
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Product",
+  name: product.name,
+  sku: product.ref,
+  category: product.category,
+  description: descripcionSeo,
+  image: new URL(product.image, Astro.site ?? "https://sillarte.co").toString(),
+  brand: {
+    "@type": "Brand",
+    name: siteConfig.name,
+  },
+};
+---
+
+<Layout title={tituloSeo} description={descripcionSeo} image={product.image} type="product">
+  <div class="header-fijo">
+    <AnnouncementBar />
+    <Nav />
+  </div>
+
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} is:inline />
+
+  <main id="contenido">
+    <section class="producto seccion seccion--marmol">
+      <div class="contenedor">
+        <nav class="producto__migas" aria-label="Ruta de navegación">
+          <a href="/#destacados">Colección Cálida</a>
+          <span aria-hidden="true">/</span>
+          <a href="/#categorias">{product.category}</a>
+          <span aria-hidden="true">/</span>
+          <span aria-current="page">{product.name}</span>
+        </nav>
+
+        <div class="producto__grid">
+          <div class="producto__galeria">
+            <div class="producto__medio-principal">
+              <Medio
+                src={product.image}
+                alt={`${product.name}, ${product.detail}`}
+                marcador={`Foto de producto — ${product.name}`}
+                loading="eager"
+                fetchpriority="high"
+                data-galeria-principal
+              />
+            </div>
+
+            {galeria.length > 1 && (
+              <div class="producto__miniaturas" role="group" aria-label="Más fotos de esta pieza">
+                {galeria.map((src, index) => (
+                  <button
+                    type="button"
+                    class="producto__miniatura"
+                    class:list={{ "producto__miniatura--activa": index === 0 }}
+                    data-galeria-miniatura
+                    data-src={src}
+                    aria-label={`Ver foto ${index + 1} de ${product.name}`}
+                  >
+                    <img src={src} alt="" loading="lazy" onerror="this.closest('.producto__miniatura').style.display='none'" />
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+
+          <div class="producto__info">
+            <p class="etiqueta reveal">{product.category} · Ref. {product.ref}</p>
+            <h1 class="titular producto__titulo reveal">{product.name}</h1>
+            <p class="producto__precio reveal">
+              $— <span>según cantidad y condición de compra</span>
+            </p>
+            <p class="producto__resumen reveal">{resumen}</p>
+
+            <div class="producto__acciones reveal">
+              <a
+                href={whatsappLink(mensajeWhatsapp)}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="boton boton--dorado"
+              >
+                Cotizar esta pieza
+              </a>
+              <a href="/#mayoreo" class="boton boton--linea">Cotización de mayoreo</a>
+            </div>
+
+            <ul class="producto__confianza reveal">
+              <li>Precios de mayoreo desde 6 unidades</li>
+              <li>Envíos a todo Colombia</li>
+              <li>Respuesta en máximo 24 horas</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {product.ficha && (
+      <section class="ficha seccion seccion--clara" aria-labelledby="ficha-titulo">
+        <div class="contenedor ficha__grid">
+          <div class="reveal">
+            <p class="etiqueta">Ficha técnica</p>
+            <h2 id="ficha-titulo" class="titular ficha__titulo">Hecha para durar.</h2>
+          </div>
+
+          <dl class="ficha__lista reveal">
+            {Object.entries(product.ficha).map(([campo, valor]) => (
+              <div class="ficha__item">
+                <dt>{campo}</dt>
+                <dd>{valor}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </section>
+    )}
+
+    <section class="descripcion seccion seccion--oscura sobre-oscuro">
+      <div class="contenedor descripcion__grid">
+        <p class="etiqueta etiqueta--sobre-oscuro reveal">Sobre esta pieza</p>
+        <p class="descripcion__texto reveal">
+          {product.descripcionLarga ?? (
+            `${product.detail}. Hace parte de la colección Cálida: pensada para combinar directamente con el resto de mesas, bancos y sillas de la familia, con un mismo lenguaje de materiales y tonos. Escríbenos para conocer fichas técnicas, tiempos de entrega y condiciones de compra al detal o al por mayor.`
+          )}
+        </p>
+      </div>
+    </section>
+
+    {relacionados.length > 0 && (
+      <section class="relacionados seccion seccion--marmol" aria-labelledby="relacionados-titulo">
+        <div class="contenedor">
+          <p class="etiqueta reveal">Combina con</p>
+          <h2 id="relacionados-titulo" class="titular relacionados__titulo reveal">
+            Otras piezas de {product.category.toLowerCase()}.
+          </h2>
+
+          <div class="relacionados__grid">
+            {relacionados.map((rel) => (
+              <a href={`/productos/${rel.slug}/`} class="relacionados__tarjeta reveal">
+                <Medio
+                  src={rel.image}
+                  alt={`${rel.name}, ${rel.detail}`}
+                  marcador={`Foto de producto — ${rel.name}`}
+                  class="medio--marcador-arriba"
+                />
+                <div class="relacionados__ficha">
+                  <h3>{rel.name}</h3>
+                  <span>Ref. {rel.ref}</span>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+    )}
+  </main>
+
+  <Footer />
+  <RevealScript />
+</Layout>
+
+<style>
+  .header-fijo {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+  }
+
+  .producto {
+    padding-top: clamp(7rem, 14vw, 9rem);
+  }
+
+  .producto__migas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    color: var(--gris);
+    margin-bottom: clamp(2rem, 4vw, 3rem);
+  }
+
+  .producto__migas a:hover {
+    color: var(--dorado-texto);
+    text-decoration: underline;
+  }
+
+  .producto__migas [aria-current="page"] {
+    color: var(--carbon);
+    font-weight: 600;
+  }
+
+  .producto__grid {
+    display: grid;
+    gap: clamp(2.5rem, 5vw, 4rem);
+  }
+
+  .producto__medio-principal {
+    aspect-ratio: 1 / 1;
+    border-radius: 1rem;
+    overflow: hidden;
+  }
+
+  .producto__medio-principal :global(.medio) {
+    height: 100%;
+    background: var(--marmol);
+  }
+
+  .producto__miniaturas {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .producto__miniatura {
+    width: 72px;
+    height: 72px;
+    padding: 0;
+    border-radius: 0.6rem;
+    overflow: hidden;
+    border: 2px solid transparent;
+    background: var(--marmol);
+    transition: border-color 0.3s var(--ease);
+  }
+
+  .producto__miniatura img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .producto__miniatura--activa,
+  .producto__miniatura:hover {
+    border-color: var(--dorado);
+  }
+
+  .producto__titulo {
+    margin-top: 0.75rem;
+    font-size: clamp(2rem, 4vw, 3.25rem);
+  }
+
+  .producto__precio {
+    margin-top: 1rem;
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    color: var(--carbon);
+  }
+
+  .producto__precio span {
+    display: block;
+    font-family: var(--font-ui);
+    font-size: 0.75rem;
+    color: var(--gris);
+    margin-top: 0.2rem;
+  }
+
+  .producto__resumen {
+    margin-top: 1.25rem;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--gris);
+    max-width: 46ch;
+  }
+
+  .producto__acciones {
+    margin-top: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .producto__confianza {
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--linea);
+    display: grid;
+    gap: 0.6rem;
+  }
+
+  .producto__confianza li {
+    padding-left: 1.5rem;
+    position: relative;
+    font-size: 0.85rem;
+    color: var(--gris);
+  }
+
+  .producto__confianza li::before {
+    content: "✦";
+    position: absolute;
+    left: 0;
+    top: 0.1rem;
+    color: var(--dorado-texto);
+    font-size: 0.75rem;
+  }
+
+  @media (min-width: 900px) {
+    .producto__grid {
+      grid-template-columns: 1.1fr 1fr;
+      align-items: start;
+    }
+  }
+
+  /* Ficha técnica */
+  .ficha__grid {
+    display: grid;
+    gap: clamp(2rem, 5vw, 4rem);
+  }
+
+  .ficha__titulo {
+    margin-top: 1rem;
+    font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+    max-width: 14ch;
+  }
+
+  .ficha__lista {
+    margin: 0;
+    display: grid;
+    gap: 0;
+    border-top: 1px solid var(--linea);
+  }
+
+  .ficha__item {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 1rem;
+    padding-block: 0.9rem;
+    border-bottom: 1px solid var(--linea);
+  }
+
+  .ficha__item dt {
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--carbon);
+  }
+
+  .ficha__item dd {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--gris);
+  }
+
+  @media (min-width: 900px) {
+    .ficha__grid {
+      grid-template-columns: 0.8fr 1.2fr;
+    }
+  }
+
+  /* Descripción larga */
+  .descripcion__grid {
+    max-width: 68ch;
+  }
+
+  .descripcion__texto {
+    margin-top: 1.5rem;
+    font-family: var(--font-display);
+    font-size: clamp(1.15rem, 2vw, 1.4rem);
+    line-height: 1.7;
+    color: var(--hueso-suave);
+  }
+
+  /* Relacionados */
+  .relacionados__titulo {
+    margin-top: 1rem;
+    font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+    margin-bottom: clamp(2rem, 4vw, 3rem);
+  }
+
+  .relacionados__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
+
+  .relacionados__tarjeta {
+    position: relative;
+    display: block;
+    border-radius: 1rem;
+    overflow: hidden;
+    aspect-ratio: 3 / 4;
+  }
+
+  .relacionados__tarjeta :global(.medio) {
+    height: 100%;
+  }
+
+  .relacionados__tarjeta :global(img) {
+    transition: transform 0.8s var(--ease);
+  }
+
+  .relacionados__tarjeta:hover :global(img:not(.medio__img--error)) {
+    transform: scale(1.06);
+  }
+
+  .relacionados__ficha {
+    position: absolute;
+    inset: auto 0 0 0;
+    padding: 1.25rem;
+    background: linear-gradient(to top, rgba(20, 18, 16, 0.85), transparent);
+    color: var(--hueso);
+  }
+
+  .relacionados__ficha h3 {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+  }
+
+  .relacionados__ficha span {
+    display: block;
+    margin-top: 0.2rem;
+    font-size: 0.75rem;
+    color: var(--hueso-suave);
+  }
+
+  @media (max-width: 700px) {
+    .relacionados__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<script>
+  // Cambia la foto principal al hacer clic en una miniatura (mejora progresiva:
+  // sin JS, todas las fotos siguen siendo accesibles como miniaturas).
+  const principal = document.querySelector<HTMLImageElement>("[data-galeria-principal] img");
+  const miniaturas = document.querySelectorAll<HTMLButtonElement>("[data-galeria-miniatura]");
+
+  miniaturas.forEach((boton) => {
+    boton.addEventListener("click", () => {
+      const src = boton.dataset.src;
+      if (!principal || !src) return;
+      principal.src = src;
+      principal.classList.remove("medio__img--error");
+      miniaturas.forEach((b) => b.classList.remove("producto__miniatura--activa"));
+      boton.classList.add("producto__miniatura--activa");
+    });
+  });
+</script>
