@@ -1,5 +1,6 @@
 ---
 import { siteConfig } from "@/data/site";
+import { products } from "@/data/products";
 
 const beneficios = [
   "Precios de mayoreo desde 6 unidades por referencia",
@@ -51,11 +52,11 @@ const beneficios = [
         <select id="interes" name="interes" required>
           <option value="">Selecciona una opción</option>
           <option value="Conjuntos">Conjuntos</option>
-          <option value='Mesa "Perla" (SM-01)'>Mesa "Perla" (SM-01)</option>
-          <option value="Banco alto Cálida (SB-01)">Banco alto Cálida (SB-01)</option>
-          <option value="Silla Concha (SC-02)">Silla Concha (SC-02)</option>
-          <option value="Silla Barril (SA-03)">Silla Barril (SA-03)</option>
-          <option value="Silla Abanico (SF-04)">Silla Abanico (SF-04)</option>
+          {products.map((product) => (
+            <option value={`${product.name} (${product.ref})`}>
+              {product.name} ({product.ref})
+            </option>
+          ))}
           <option value="Toda la colección">Toda la colección</option>
         </select>
       </div>
