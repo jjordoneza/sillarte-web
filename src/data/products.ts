@@ -69,6 +69,9 @@ export const products: Product[] = [
       "/products/silla-barril-camel-alt.jpg",
       "/products/silla-barril-camel-espalda.jpg",
       "/products/silla-barril-camel-detalle.jpg",
+      "/products/silla-barril-negro.jpg",
+      "/products/silla-barril-negro-espalda.jpg",
+      "/products/silla-barril-negro-alt.jpg",
       "/products/silla-barril-negro-base.jpg",
     ],
     ficha: {
