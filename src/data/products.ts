@@ -60,11 +60,17 @@ export const products: Product[] = [
     name: "Silla Barril",
     ref: "SB-02",
     category: "Sillas",
-    detail: "Asiento curvo tapizado gris, patas de metal",
+    detail: "Asiento curvo tapizado camel, patas de metal",
     // Foto real de producto (fondo blanco); se usa para ambos bloques
     // mientras no haya fotografía de estudio con fondo cálido.
     image: "/products/silla-barril.jpg",
     scene: "/products/silla-barril.jpg",
+    galeria: [
+      "/products/silla-barril-camel-alt.jpg",
+      "/products/silla-barril-camel-espalda.jpg",
+      "/products/silla-barril-camel-detalle.jpg",
+      "/products/silla-barril-negro-base.jpg",
+    ],
     ficha: {
       "Alto total": "82 cm",
       Ancho: "51 cm",
@@ -74,7 +80,7 @@ export const products: Product[] = [
       "Alto de respaldo": "38 cm",
       "Material asiento/respaldo": "Poliuretano acolchado (cuero sintético)",
       "Material patas": "Metal",
-      "Colores disponibles": "Gris (fotografiado); variante café-camel disponible",
+      "Colores disponibles": "Camel y gris oscuro",
     },
     descripcionCorta:
       "Silla de comedor con asiento curvo y respaldo envolvente, tapizada en poliuretano acolchado sobre patas de metal. Cómoda, resistente y lista para combinar con el resto de la familia Cálida.",
