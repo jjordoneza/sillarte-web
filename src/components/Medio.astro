@@ -9,12 +9,15 @@ interface Props {
   class?: string;
   loading?: "lazy" | "eager";
   fetchpriority?: "high" | "low" | "auto";
+  // Permite atributos data-* arbitrarios (p. ej. data-galeria-principal
+  // para engancharle un script desde la página que use este componente).
+  [key: `data-${string}`]: string | boolean | undefined;
 }
 
-const { src, alt, marcador, class: clase = "", loading = "lazy", fetchpriority = "auto" } = Astro.props;
+const { src, alt, marcador, class: clase = "", loading = "lazy", fetchpriority = "auto", ...resto } = Astro.props;
 ---
 
-<div class:list={["medio", clase]}>
+<div class:list={["medio", clase]} {...resto}>
   <img
     src={src}
     alt={alt}
