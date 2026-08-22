@@ -119,7 +119,16 @@ export const products: Product[] = [
     category: "Sillas",
     detail: "Con brazos, tapizado símil cuero negro",
     image: "/products/silla-abanico.jpg",
-    scene: "/products/silla-abanico.jpg",
+    // Esta pieza sí tiene fotos de escena reales (ambientadas, no de
+    // fondo blanco) — se usa una para los bloques inmersivos.
+    scene: "/products/silla-abanico-escena.jpg",
+    galeria: [
+      "/products/silla-abanico-escena-alt.jpg",
+      "/products/silla-abanico-escena-dupla.jpg",
+      "/products/silla-abanico-espalda.jpg",
+      "/products/silla-abanico-detalle-herraje.jpg",
+      "/products/silla-abanico-medidas.jpg",
+    ],
     ficha: {
       "Alto total": "77 cm",
       "Ancho (lado a lado)": "49 cm",
