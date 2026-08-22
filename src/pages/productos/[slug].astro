@@ -70,7 +70,12 @@ const jsonLd = {
 
         <div class="producto__grid">
           <div class="producto__galeria">
-            <div class="producto__medio-principal">
+            <button
+              type="button"
+              class="producto__medio-principal"
+              data-abrir-zoom
+              aria-label={`Ampliar foto de ${product.name}`}
+            >
               <Medio
                 src={product.image}
                 alt={`${product.name}, ${product.detail}`}
@@ -79,7 +84,15 @@ const jsonLd = {
                 fetchpriority="high"
                 data-galeria-principal
               />
-            </div>
+              <span class="producto__zoom-icono" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                  <circle cx="11" cy="11" r="7" />
+                  <line x1="16.5" y1="16.5" x2="21" y2="21" />
+                  <line x1="11" y1="8" x2="11" y2="14" />
+                  <line x1="8" y1="11" x2="14" y2="11" />
+                </svg>
+              </span>
+            </button>
 
             {galeria.length > 1 && (
               <div class="producto__miniaturas" role="group" aria-label="Más fotos de esta pieza">
@@ -189,6 +202,39 @@ const jsonLd = {
 
   <Footer />
   <RevealScript />
+
+  <div class="lightbox" data-lightbox hidden>
+    <button type="button" class="lightbox__fondo" data-lightbox-cerrar aria-label="Cerrar"></button>
+
+    <button type="button" class="lightbox__cerrar" data-lightbox-cerrar aria-label="Cerrar foto ampliada">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <line x1="5" y1="5" x2="19" y2="19" />
+        <line x1="19" y1="5" x2="5" y2="19" />
+      </svg>
+    </button>
+
+    {galeria.length > 1 && (
+      <button type="button" class="lightbox__nav lightbox__nav--prev" data-lightbox-prev aria-label="Foto anterior">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="15 18 9 12 15 6" />
+        </svg>
+      </button>
+    )}
+
+    <div class="lightbox__marco">
+      <img class="lightbox__imagen" data-lightbox-imagen src="" alt="" />
+    </div>
+
+    {galeria.length > 1 && (
+      <button type="button" class="lightbox__nav lightbox__nav--next" data-lightbox-next aria-label="Foto siguiente">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="9 18 15 12 9 6" />
+        </svg>
+      </button>
+    )}
+
+    <p class="lightbox__ayuda">Toca la foto para acercar</p>
+  </div>
 </Layout>
 
 <style>
@@ -229,9 +275,50 @@ const jsonLd = {
   }
 
   .producto__medio-principal {
+    position: relative;
+    display: block;
+    width: 100%;
     aspect-ratio: 1 / 1;
     border-radius: 1rem;
     overflow: hidden;
+    padding: 0;
+    border: none;
+    background: none;
+    font: inherit;
+    cursor: zoom-in;
+  }
+
+  .producto__medio-principal:focus-visible {
+    outline: 3px solid var(--dorado-texto);
+    outline-offset: 3px;
+  }
+
+  .producto__zoom-icono {
+    position: absolute;
+    right: 1rem;
+    bottom: 1rem;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 999px;
+    background: rgba(20, 18, 16, 0.72);
+    color: var(--hueso);
+    opacity: 0.85;
+    transition: opacity 0.3s var(--ease), transform 0.3s var(--ease);
+  }
+
+  .producto__zoom-icono svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .producto__medio-principal:hover .producto__zoom-icono,
+  .producto__medio-principal:focus-visible .producto__zoom-icono {
+    opacity: 1;
+    transform: scale(1.08);
   }
 
   .producto__medio-principal :global(.medio) {
@@ -464,22 +551,209 @@ const jsonLd = {
       grid-template-columns: 1fr;
     }
   }
+
+  /* Lightbox: foto ampliada con zoom */
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 80;
+    display: none;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .lightbox:not([hidden]) {
+    display: flex;
+  }
+
+  .lightbox__fondo {
+    position: absolute;
+    inset: 0;
+    border: none;
+    background: rgba(20, 18, 16, 0.94);
+    cursor: default;
+    padding: 0;
+  }
+
+  .lightbox__marco {
+    position: relative;
+    z-index: 1;
+    width: min(92vw, 1100px);
+    height: min(86vh, 1100px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: auto;
+  }
+
+  .lightbox__imagen {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    cursor: zoom-in;
+    transition: transform 0.35s var(--ease);
+    transform: scale(1);
+    touch-action: pinch-zoom;
+  }
+
+  .lightbox__imagen.lightbox__imagen--zoom {
+    max-width: none;
+    max-height: none;
+    width: min(92vw, 1100px);
+    transform: scale(2);
+    cursor: zoom-out;
+  }
+
+  .lightbox__cerrar,
+  .lightbox__nav {
+    position: absolute;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 999px;
+    border: 1px solid rgba(242, 235, 222, 0.3);
+    background: rgba(20, 18, 16, 0.6);
+    color: var(--hueso);
+    transition: background-color 0.3s var(--ease), border-color 0.3s var(--ease);
+  }
+
+  .lightbox__cerrar:hover,
+  .lightbox__nav:hover {
+    background: rgba(20, 18, 16, 0.85);
+    border-color: var(--dorado-claro);
+  }
+
+  .lightbox__cerrar svg,
+  .lightbox__nav svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .lightbox__cerrar {
+    top: 1.25rem;
+    right: 1.25rem;
+  }
+
+  .lightbox__nav--prev {
+    left: 1.25rem;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .lightbox__nav--next {
+    right: 1.25rem;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .lightbox__ayuda {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
+    color: var(--hueso-suave);
+  }
+
+  @media (max-width: 640px) {
+    .lightbox__cerrar,
+    .lightbox__nav {
+      width: 40px;
+      height: 40px;
+    }
+
+    .lightbox__ayuda {
+      display: none;
+    }
+  }
 </style>
 
 <script>
   // Cambia la foto principal al hacer clic en una miniatura (mejora progresiva:
   // sin JS, todas las fotos siguen siendo accesibles como miniaturas).
   const principal = document.querySelector<HTMLImageElement>("[data-galeria-principal] img");
-  const miniaturas = document.querySelectorAll<HTMLButtonElement>("[data-galeria-miniatura]");
+  const miniaturas = Array.from(document.querySelectorAll<HTMLButtonElement>("[data-galeria-miniatura]"));
+  const abrirZoomBoton = document.querySelector<HTMLButtonElement>("[data-abrir-zoom]");
+  const lightbox = document.querySelector<HTMLElement>("[data-lightbox]");
+  const lightboxImagen = document.querySelector<HTMLImageElement>("[data-lightbox-imagen]");
+  const botonesCerrarLightbox = document.querySelectorAll<HTMLButtonElement>("[data-lightbox-cerrar]");
+  const botonAnterior = document.querySelector<HTMLButtonElement>("[data-lightbox-prev]");
+  const botonSiguiente = document.querySelector<HTMLButtonElement>("[data-lightbox-next]");
+  const botonCerrarLightbox = document.querySelector<HTMLButtonElement>(".lightbox__cerrar");
 
-  miniaturas.forEach((boton) => {
-    boton.addEventListener("click", () => {
-      const src = boton.dataset.src;
-      if (!principal || !src) return;
-      principal.src = src;
-      principal.classList.remove("medio__img--error");
-      miniaturas.forEach((b) => b.classList.remove("producto__miniatura--activa"));
-      boton.classList.add("producto__miniatura--activa");
-    });
+  // Lista completa de fotos: las miniaturas ya representan toda la galería
+  // (incluida la foto principal); si no hay miniaturas, solo queda esa foto.
+  const fotos = miniaturas.length > 0 ? miniaturas.map((b) => b.dataset.src ?? "") : principal ? [principal.src] : [];
+  let indiceActual = 0;
+  let elementoConFocoPrevio: HTMLElement | null = null;
+
+  function mostrarFoto(indice: number) {
+    if (!principal || fotos.length === 0) return;
+    indiceActual = (indice + fotos.length) % fotos.length;
+    principal.src = fotos[indiceActual];
+    principal.classList.remove("medio__img--error");
+    miniaturas.forEach((b, i) => b.classList.toggle("producto__miniatura--activa", i === indiceActual));
+  }
+
+  miniaturas.forEach((boton, indice) => {
+    boton.addEventListener("click", () => mostrarFoto(indice));
+  });
+
+  function actualizarImagenLightbox() {
+    if (!lightboxImagen || fotos.length === 0) return;
+    lightboxImagen.src = fotos[indiceActual];
+    lightboxImagen.classList.remove("lightbox__imagen--zoom");
+  }
+
+  function abrirLightbox() {
+    if (!lightbox || fotos.length === 0) return;
+    elementoConFocoPrevio = document.activeElement as HTMLElement;
+    actualizarImagenLightbox();
+    lightbox.hidden = false;
+    document.body.style.overflow = "hidden";
+    botonCerrarLightbox?.focus();
+  }
+
+  function cerrarLightbox() {
+    if (!lightbox) return;
+    lightbox.hidden = true;
+    document.body.style.overflow = "";
+    lightboxImagen?.classList.remove("lightbox__imagen--zoom");
+    elementoConFocoPrevio?.focus();
+  }
+
+  abrirZoomBoton?.addEventListener("click", abrirLightbox);
+  botonesCerrarLightbox.forEach((boton) => boton.addEventListener("click", cerrarLightbox));
+
+  botonAnterior?.addEventListener("click", () => {
+    mostrarFoto(indiceActual - 1);
+    actualizarImagenLightbox();
+  });
+
+  botonSiguiente?.addEventListener("click", () => {
+    mostrarFoto(indiceActual + 1);
+    actualizarImagenLightbox();
+  });
+
+  lightboxImagen?.addEventListener("click", () => {
+    lightboxImagen.classList.toggle("lightbox__imagen--zoom");
+  });
+
+  window.addEventListener("keydown", (event) => {
+    if (!lightbox || lightbox.hidden) return;
+    if (event.key === "Escape") cerrarLightbox();
+    if (event.key === "ArrowLeft") {
+      mostrarFoto(indiceActual - 1);
+      actualizarImagenLightbox();
+    }
+    if (event.key === "ArrowRight") {
+      mostrarFoto(indiceActual + 1);
+      actualizarImagenLightbox();
+    }
   });
 </script>
