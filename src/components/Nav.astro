@@ -1,6 +1,16 @@
 ---
 import { siteConfig, whatsappLink } from "@/data/site";
 
+interface Props {
+  // Sólo la portada tiene un Hero oscuro detrás: ahí el nav puede nacer
+  // transparente y volverse sólido al hacer scroll. En cualquier otra
+  // página (sin Hero oscuro), el nav debe ser sólido desde el inicio o
+  // el texto claro se pierde contra el fondo claro.
+  transparente?: boolean;
+}
+
+const { transparente = false } = Astro.props;
+
 // Rutas absolutas (con "/" al inicio) para que funcionen igual desde la
 // portada que desde una página de detalle de producto.
 const links = [
@@ -12,7 +22,7 @@ const links = [
 ];
 ---
 
-<header class="nav" id="nav" data-nav>
+<header id="nav" data-nav class:list={["nav", { "nav--transparente": transparente }]}>
   <div class="contenedor nav__barra">
     <a href="/" class="nav__logo">{siteConfig.name}</a>
 
@@ -68,12 +78,24 @@ const links = [
 </div>
 
 <style>
+  /* Sólido por defecto: seguro en cualquier página, con o sin Hero
+     oscuro detrás. */
   .nav {
-    background: transparent;
+    background: rgba(20, 18, 16, 0.92);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.06);
     transition: background-color 0.4s var(--ease), box-shadow 0.4s var(--ease);
   }
 
-  .nav[data-scrolled="true"] {
+  /* Sólo la portada, sobre el Hero: nace transparente y se vuelve
+     sólido al hacer scroll. */
+  .nav--transparente {
+    background: transparent;
+    backdrop-filter: none;
+    box-shadow: none;
+  }
+
+  .nav--transparente[data-scrolled="true"] {
     background: rgba(20, 18, 16, 0.92);
     backdrop-filter: blur(10px);
     box-shadow: 0 1px 0 rgba(255, 255, 255, 0.06);
