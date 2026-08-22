@@ -16,6 +16,9 @@ export type Product = {
   ficha?: Record<string, string>;
   descripcionCorta?: string;
   descripcionLarga?: string;
+  // Fotos adicionales de producto (detalle de materiales, ángulos extra).
+  // Tampoco se muestran todavía; listas para una galería futura.
+  galeria?: string[];
 };
 
 export const products: Product[] = [
@@ -25,8 +28,17 @@ export const products: Product[] = [
     ref: "SM-01",
     category: "Mesas",
     detail: "Tablero marmoleado hueso, base negra",
-    image: "/products/mesa-perla.png",
-    scene: "/scenes/pieza-mesa-perla.jpg",
+    // Foto real de producto (fondo blanco, no recorte transparente ni
+    // escena de estudio) — se usa para ambos bloques mientras no haya
+    // fotografía de estudio con fondo cálido.
+    image: "/products/mesa-perla.jpg",
+    scene: "/products/mesa-perla.jpg",
+    galeria: [
+      "/products/mesa-perla-alt.jpg",
+      "/products/mesa-perla-detalle-tablero.jpg",
+      "/products/mesa-perla-detalle-base.jpg",
+      "/products/mesa-perla-listado.jpg",
+    ],
     ficha: {
       Alto: "74 cm",
       "Diámetro tablero": "70 cm",
