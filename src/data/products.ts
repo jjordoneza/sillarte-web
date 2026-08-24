@@ -185,6 +185,13 @@ export const products: Product[] = [
     detail: "Tejido calado blanco, base fija en tijera",
     image: "/products/silla-trama.jpg",
     scene: "/products/silla-trama.jpg",
+    galeria: [
+      "/products/silla-trama-alt.jpg",
+      "/products/silla-trama-perfil.jpg",
+      "/products/silla-trama-rojo.jpg",
+      "/products/silla-trama-verde.jpg",
+      "/products/silla-trama-medidas.jpg",
+    ],
     ficha: {
       "Alto total": "82,5 cm",
       Largo: "45,5 cm",
@@ -193,7 +200,7 @@ export const products: Product[] = [
       "Ancho superior de respaldo": "63,5 cm",
       "Material asiento/respaldo": "Polipropileno, tejido calado tipo cesta",
       "Material base": "Metal, acabado que simula madera",
-      Color: "Blanco",
+      "Colores disponibles": "Blanco (fotografiado); también en rojo y verde",
       Brazos: "Incluidos",
       Base: "Fija, 4 patas en tijera",
     },
