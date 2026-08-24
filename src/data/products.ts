@@ -248,9 +248,9 @@ export const faq = [
       "Sí, despachamos a todas las ciudades de Colombia. El tiempo y costo de envío dependen del destino y el volumen del pedido; te lo confirmamos en la cotización.",
   },
   {
-    question: "¿Las piezas de la colección 2026 combinan entre sí?",
+    question: "¿Por qué los precios de Sillarte son más bajos?",
     answer:
-      "Sí. Los 4 tonos y los materiales de la colección fueron pensados para combinarse: puedes mezclar sillas y mesas de distintas referencias sin perder coherencia visual.",
+      "Porque compras directo, sin intermediarios que suban el costo. Eso nos permite ofrecer diseño con acabados premium (mármol, piedra sinterizada, metal, cuero sintético) a precio de fábrica.",
   },
   {
     question: "¿Cuánto tardan en responder una cotización de mayoreo?",

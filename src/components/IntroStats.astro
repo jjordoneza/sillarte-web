@@ -1,8 +1,9 @@
 ---
 const stats = [
-  { valor: "04", etiqueta: "Tonos que combinan entre sí" },
-  { valor: "06+", etiqueta: "Piezas en la colección" },
-  { valor: "02", etiqueta: "Canales: mayoreo y detal" },
+  { valor: "6+", etiqueta: "Referencias en stock permanente" },
+  { valor: "0", etiqueta: "Intermediarios entre fábrica y tu pedido" },
+  { valor: "24h", etiqueta: "Tiempo de respuesta a cotizaciones" },
+  { valor: "6", etiqueta: "Unidades mínimas para precio mayorista" },
 ];
 ---
 
@@ -11,8 +12,7 @@ const stats = [
     <p class="etiqueta reveal">La colección</p>
 
     <h2 class="titular intro__titulo reveal">
-      Esta es una colección pensada para que cada pieza combine con las demás:
-      <em class="acento-dorado">un solo lenguaje</em>, cuatro tonos, infinitas combinaciones.
+      <em class="acento-dorado">Precio de fábrica</em>, stock real y diseño que no se ve barato.
     </h2>
 
     <dl class="intro__stats reveal">
@@ -40,7 +40,7 @@ const stats = [
   .intro__stats {
     margin: 0;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 2rem;
     padding-top: 2.5rem;
     border-top: 1px solid var(--linea);
@@ -59,7 +59,13 @@ const stats = [
     max-width: 22ch;
   }
 
-  @media (max-width: 700px) {
+  @media (max-width: 900px) {
+    .intro__stats {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 480px) {
     .intro__stats {
       grid-template-columns: 1fr;
       gap: 1.75rem;
