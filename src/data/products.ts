@@ -1,4 +1,4 @@
-// Catálogo de la colección Cálida 2026.
+// Catálogo de la colección 2026.
 // `image` referencia el recorte en /public/products (fondo transparente).
 // `scene` referencia la foto de estudio en /public/scenes (para bloques inmersivos).
 export type Product = {
@@ -51,9 +51,9 @@ export const products: Product[] = [
       "Colores disponibles": "Tablero marmoleado hueso / Base negra",
     },
     descripcionCorta:
-      "Mesa redonda de pedestal con tablero marmoleado en tono hueso y base en acero negro. Compacta, resistente y lista para combinar con el resto de la familia Cálida.",
+      "Mesa redonda de pedestal con tablero marmoleado en tono hueso y base en acero negro. Compacta, resistente y lista para combinar con el resto de la familia.",
     descripcionLarga:
-      'Redonda, marmoleada, de pedestal — la protagonista compacta de cualquier montaje. Una mesa de líneas limpias pensada para espacios donde cada centímetro cuenta. Su tablero de 70 cm de diámetro con acabado marmoleado en tono hueso se apoya sobre una base pedestal única en acero negro, liberando espacio y facilitando el movimiento a su alrededor. Tablero en MDF de alta densidad, resistente a golpes, humedad y deformaciones. Base en acero con recubrimiento en polvo, antióxido, con protectores de piso que evitan rayones en porcelanato o madera. Ensamble sencillo con herramientas incluidas, lista para usar en minutos. Hace parte de la familia Cálida: combina directamente con las banquetas de barra, la banca y las sillas de la colección, permitiendo a distribuidores y tiendas ofrecer un conjunto completo con una sola paleta (hueso, camel, gris, negro y detalles dorados). Disponible con condiciones especiales de precio por volumen para reventa.',
+      'Redonda, marmoleada, de pedestal — la protagonista compacta de cualquier montaje. Una mesa de líneas limpias pensada para espacios donde cada centímetro cuenta. Su tablero de 70 cm de diámetro con acabado marmoleado en tono hueso se apoya sobre una base pedestal única en acero negro, liberando espacio y facilitando el movimiento a su alrededor. Tablero en MDF de alta densidad, resistente a golpes, humedad y deformaciones. Base en acero con recubrimiento en polvo, antióxido, con protectores de piso que evitan rayones en porcelanato o madera. Ensamble sencillo con herramientas incluidas, lista para usar en minutos. Hace parte de la familia: combina directamente con las banquetas de barra, la banca y las sillas de la colección, permitiendo a distribuidores y tiendas ofrecer un conjunto completo con una sola paleta (hueso, camel, gris, negro y detalles dorados). Disponible con condiciones especiales de precio por volumen para reventa.',
   },
   {
     slug: "silla-barril",
@@ -87,9 +87,9 @@ export const products: Product[] = [
       "Colores disponibles": "Camel y gris oscuro",
     },
     descripcionCorta:
-      "Silla de comedor con asiento curvo y respaldo envolvente, tapizada en poliuretano acolchado sobre patas de metal. Cómoda, resistente y lista para combinar con el resto de la familia Cálida.",
+      "Silla de comedor con asiento curvo y respaldo envolvente, tapizada en poliuretano acolchado sobre patas de metal. Cómoda, resistente y lista para combinar con el resto de la familia.",
     descripcionLarga:
-      "Asiento curvo, respaldo envolvente: la silueta que le da nombre a su propio estilo. Su asiento ancho se curva hacia arriba en los costados, envolviendo suavemente el cuerpo, mientras el respaldo alto mantiene una postura cómoda durante comidas largas. Tapizada en poliuretano acolchado de tacto suave, resistente al uso diario y fácil de limpiar con un paño húmedo, se sostiene sobre patas de metal delgadas que aportan ligereza visual sin sacrificar estabilidad. El asiento ancho y el respaldo curvo distribuyen el peso de forma cómoda. Hace parte de la familia Cálida: combina con la Mesa Perla y el resto de la colección en una misma paleta de hueso, camel, gris, negro y detalles dorados, permitiendo a distribuidores y tiendas ofrecer un conjunto coordinado con una sola referencia. Condiciones especiales de precio por volumen disponibles para reventa.",
+      "Asiento curvo, respaldo envolvente: la silueta que le da nombre a su propio estilo. Su asiento ancho se curva hacia arriba en los costados, envolviendo suavemente el cuerpo, mientras el respaldo alto mantiene una postura cómoda durante comidas largas. Tapizada en poliuretano acolchado de tacto suave, resistente al uso diario y fácil de limpiar con un paño húmedo, se sostiene sobre patas de metal delgadas que aportan ligereza visual sin sacrificar estabilidad. El asiento ancho y el respaldo curvo distribuyen el peso de forma cómoda. Hace parte de la familia: combina con la Mesa Perla y el resto de la colección en una misma paleta de hueso, camel, gris, negro y detalles dorados, permitiendo a distribuidores y tiendas ofrecer un conjunto coordinado con una sola referencia. Condiciones especiales de precio por volumen disponibles para reventa.",
   },
   {
     slug: "silla-concha",
@@ -110,9 +110,9 @@ export const products: Product[] = [
       Color: "Negro",
     },
     descripcionCorta:
-      "Silla de comedor de líneas limpias, asiento en cuero sobre patas de metal negro. Sobria, versátil y lista para combinar con el resto de la familia Cálida.",
+      "Silla de comedor de líneas limpias, asiento en cuero sobre patas de metal negro. Sobria, versátil y lista para combinar con el resto de la familia.",
     descripcionLarga:
-      "Cuero y metal, en su expresión más limpia. Una silla de comedor de líneas depuradas: asiento en cuero sobre una estructura de patas en metal negro, pensada para quienes buscan un mueble sobrio que no pase de moda. Su perfil minimalista la hace igual de versátil en un comedor formal que en una barra o rincón de trabajo. El asiento en cuero es de tacto firme y fácil mantenimiento, y la estructura en metal negro es estable y resistente al uso diario, con un perfil liviano que no sobrecarga visualmente el espacio. Hace parte de la familia Cálida: combina con la Mesa Perla, la Silla Barril y el resto de la colección en una misma paleta de hueso, camel, gris, negro y detalles dorados, permitiendo a distribuidores y tiendas ofrecer un conjunto coordinado con una sola referencia. Condiciones especiales de precio por volumen disponibles para reventa.",
+      "Cuero y metal, en su expresión más limpia. Una silla de comedor de líneas depuradas: asiento en cuero sobre una estructura de patas en metal negro, pensada para quienes buscan un mueble sobrio que no pase de moda. Su perfil minimalista la hace igual de versátil en un comedor formal que en una barra o rincón de trabajo. El asiento en cuero es de tacto firme y fácil mantenimiento, y la estructura en metal negro es estable y resistente al uso diario, con un perfil liviano que no sobrecarga visualmente el espacio. Hace parte de la familia: combina con la Mesa Perla, la Silla Barril y el resto de la colección en una misma paleta de hueso, camel, gris, negro y detalles dorados, permitiendo a distribuidores y tiendas ofrecer un conjunto coordinado con una sola referencia. Condiciones especiales de precio por volumen disponibles para reventa.",
   },
   {
     slug: "silla-abanico",
@@ -142,9 +142,9 @@ export const products: Product[] = [
       Brazos: "Incluidos",
     },
     descripcionCorta:
-      "Silla de comedor con brazos y respaldo abierto, tapizada en símil cuero negro sobre patas de metal. Cómoda, moderna y lista para combinar con el resto de la familia Cálida.",
+      "Silla de comedor con brazos y respaldo abierto, tapizada en símil cuero negro sobre patas de metal. Cómoda, moderna y lista para combinar con el resto de la familia.",
     descripcionLarga:
-      "Respaldo abierto, brazos que abrazan: comodidad con carácter. Sus brazos y respaldo abierto aligeran visualmente cualquier montaje sin renunciar al soporte. Tapizada en símil cuero negro sobre una estructura de patas en metal, combina un perfil moderno con la comodidad de tener dónde apoyar los brazos durante comidas largas. El tapizado en símil cuero es resistente y fácil de limpiar con un paño húmedo, la estructura en metal negro es estable y de bajo mantenimiento, y el diseño con brazos y respaldo abierto aporta comodidad sin verse pesada en el espacio. Hace parte de la familia Cálida: combina con la Mesa Perla, la Silla Barril y la Silla Concha en una misma paleta de hueso, camel, gris, negro y detalles dorados, permitiendo a distribuidores y tiendas ofrecer un conjunto coordinado con una sola referencia. Condiciones especiales de precio por volumen disponibles para reventa.",
+      "Respaldo abierto, brazos que abrazan: comodidad con carácter. Sus brazos y respaldo abierto aligeran visualmente cualquier montaje sin renunciar al soporte. Tapizada en símil cuero negro sobre una estructura de patas en metal, combina un perfil moderno con la comodidad de tener dónde apoyar los brazos durante comidas largas. El tapizado en símil cuero es resistente y fácil de limpiar con un paño húmedo, la estructura en metal negro es estable y de bajo mantenimiento, y el diseño con brazos y respaldo abierto aporta comodidad sin verse pesada en el espacio. Hace parte de la familia: combina con la Mesa Perla, la Silla Barril y la Silla Concha en una misma paleta de hueso, camel, gris, negro y detalles dorados, permitiendo a distribuidores y tiendas ofrecer un conjunto coordinado con una sola referencia. Condiciones especiales de precio por volumen disponibles para reventa.",
   },
   {
     slug: "silla-alta",
@@ -173,9 +173,9 @@ export const products: Product[] = [
       Presentación: "Set de 2 unidades",
     },
     descripcionCorta:
-      "Silla alta giratoria con brazos, asiento en vinil piel sobre estructura de madera de pino y base en acero laqueado beige. Set de 2 unidades, lista para combinar con el resto de la familia Cálida.",
+      "Silla alta giratoria con brazos, asiento en vinil piel sobre estructura de madera de pino y base en acero laqueado beige. Set de 2 unidades, lista para combinar con el resto de la familia.",
     descripcionLarga:
-      "Giro de 360°, brazos incluidos: la barra nunca se sintió tan cómoda. Pensada para barras de cocina y desayunadores, con asiento en vinil piel relleno de espuma de poliuretano sobre una estructura interna en madera de pino, montada sobre una base de acero con acabado laqueado en beige y pintura epoxi. Su giro de 360° y sus apoyabrazos la hacen especialmente cómoda para sesiones largas en la barra. El asiento en vinil piel es fácil de limpiar y resistente al uso diario, la base en acero con pintura epoxi resiste la corrosión, y soporta hasta 120 kg de peso. Se vende en set de 2 unidades. Cierra la familia Cálida: combina con la Mesa Perla, la Silla Barril, la Silla Concha y la Silla Abanico en una misma paleta de hueso, camel, gris, negro y detalles dorados, permitiendo a distribuidores y tiendas ofrecer la colección completa con una sola referencia. Condiciones especiales de precio por volumen disponibles para reventa.",
+      "Giro de 360°, brazos incluidos: la barra nunca se sintió tan cómoda. Pensada para barras de cocina y desayunadores, con asiento en vinil piel relleno de espuma de poliuretano sobre una estructura interna en madera de pino, montada sobre una base de acero con acabado laqueado en beige y pintura epoxi. Su giro de 360° y sus apoyabrazos la hacen especialmente cómoda para sesiones largas en la barra. El asiento en vinil piel es fácil de limpiar y resistente al uso diario, la base en acero con pintura epoxi resiste la corrosión, y soporta hasta 120 kg de peso. Se vende en set de 2 unidades. Cierra la familia: combina con la Mesa Perla, la Silla Barril, la Silla Concha y la Silla Abanico en una misma paleta de hueso, camel, gris, negro y detalles dorados, permitiendo a distribuidores y tiendas ofrecer la colección completa con una sola referencia. Condiciones especiales de precio por volumen disponibles para reventa.",
   },
   {
     slug: "silla-trama",
@@ -193,9 +193,10 @@ export const products: Product[] = [
       "/products/silla-trama-medidas.jpg",
     ],
     ficha: {
-      "Alto total": "82,5 cm",
+      "Alto total": "80 cm",
       Largo: "45,5 cm",
       Ancho: "48 cm",
+      "Alto de asiento": "45 cm",
       "Profundidad de asiento": "43 cm",
       "Ancho superior de respaldo": "63,5 cm",
       "Material asiento/respaldo": "Polipropileno, tejido calado tipo cesta",
@@ -203,11 +204,12 @@ export const products: Product[] = [
       "Colores disponibles": "Blanco (fotografiado); también en rojo y verde",
       Brazos: "Incluidos",
       Base: "Fija, 4 patas en tijera",
+      "Peso máximo soportado": "130 kg",
     },
     descripcionCorta:
-      "Silla de comedor con asiento y respaldo en polipropileno tejido tipo cesta, brazos incluidos y base fija en metal con acabado madera. Ligera, resistente y lista para combinar con el resto de la familia Cálida.",
+      "Silla de comedor con asiento y respaldo en polipropileno tejido tipo cesta, brazos incluidos y base fija en metal con acabado madera. Ligera, resistente y lista para combinar con el resto de la familia.",
     descripcionLarga:
-      "Polipropileno tejido, base en tijera: textura que se nota antes de sentarse. Su asiento y respaldo en polipropileno calado forman un patrón tejido tipo cesta, con brazos incluidos que aportan comodidad extra. La base fija de cuatro patas en tijera, en metal con acabado que simula madera, le da estabilidad y un aire cálido y natural sin dejar de ser un material de bajo mantenimiento. El polipropileno es resistente, liviano y fácil de limpiar con un paño húmedo, y soporta hasta 110 kg de peso. Hace parte de la familia Cálida: combina con la Mesa Perla, la Silla Barril, la Silla Concha, la Silla Abanico y la Silla Alta en una misma paleta de hueso, camel, gris, negro y detalles dorados, permitiendo a distribuidores y tiendas ofrecer la colección completa con una sola referencia. Condiciones especiales de precio por volumen disponibles para reventa.",
+      "Polipropileno tejido, base en tijera: textura que se nota antes de sentarse. Su asiento y respaldo en polipropileno calado forman un patrón tejido tipo cesta, con brazos incluidos que aportan comodidad extra. La base fija de cuatro patas en tijera, en metal con acabado que simula madera, le da estabilidad y un aire cálido y natural sin dejar de ser un material de bajo mantenimiento. El polipropileno es resistente, liviano y fácil de limpiar con un paño húmedo, y soporta hasta 130 kg de peso. Hace parte de la familia: combina con la Mesa Perla, la Silla Barril, la Silla Concha, la Silla Abanico y la Silla Alta en una misma paleta de hueso, camel, gris, negro y detalles dorados, permitiendo a distribuidores y tiendas ofrecer la colección completa con una sola referencia. Condiciones especiales de precio por volumen disponibles para reventa.",
   },
 ];
 
@@ -221,7 +223,7 @@ export const categories = [
   },
   {
     name: "Sillas",
-    description: "Barril, Concha, Abanico y Trama, en la misma paleta cálida.",
+    description: "Barril, Concha, Abanico y Trama, en la misma paleta.",
     image: "/scenes/categoria-sillas.jpg",
     href: "#destacados",
   },
@@ -252,7 +254,7 @@ export const faq = [
       "Sí, despachamos a todas las ciudades de Colombia. El tiempo y costo de envío dependen del destino y el volumen del pedido; te lo confirmamos en la cotización.",
   },
   {
-    question: "¿Las piezas de la colección Cálida combinan entre sí?",
+    question: "¿Las piezas de la colección 2026 combinan entre sí?",
     answer:
       "Sí. Los 4 tonos y los materiales de la colección fueron pensados para combinarse: puedes mezclar sillas y mesas de distintas referencias sin perder coherencia visual.",
   },
@@ -272,7 +274,7 @@ export const faq = [
 export const testimonials = [
   {
     quote:
-      "Amoblamos todo el café con la colección Cálida y el cambio se sintió inmediato: se ve un lugar mucho más costoso de lo que realmente invertimos.",
+      "Amoblamos todo el café con la colección 2026 y el cambio se sintió inmediato: se ve un lugar mucho más costoso de lo que realmente invertimos.",
     author: "Cliente ejemplo",
     role: "Dueño de cafetería, Medellín",
   },

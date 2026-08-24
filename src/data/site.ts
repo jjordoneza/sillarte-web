@@ -2,11 +2,10 @@
 // Reutiliza la información real de contacto ya validada por Sillarte.
 export const siteConfig = {
   name: "Sillarte",
-  collection: "Cálida",
   year: "2026",
-  slogan: "Diseños que se ven caros, a buen precio.",
+  slogan: "Diseños lujosos, a un precio justo.",
   description:
-    "Colección Cálida 2026 de Sillarte: sillas, mesas y bancos de diseño que combinan entre sí. Venta al por mayor para cafés, restaurantes y hoteles, y al detal para hogares en toda Colombia.",
+    "Colección 2026 de Sillarte: sillas, mesas y bancos de diseño que combinan entre sí. Venta al por mayor para cafés, restaurantes y hoteles, y al detal para hogares en toda Colombia.",
   whatsappNumber: "573155441165",
   // TODO: confirmar si el correo de mayoreo es distinto al general antes de publicar.
   email: "sillarte.co@gmail.com",
