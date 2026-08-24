@@ -41,10 +41,10 @@ export const products: Product[] = [
     ],
     ficha: {
       Alto: "74 cm",
-      "Diámetro tablero": "70 cm",
+      "Diámetro tablero": "80 cm",
       "Grosor del tablero": "1,8 cm",
       "Peso de la pieza": "8,3 kg",
-      "Material tablero": "MDF de alta densidad, acabado marmoleado tono hueso",
+      "Material tablero": "Piedra sinterizada, acabado marmoleado tono hueso",
       "Material base": "Acero, pedestal único, recubrimiento en polvo negro",
       "Protección de piso": "Sí, borde plástico en la base",
       Ensamble: "Requiere ensamble, herramientas incluidas",
@@ -53,7 +53,7 @@ export const products: Product[] = [
     descripcionCorta:
       "Mesa redonda de pedestal con tablero marmoleado en tono hueso y base en acero negro. Compacta, resistente y lista para combinar con el resto de la familia.",
     descripcionLarga:
-      'Redonda, marmoleada, de pedestal — la protagonista compacta de cualquier montaje. Una mesa de líneas limpias pensada para espacios donde cada centímetro cuenta. Su tablero de 70 cm de diámetro con acabado marmoleado en tono hueso se apoya sobre una base pedestal única en acero negro, liberando espacio y facilitando el movimiento a su alrededor. Tablero en MDF de alta densidad, resistente a golpes, humedad y deformaciones. Base en acero con recubrimiento en polvo, antióxido, con protectores de piso que evitan rayones en porcelanato o madera. Ensamble sencillo con herramientas incluidas, lista para usar en minutos. Hace parte de la familia: combina directamente con las banquetas de barra, la banca y las sillas de la colección, permitiendo a distribuidores y tiendas ofrecer un conjunto completo con una sola paleta (hueso, camel, gris, negro y detalles dorados). Disponible con condiciones especiales de precio por volumen para reventa.',
+      'Redonda, marmoleada, de pedestal — la protagonista compacta de cualquier montaje. Una mesa de líneas limpias pensada para espacios donde cada centímetro cuenta. Su tablero de 80 cm de diámetro con acabado marmoleado en tono hueso se apoya sobre una base pedestal única en acero negro, liberando espacio y facilitando el movimiento a su alrededor. Tablero en piedra sinterizada, resistente a golpes, calor, humedad y manchas. Base en acero con recubrimiento en polvo, antióxido, con protectores de piso que evitan rayones en porcelanato o madera. Ensamble sencillo con herramientas incluidas, lista para usar en minutos. Hace parte de la familia: combina directamente con las banquetas de barra, la banca y las sillas de la colección, permitiendo a distribuidores y tiendas ofrecer un conjunto completo con una sola paleta (hueso, camel, gris, negro y detalles dorados). Disponible con condiciones especiales de precio por volumen para reventa.',
   },
   {
     slug: "silla-barril",
