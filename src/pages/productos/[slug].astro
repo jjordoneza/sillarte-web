@@ -248,6 +248,7 @@ const jsonLd = {
 
   .producto {
     padding-top: clamp(7rem, 14vw, 9rem);
+    padding-bottom: clamp(2rem, 4vw, 3rem);
   }
 
   .producto__migas {
@@ -453,7 +454,12 @@ const jsonLd = {
     }
   }
 
-  /* Ficha técnica */
+  /* Ficha técnica: menos aire arriba que el resto de secciones para que
+     no se sienta como un salto largo justo después de "Sobre esta pieza". */
+  .ficha {
+    padding-top: clamp(2rem, 4vw, 3rem);
+  }
+
   .ficha__grid {
     display: grid;
     gap: clamp(2rem, 5vw, 4rem);

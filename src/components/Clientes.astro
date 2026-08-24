@@ -1,0 +1,128 @@
+---
+import Medio from "@/components/Medio.astro";
+import { clients } from "@/data/clients";
+---
+
+<section class="clientes seccion seccion--marmol" aria-labelledby="clientes-titulo">
+  <div class="contenedor">
+    <div class="clientes__cabecera">
+      <p class="etiqueta reveal">Nuestros clientes</p>
+      <h2 id="clientes-titulo" class="titular clientes__titulo reveal">Negocios que ya confían en Sillarte.</h2>
+    </div>
+  </div>
+
+  <div class="clientes__pista-envoltorio reveal">
+    <div class="clientes__pista">
+      {[...clients, ...clients].map((client) => (
+        <a
+          class="clientes__tarjeta"
+          href={`https://instagram.com/${client.instagram}`}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Medio
+            src={client.image}
+            alt={`${client.business}, ${client.city}`}
+            marcador={`Foto de cliente — ${client.business}`}
+            class="clientes__medio"
+          />
+          <div class="clientes__info">
+            <span class="clientes__negocio">{client.business}</span>
+            <span class="clientes__ciudad">{client.city}</span>
+            <span class="clientes__ig">@{client.instagram}</span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .clientes__cabecera {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 40ch;
+    margin-bottom: clamp(2.5rem, 5vw, 3.5rem);
+  }
+
+  .clientes__titulo {
+    font-size: clamp(2rem, 4.5vw, 3.5rem);
+  }
+
+  .clientes__pista-envoltorio {
+    overflow: hidden;
+    mask-image: linear-gradient(to right, transparent, black 4%, black 96%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 4%, black 96%, transparent);
+  }
+
+  .clientes__pista {
+    display: flex;
+    width: max-content;
+    gap: 1.5rem;
+    padding-inline: 1.5rem;
+    animation: clientes-desplazar 36s linear infinite;
+  }
+
+  .clientes__pista:hover {
+    animation-play-state: paused;
+  }
+
+  .clientes__tarjeta {
+    display: block;
+    flex: 0 0 240px;
+    border-radius: 1rem;
+    overflow: hidden;
+    background: var(--hueso);
+    border: 1px solid var(--linea);
+    transition: border-color 0.3s var(--ease);
+  }
+
+  .clientes__tarjeta:hover {
+    border-color: var(--dorado);
+  }
+
+  .clientes__tarjeta :global(.clientes__medio) {
+    aspect-ratio: 4 / 5;
+  }
+
+  .clientes__info {
+    padding: 1rem 1.1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+
+  .clientes__negocio {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    color: var(--carbon);
+  }
+
+  .clientes__ciudad {
+    font-size: 0.78rem;
+    color: var(--gris);
+  }
+
+  .clientes__ig {
+    margin-top: 0.25rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--dorado-texto);
+  }
+
+  @keyframes clientes-desplazar {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .clientes__pista {
+      animation: none;
+    }
+  }
+</style>
