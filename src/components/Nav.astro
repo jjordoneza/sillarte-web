@@ -16,14 +16,17 @@ const { transparente = false } = Astro.props;
 const links = [
   { href: "/#destacados", label: "Colección" },
   { href: "/#categorias", label: "Categorías" },
-  { href: "/#mayoreo", label: "Mayoreo" },
+  { href: "/#mayoreo", label: "Comprar al por mayor" },
   { href: "/#faq", label: "FAQ" },
 ];
 ---
 
 <header id="nav" data-nav class:list={["nav", { "nav--transparente": transparente }]}>
   <div class="contenedor nav__barra">
-    <a href="/" class="nav__logo">{siteConfig.name}</a>
+    <a href="/" class="nav__logo">
+      {siteConfig.name}
+      <img src="/marca/icono-sillarte.png" alt="" class="nav__logo-icono" width="28" height="28" />
+    </a>
 
     <nav class="nav__links" aria-label="Navegación principal">
       <ul>
@@ -109,10 +112,19 @@ const links = [
   }
 
   .nav__logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
     font-family: var(--font-display);
     font-size: 1.3rem;
     color: var(--hueso);
     letter-spacing: 0.02em;
+  }
+
+  .nav__logo-icono {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
   }
 
   .nav__links ul {
