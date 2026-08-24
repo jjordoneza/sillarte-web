@@ -1,6 +1,7 @@
 ---
 import "@/styles/global.css";
 import { siteConfig } from "@/data/site";
+import WhatsAppFlotante from "@/components/WhatsAppFlotante.astro";
 
 interface Props {
   title?: string;
@@ -56,5 +57,6 @@ const ogImage = new URL(image, Astro.site ?? "https://sillarte.co").toString();
     </script>
     <a href="#contenido" class="saltar-enlace">Saltar al contenido</a>
     <slot />
+    <WhatsAppFlotante />
   </body>
 </html>
