@@ -43,15 +43,14 @@ const beneficios = [
       </div>
 
       <div class="mayoreo__campo">
-        <label for="contacto">Teléfono o correo de contacto</label>
-        <input type="text" id="contacto" name="contacto" required autocomplete="tel" />
+        <label for="telefono-contacto">Teléfono o correo de contacto</label>
+        <input type="text" id="telefono-contacto" name="contacto" required autocomplete="tel" />
       </div>
 
       <div class="mayoreo__campo">
         <label for="interes">Pieza de interés</label>
         <select id="interes" name="interes" required>
           <option value="">Selecciona una opción</option>
-          <option value="Conjuntos">Conjuntos</option>
           {products.map((product) => (
             <option value={`${product.name} (${product.ref})`}>
               {product.name} ({product.ref})
