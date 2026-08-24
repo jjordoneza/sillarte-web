@@ -326,6 +326,12 @@ const jsonLd = {
     background: var(--marmol);
   }
 
+  /* object-fit: contain (no cover) para que piezas altas y angostas
+     (p. ej. una silla de barra) se vean completas, sin recortar. */
+  .producto__medio-principal :global(.medio img) {
+    object-fit: contain;
+  }
+
   .producto__miniaturas {
     display: flex;
     gap: 0.75rem;
@@ -347,7 +353,7 @@ const jsonLd = {
   .producto__miniatura img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     display: block;
   }
 

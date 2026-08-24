@@ -73,6 +73,7 @@ export const products: Product[] = [
       "/products/silla-barril-negro-espalda.jpg",
       "/products/silla-barril-negro-alt.jpg",
       "/products/silla-barril-negro-base.jpg",
+      "/products/silla-barril-medidas.jpg",
     ],
     ficha: {
       "Alto total": "82 cm",
@@ -98,6 +99,7 @@ export const products: Product[] = [
     detail: "Asiento en cuero negro, patas de metal",
     image: "/products/silla-concha.jpg",
     scene: "/products/silla-concha.jpg",
+    galeria: ["/products/silla-concha-espalda.jpg"],
     ficha: {
       Alto: "91 cm",
       Ancho: "45 cm",
@@ -152,6 +154,11 @@ export const products: Product[] = [
     detail: "Giratoria, con brazos, base beige — set x2",
     image: "/products/silla-alta.jpg",
     scene: "/products/silla-alta.jpg",
+    galeria: [
+      "/products/silla-alta-frente.jpg",
+      "/products/silla-alta-espalda.jpg",
+      "/products/silla-alta-base.jpg",
+    ],
     ficha: {
       "Alto máximo": "105 cm",
       Ancho: "46 cm",
