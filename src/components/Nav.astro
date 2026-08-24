@@ -62,6 +62,13 @@ const links = [
 </header>
 
 <div class="menu-movil" id="menu-movil" data-menu-panel hidden>
+  <button type="button" class="menu-movil__cerrar" data-menu-cerrar aria-label="Cerrar menú">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+      <line x1="5" y1="5" x2="19" y2="19"></line>
+      <line x1="19" y1="5" x2="5" y2="19"></line>
+    </svg>
+  </button>
+
   <nav aria-label="Navegación móvil">
     <ul>
       {links.map((link) => (
@@ -201,6 +208,30 @@ const links = [
     text-align: center;
   }
 
+  /* Botón de cerrar dentro del propio panel: independiente del toggle de
+     apertura, para no depender de que su z-index "escape" por encima del
+     panel (el nav puede crear su propio contexto de apilamiento cuando
+     tiene backdrop-filter activo). */
+  .menu-movil__cerrar {
+    position: absolute;
+    top: 1.35rem;
+    right: 1.35rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    background: transparent;
+    border: 1px solid rgba(242, 235, 222, 0.35);
+    border-radius: 50%;
+    color: var(--hueso);
+  }
+
+  .menu-movil__cerrar svg {
+    width: 18px;
+    height: 18px;
+  }
+
   .menu-movil .boton {
     white-space: normal;
     max-width: 100%;
@@ -248,6 +279,7 @@ const links = [
   const nav = document.querySelector<HTMLElement>("[data-nav]");
   const toggle = document.querySelector<HTMLButtonElement>("[data-menu-toggle]");
   const panel = document.querySelector<HTMLElement>("[data-menu-panel]");
+  const cerrar = document.querySelector<HTMLButtonElement>("[data-menu-cerrar]");
   const menuLinks = document.querySelectorAll<HTMLAnchorElement>("[data-menu-link]");
 
   const setScrolled = () => {
@@ -276,6 +308,7 @@ const links = [
     isOpen ? closeMenu() : openMenu();
   });
 
+  cerrar?.addEventListener("click", closeMenu);
   menuLinks.forEach((link) => link.addEventListener("click", closeMenu));
 
   window.addEventListener("keydown", (event) => {
