@@ -722,12 +722,18 @@ const jsonLd = {
     lightboxImagen.classList.remove("lightbox__imagen--zoom");
   }
 
+  // Algunos navegadores móviles no apilan correctamente dos elementos
+  // position:fixed (el header y el lightbox); se oculta el header mientras
+  // el lightbox está abierto para evitar que se vea "por encima".
+  const headerFijo = document.querySelector<HTMLElement>(".header-fijo");
+
   function abrirLightbox() {
     if (!lightbox || fotos.length === 0) return;
     elementoConFocoPrevio = document.activeElement as HTMLElement;
     actualizarImagenLightbox();
     lightbox.hidden = false;
     document.body.style.overflow = "hidden";
+    if (headerFijo) headerFijo.style.visibility = "hidden";
     botonCerrarLightbox?.focus();
   }
 
@@ -735,6 +741,7 @@ const jsonLd = {
     if (!lightbox) return;
     lightbox.hidden = true;
     document.body.style.overflow = "";
+    if (headerFijo) headerFijo.style.visibility = "";
     lightboxImagen?.classList.remove("lightbox__imagen--zoom");
     elementoConFocoPrevio?.focus();
   }
