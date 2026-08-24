@@ -8,7 +8,10 @@ const anio = new Date().getFullYear();
 <footer class="footer seccion--oscura sobre-oscuro" id="contacto">
   <div class="contenedor footer__grid">
     <div class="footer__marca">
-      <p class="footer__logo">{siteConfig.name}</p>
+      <p class="footer__logo">
+        {siteConfig.name}
+        <img src="/marca/icono-sillarte.png" alt="" class="footer__logo-icono" width="32" height="32" />
+      </p>
       <p class="footer__slogan">{siteConfig.slogan}</p>
     </div>
 
@@ -31,7 +34,7 @@ const anio = new Date().getFullYear();
       <ul>
         <li><a href="/#destacados">Colección</a></li>
         <li><a href="/#categorias">Categorías</a></li>
-        <li><a href="/#mayoreo">Mayoreo</a></li>
+        <li><a href="/#mayoreo">Comprar al por mayor</a></li>
         <li><a href="/#faq">Preguntas frecuentes</a></li>
       </ul>
     </div>
@@ -63,8 +66,17 @@ const anio = new Date().getFullYear();
   }
 
   .footer__logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
     font-family: var(--font-display);
     font-size: 1.6rem;
+  }
+
+  .footer__logo-icono {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
   }
 
   .footer__slogan {
