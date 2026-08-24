@@ -216,7 +216,7 @@ const beneficios = [
     const cantidad = data.get("cantidad");
 
     const mensaje =
-      `Hola, quiero cotizar al por mayor la colección Cálida de Sillarte.\n` +
+      `Hola, quiero cotizar al por mayor la colección 2026 de Sillarte.\n` +
       `Nombre/negocio: ${nombre}\n` +
       `Contacto: ${contacto}\n` +
       `Interés: ${interes}\n` +
@@ -224,7 +224,7 @@ const beneficios = [
 
     if (via === "mail") {
       window.location.href = `mailto:${email}?subject=${encodeURIComponent(
-        "Cotización de mayoreo — Colección Cálida"
+        "Cotización de mayoreo — Colección 2026"
       )}&body=${encodeURIComponent(mensaje)}`;
     } else {
       window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(mensaje)}`, "_blank", "noopener");

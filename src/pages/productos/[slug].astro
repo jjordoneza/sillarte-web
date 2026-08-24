@@ -27,10 +27,10 @@ const relacionados = products
 
 const galeria = [product.image, ...(product.galeria ?? [])];
 
-const tituloSeo = `${product.name} — Colección Cálida | ${siteConfig.name}`;
+const tituloSeo = `${product.name} — Colección 2026 | ${siteConfig.name}`;
 const descripcionSeo = `${resumen} Ref. ${product.ref}. Disponible al detal y al por mayor desde 6 unidades, envíos a todo Colombia.`;
 
-const mensajeWhatsapp = `Hola, quiero cotizar la pieza ${product.name} (ref. ${product.ref}) de la colección Cálida de Sillarte.`;
+const mensajeWhatsapp = `Hola, quiero cotizar la pieza ${product.name} (ref. ${product.ref}) de la colección 2026 de Sillarte.`;
 
 // Datos estructurados para buscadores (schema.org/Product).
 // Se omite "offers" a propósito: todavía no hay precio real publicado.
@@ -61,7 +61,7 @@ const jsonLd = {
     <section class="producto seccion seccion--marmol">
       <div class="contenedor">
         <nav class="producto__migas" aria-label="Ruta de navegación">
-          <a href="/#destacados">Colección Cálida</a>
+          <a href="/#destacados">Colección 2026</a>
           <span aria-hidden="true">/</span>
           <a href="/#categorias">{product.category}</a>
           <span aria-hidden="true">/</span>
@@ -142,7 +142,7 @@ const jsonLd = {
               <h2>Sobre esta pieza</h2>
               <p>
                 {product.descripcionLarga ?? (
-                  `${product.detail}. Hace parte de la colección Cálida: pensada para combinar directamente con el resto de mesas, bancos y sillas de la familia, con un mismo lenguaje de materiales y tonos. Escríbenos para conocer fichas técnicas, tiempos de entrega y condiciones de compra al detal o al por mayor.`
+                  `${product.detail}. Hace parte de la colección 2026: pensada para combinar directamente con el resto de mesas, bancos y sillas de la familia, con un mismo lenguaje de materiales y tonos. Escríbenos para conocer fichas técnicas, tiempos de entrega y condiciones de compra al detal o al por mayor.`
                 )}
               </p>
             </div>

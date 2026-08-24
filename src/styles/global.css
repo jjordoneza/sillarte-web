@@ -1,5 +1,5 @@
 /* ===========================================================
-   SILLARTE — Colección Cálida 2026
+   SILLARTE — Colección 2026
    Sistema de estilos global: variables, reset, tipografía,
    utilidades compartidas por todas las secciones.
    =========================================================== */
@@ -7,7 +7,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Hanken+Grotesk:wght@400;500;600;700&display=swap");
 
 :root {
-  /* Paleta Cálida */
+  /* Paleta */
   --hueso: #f2ebde;
   --hueso-2: #eae1d2;
   --marmol: #fbfaf6;
