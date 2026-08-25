@@ -22,7 +22,7 @@ export const clients: Client[] = [
   {
     business: "Jardín del Cielo",
     city: "Cali, Valle del Cauca",
-    instagram: "unjardindelcielo",
+    instagram: "unjardinenelcielo",
     image: "/clients/jardin-del-cielo.jpeg",
   },
   {
