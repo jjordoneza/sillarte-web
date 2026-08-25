@@ -7,7 +7,7 @@ import Nav from "@/components/Nav.astro";
 import Footer from "@/components/Footer.astro";
 import Medio from "@/components/Medio.astro";
 import RevealScript from "@/components/RevealScript.astro";
-import { products, type Product } from "@/data/products";
+import { products, categories, type Product } from "@/data/products";
 import { siteConfig, whatsappLink } from "@/data/site";
 
 export function getStaticPaths() {
@@ -35,8 +35,12 @@ const descripcionSeo = `${resumen} Ref. ${product.ref}. Disponible al detal y al
 
 const mensajeWhatsapp = `Hola, quiero cotizar la pieza ${product.name} (ref. ${product.ref}) de la colección 2026 de Sillarte.`;
 
+// URL de la categoría de esta pieza, para la miga de pan y el breadcrumb JSON-LD.
+const categoriaUrl = categories.find((c) => c.name === product.category)?.href ?? "/#categorias";
+
 // Datos estructurados para buscadores (schema.org/Product).
-// Se omite "offers" a propósito: todavía no hay precio real publicado.
+// Se omite el precio a propósito porque todavía no se publica en el sitio;
+// sí se declara disponibilidad para que el rich snippet muestre "En stock".
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Product",
@@ -49,6 +53,24 @@ const jsonLd = {
     "@type": "Brand",
     name: siteConfig.name,
   },
+  offers: {
+    "@type": "Offer",
+    availability: "https://schema.org/InStock",
+    itemCondition: "https://schema.org/NewCondition",
+    url: new URL(`/productos/${product.slug}/`, Astro.site ?? "https://sillarte.co").toString(),
+  },
+};
+
+// Datos estructurados (schema.org/BreadcrumbList): coinciden con las migas
+// visuales de más abajo (Colección 2026 / Categoría / Producto).
+const breadcrumbJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Colección 2026", item: new URL("/", Astro.site ?? "https://sillarte.co").toString() },
+    { "@type": "ListItem", position: 2, name: product.category, item: new URL(categoriaUrl, Astro.site ?? "https://sillarte.co").toString() },
+    { "@type": "ListItem", position: 3, name: product.name, item: new URL(`/productos/${product.slug}/`, Astro.site ?? "https://sillarte.co").toString() },
+  ],
 };
 ---
 
@@ -59,6 +81,7 @@ const jsonLd = {
   </div>
 
   <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} is:inline />
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbJsonLd)} is:inline />
 
   <main id="contenido">
     <section class="producto seccion seccion--marmol">
@@ -66,7 +89,7 @@ const jsonLd = {
         <nav class="producto__migas" aria-label="Ruta de navegación">
           <a href="/#destacados">Colección 2026</a>
           <span aria-hidden="true">/</span>
-          <a href="/#categorias">{product.category}</a>
+          <a href={categoriaUrl}>{product.category}</a>
           <span aria-hidden="true">/</span>
           <span aria-current="page">{product.name}</span>
         </nav>

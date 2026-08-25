@@ -1,6 +1,23 @@
 ---
 import { faq } from "@/data/products";
+
+// Datos estructurados (schema.org/FAQPage) para optar a rich snippets de
+// preguntas frecuentes en los resultados de búsqueda.
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faq.map((item) => ({
+    "@type": "Question",
+    name: item.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: item.answer,
+    },
+  })),
+};
 ---
+
+<script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} is:inline />
 
 <section class="faq seccion seccion--clara" id="faq">
   <div class="contenedor faq__grid">

@@ -251,24 +251,29 @@ export const products: Product[] = [
 ];
 
 // Categorías del segundo nivel de navegación visual.
+// Cada una tiene su propia URL en /categorias/[slug]/ para poder rankear
+// en búsquedas específicas (p. ej. "sillas de comedor al por mayor").
 export const categories = [
   {
     name: "Sillas",
-    description: "Barril, Concha, Abanico, Trama y Alta, en la misma paleta.",
+    slug: "sillas",
+    description: "Barril, Concha, Abanico, Trama y Alta, con stock disponible.",
     image: "/scenes/categoria-sillas.jpg",
-    href: "#destacados",
+    href: "/categorias/sillas/",
   },
   {
     name: "Mesas",
+    slug: "mesas",
     description: "Base sólida, cubierta en piedra sinterizada.",
     image: "/scenes/categoria-mesas.jpg",
-    href: "#destacados",
+    href: "/categorias/mesas/",
   },
   {
     name: "Cuadros",
+    slug: "cuadros",
     description: "Piezas religiosas para decorar con carácter.",
     image: "/scenes/categoria-cuadros.jpg",
-    href: "#destacados",
+    href: "/categorias/cuadros/",
   },
 ];
 

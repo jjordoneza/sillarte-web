@@ -1,0 +1,201 @@
+---
+// Página de categoría: una por cada entrada en `categories` (Sillas, Mesas,
+// Cuadros). Da a cada categoría su propia URL indexable en vez de depender
+// solo del ancla "#categorias" en la home — mejor oportunidad de rankear
+// para búsquedas específicas como "sillas de comedor al por mayor Colombia".
+import Layout from "@/layouts/Layout.astro";
+import AnnouncementBar from "@/components/AnnouncementBar.astro";
+import Nav from "@/components/Nav.astro";
+import Footer from "@/components/Footer.astro";
+import Medio from "@/components/Medio.astro";
+import RevealScript from "@/components/RevealScript.astro";
+import { products, categories } from "@/data/products";
+import { siteConfig } from "@/data/site";
+
+export function getStaticPaths() {
+  return categories.map((cat) => ({
+    params: { category: cat.slug },
+    props: { cat },
+  }));
+}
+
+const { cat } = Astro.props as { cat: (typeof categories)[number] };
+
+const piezas = products.filter((p) => p.category === cat.name);
+
+const tituloSeo = `${cat.name} — Colección 2026 | ${siteConfig.name}`;
+const descripcionSeo = `${cat.name} de diseño al por mayor y al detal en Colombia: ${cat.description.toLowerCase()} Envíos a todo el país, precio de fábrica.`;
+
+// Datos estructurados (schema.org/BreadcrumbList): coinciden con las migas
+// visuales de la página para reforzar la jerarquía Inicio / Categoría.
+const breadcrumbJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Colección 2026", item: new URL("/", Astro.site).toString() },
+    { "@type": "ListItem", position: 2, name: cat.name, item: new URL(cat.href, Astro.site).toString() },
+  ],
+};
+---
+
+<Layout title={tituloSeo} description={descripcionSeo} image={cat.image}>
+  <div class="header-fijo">
+    <AnnouncementBar />
+    <Nav />
+  </div>
+
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbJsonLd)} is:inline />
+
+  <main id="contenido">
+    <section class="categoria seccion seccion--marmol">
+      <div class="contenedor">
+        <nav class="categoria__migas" aria-label="Ruta de navegación">
+          <a href="/#destacados">Colección 2026</a>
+          <span aria-hidden="true">/</span>
+          <span aria-current="page">{cat.name}</span>
+        </nav>
+
+        <p class="etiqueta reveal">Explora por categoría</p>
+        <h1 class="titular categoria__titulo reveal">{cat.name} de la colección 2026.</h1>
+        <p class="categoria__descripcion reveal">{cat.description}</p>
+
+        {piezas.length > 0 ? (
+          <div class="categoria__grid">
+            {piezas.map((pieza) => (
+              <a href={`/productos/${pieza.slug}/`} class="categoria__tarjeta reveal">
+                <Medio
+                  src={pieza.scene}
+                  alt={`${pieza.name}, ${pieza.detail}`}
+                  marcador={`Escena de estudio — ${pieza.name}`}
+                  class="medio--marcador-arriba"
+                />
+                <div class="categoria__ficha">
+                  <h2>{pieza.name}</h2>
+                  <span>Ref. {pieza.ref}</span>
+                </div>
+              </a>
+            ))}
+          </div>
+        ) : (
+          <p class="categoria__vacio reveal">
+            Estamos preparando esta categoría. Escríbenos por WhatsApp para conocer disponibilidad y fechas de lanzamiento.
+          </p>
+        )}
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+  <RevealScript />
+</Layout>
+
+<style>
+  .header-fijo {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+  }
+
+  .categoria {
+    padding-top: clamp(7rem, 14vw, 9rem);
+  }
+
+  .categoria__migas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    color: var(--gris);
+    margin-bottom: clamp(2rem, 4vw, 3rem);
+  }
+
+  .categoria__migas a:hover {
+    color: var(--dorado-texto);
+    text-decoration: underline;
+  }
+
+  .categoria__migas [aria-current="page"] {
+    color: var(--carbon);
+    font-weight: 600;
+  }
+
+  .categoria__titulo {
+    margin-top: 1rem;
+    font-size: clamp(2rem, 4.5vw, 3.5rem);
+  }
+
+  .categoria__descripcion {
+    margin-top: 1rem;
+    max-width: 50ch;
+    color: var(--gris);
+    font-size: 1.05rem;
+  }
+
+  .categoria__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+    margin-top: clamp(2.5rem, 5vw, 4rem);
+  }
+
+  .categoria__tarjeta {
+    position: relative;
+    display: block;
+    border-radius: 1rem;
+    overflow: hidden;
+    aspect-ratio: 3 / 4;
+  }
+
+  .categoria__tarjeta :global(.medio) {
+    height: 100%;
+  }
+
+  .categoria__tarjeta :global(img) {
+    transition: transform 0.8s var(--ease);
+  }
+
+  .categoria__tarjeta:hover :global(img:not(.medio__img--error)) {
+    transform: scale(1.06);
+  }
+
+  .categoria__ficha {
+    position: absolute;
+    inset: auto 0 0 0;
+    padding: 1.25rem;
+    background: linear-gradient(to top, rgba(20, 18, 16, 0.85), transparent);
+    color: var(--hueso);
+  }
+
+  .categoria__ficha h2 {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+  }
+
+  .categoria__ficha span {
+    display: block;
+    margin-top: 0.2rem;
+    font-size: 0.75rem;
+    color: var(--hueso-suave);
+  }
+
+  .categoria__vacio {
+    margin-top: clamp(2.5rem, 5vw, 4rem);
+    max-width: 50ch;
+    color: var(--gris);
+    font-size: 1.05rem;
+  }
+
+  @media (max-width: 900px) {
+    .categoria__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 560px) {
+    .categoria__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
