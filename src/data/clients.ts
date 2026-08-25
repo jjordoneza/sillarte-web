@@ -25,4 +25,10 @@ export const clients: Client[] = [
     instagram: "unjardindelcielo",
     image: "/clients/jardin-del-cielo.jpeg",
   },
+  {
+    business: "Zaguán de la Estación",
+    city: "Salento, Quindío",
+    instagram: "zaguandelaestacion",
+    image: "/clients/zaguan-de-la-estacion.jpeg",
+  },
 ];
