@@ -185,7 +185,7 @@ export const products: Product[] = [
     name: "Silla Alta",
     ref: "SL-05",
     category: "Sillas",
-    detail: "Giratoria, con brazos, en beige o verde — set x2",
+    detail: "Giratoria, con brazos, en beige o verde",
     image: "/products/silla-alta.jpg",
     scene: "/products/silla-alta.jpg",
     galeria: [
@@ -207,12 +207,12 @@ export const products: Product[] = [
       "Colores disponibles": "Beige y verde",
       Apoyabrazos: "Sí",
       "Rotación 360°": "Sí",
-      Presentación: "Set de 2 unidades",
+      Presentación: "Unidad individual",
     },
     descripcionCorta:
-      "Silla alta giratoria con brazos, asiento en vinil piel sobre estructura de madera de pino y base en acero laqueado, disponible en beige o verde. Set de 2 unidades, lista para combinar con el resto de la familia.",
+      "Silla alta giratoria con brazos, asiento en vinil piel sobre estructura de madera de pino y base en acero laqueado, disponible en beige o verde. Se vende por unidad, lista para combinar con el resto de la familia.",
     descripcionLarga:
-      "Giro de 360°, brazos incluidos: la barra nunca se sintió tan cómoda. Pensada para barras de cocina y desayunadores, con asiento en vinil piel relleno de espuma de poliuretano sobre una estructura interna en madera de pino, montada sobre una base de acero con acabado laqueado en beige o verde y pintura epoxi. Su giro de 360° y sus apoyabrazos la hacen especialmente cómoda para sesiones largas en la barra. El asiento en vinil piel es fácil de limpiar y resistente al uso diario, la base en acero con pintura epoxi resiste la corrosión, y soporta hasta 120 kg de peso. Se vende en set de 2 unidades.",
+      "Giro de 360°, brazos incluidos: la barra nunca se sintió tan cómoda. Pensada para barras de cocina y desayunadores, con asiento en vinil piel relleno de espuma de poliuretano sobre una estructura interna en madera de pino, montada sobre una base de acero con acabado laqueado en beige o verde y pintura epoxi. Su giro de 360° y sus apoyabrazos la hacen especialmente cómoda para sesiones largas en la barra. El asiento en vinil piel es fácil de limpiar y resistente al uso diario, la base en acero con pintura epoxi resiste la corrosión, y soporta hasta 120 kg de peso. Se vende por unidad.",
   },
   {
     slug: "silla-trama",
