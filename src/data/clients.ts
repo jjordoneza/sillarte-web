@@ -10,7 +10,12 @@ export type Client = {
 };
 
 export const clients: Client[] = [
-  { business: "Negocio Ejemplo", city: "Medellín", instagram: "negocio_ejemplo", image: "/clients/cliente-1.jpg" },
+  {
+    business: "Casa del Ángel",
+    city: "El Retiro, Antioquia",
+    instagram: "casa_del_angel_elretiro",
+    image: "/clients/casa-del-angel.jpg",
+  },
   { business: "Negocio Ejemplo", city: "Bogotá", instagram: "negocio_ejemplo", image: "/clients/cliente-2.jpg" },
   { business: "Negocio Ejemplo", city: "Cali", instagram: "negocio_ejemplo", image: "/clients/cliente-3.jpg" },
 ];
