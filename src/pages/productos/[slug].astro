@@ -21,8 +21,8 @@ const { product } = Astro.props as { product: Product };
 
 // Descripciones con respaldo mientras no llegue la ficha completa de cada pieza.
 const resumen = product.descripcionCorta ?? product.detail;
-// Primero se intenta recomendar piezas de la misma categoría; si la pieza
-// es la única de su categoría (p. ej. la única mesa del catálogo), se
+// Primero se intenta recomendar piezas de la misma categoría; si no hay
+// suficientes (p. ej. cuando sólo hay 1-2 mesas en el catálogo), se
 // completa con el resto de la colección para no dejar la sección vacía.
 const mismaCategoria = products.filter((p) => p.category === product.category && p.slug !== product.slug);
 const otras = products.filter((p) => p.category !== product.category);

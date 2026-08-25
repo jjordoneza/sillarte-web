@@ -1,6 +1,11 @@
 ---
 import Medio from "@/components/Medio.astro";
 import { products } from "@/data/products";
+
+// Número de piezas en palabras, para que el titular no se desactualice
+// cada vez que se agrega o quita un producto del catálogo.
+const numerosEnPalabras = ["Cero", "Una", "Dos", "Tres", "Cuatro", "Cinco", "Seis", "Siete", "Ocho", "Nueve", "Diez"];
+const cantidadPiezas = numerosEnPalabras[products.length] ?? String(products.length);
 ---
 
 <section class="destacados seccion seccion--marmol" id="destacados">
@@ -8,7 +13,7 @@ import { products } from "@/data/products";
     <div class="destacados__cabecera">
       <p class="etiqueta reveal">Piezas destacadas</p>
       <h2 class="titular destacados__titulo reveal">
-        Seis piezas, <em class="acento-dorado">un solo lenguaje</em>.
+        {cantidadPiezas} piezas, <em class="acento-dorado">un solo lenguaje</em>.
       </h2>
     </div>
 

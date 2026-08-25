@@ -56,6 +56,32 @@ export const products: Product[] = [
       'Redonda, marmoleada, de pedestal — la protagonista compacta de cualquier montaje. Una mesa de líneas limpias pensada para espacios donde cada centímetro cuenta. Su tablero de 80 cm de diámetro con acabado marmoleado en tono hueso se apoya sobre una base pedestal única en acero negro, liberando espacio y facilitando el movimiento a su alrededor. Tablero en piedra sinterizada, resistente a golpes, calor, humedad y manchas. Base en acero con recubrimiento en polvo, antióxido, con protectores de piso que evitan rayones en porcelanato o madera. Ensamble sencillo con herramientas incluidas, lista para usar en minutos.',
   },
   {
+    slug: "mesa-marfil",
+    name: "Mesa Marfil",
+    ref: "SM-02",
+    category: "Mesas",
+    detail: "Tablero mármol blanco, patas negras con remates dorados",
+    // Foto real de producto (fondo blanco); la escena de estudio real
+    // (ambientada) se usa para el bloque inmersivo mientras no haya una
+    // fotografía propia con fondo cálido de esta pieza.
+    image: "/products/mesa-marfil.jpg",
+    scene: "/products/mesa-marfil-escena.webp",
+    galeria: ["/products/mesa-marfil-escena.webp", "/products/mesa-marfil-medidas.webp"],
+    ficha: {
+      Largo: "120 cm",
+      Ancho: "70 cm",
+      Alto: "76 cm",
+      Capacidad: "6 personas",
+      "Material tablero": "Piedra sinterizada, acabado mármol blanco brillante",
+      "Material base": "Metal, patas cónicas negras con remates dorados",
+      "Colores disponibles": "Tablero mármol blanco brillante / Base negra con remates dorados",
+    },
+    descripcionCorta:
+      "Mesa rectangular de comedor para 6 personas, con tablero en piedra sinterizada acabado mármol blanco brillante y patas cónicas de metal negro con remates dorados. Elegante, resistente y lista para combinar con el resto de la familia.",
+    descripcionLarga:
+      "Rectangular, en piedra sinterizada — la mesa central para reunir a todos. Una mesa de comedor para 6 personas, con tablero en piedra sinterizada de acabado mármol blanco brillante, resistente a rayones, calor y manchas: conserva su aspecto de mármol sin los cuidados de la piedra natural. Se sostiene sobre patas cónicas metálicas en negro con remates dorados, que aligeran visualmente su presencia sin restarle estabilidad. Tamaño pensado para comedores de 6 puestos.",
+  },
+  {
     slug: "silla-barril",
     name: "Silla Barril",
     ref: "SB-02",
