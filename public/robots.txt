@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://sillarte.co/sitemap.xml
+Sitemap: https://sillarte.co/sitemap-index.xml
