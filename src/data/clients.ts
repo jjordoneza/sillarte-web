@@ -1,7 +1,4 @@
 // Clientes reales que ya usan piezas de Sillarte en su negocio.
-// NOTA: las entradas de abajo son de ejemplo (placeholder) para maquetar
-// la sección mientras llegan las fotos y datos reales de cada cliente
-// (nombre del negocio, ciudad y usuario de Instagram).
 export type Client = {
   business: string;
   city: string;
@@ -10,7 +7,28 @@ export type Client = {
 };
 
 export const clients: Client[] = [
-  { business: "Negocio Ejemplo", city: "Medellín", instagram: "negocio_ejemplo", image: "/clients/cliente-1.jpg" },
-  { business: "Negocio Ejemplo", city: "Bogotá", instagram: "negocio_ejemplo", image: "/clients/cliente-2.jpg" },
-  { business: "Negocio Ejemplo", city: "Cali", instagram: "negocio_ejemplo", image: "/clients/cliente-3.jpg" },
+  {
+    business: "Casa del Ángel",
+    city: "El Retiro, Antioquia",
+    instagram: "casa_del_angel_elretiro",
+    image: "/clients/casa-del-angel.jpg",
+  },
+  {
+    business: "Olympus",
+    city: "Envigado, Antioquia",
+    instagram: "olympusenvigado",
+    image: "/clients/olympus-envigado.jpg",
+  },
+  {
+    business: "Jardín del Cielo",
+    city: "Cali, Valle del Cauca",
+    instagram: "unjardindelcielo",
+    image: "/clients/jardin-del-cielo.jpeg",
+  },
+  {
+    business: "Zaguán de la Estación",
+    city: "Salento, Quindío",
+    instagram: "zaguandelaestacion",
+    image: "/clients/zaguan-de-la-estacion.jpeg",
+  },
 ];
