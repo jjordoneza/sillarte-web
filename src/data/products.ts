@@ -38,6 +38,10 @@ export const products: Product[] = [
       "/products/mesa-perla-detalle-tablero.jpg",
       "/products/mesa-perla-detalle-base.jpg",
       "/products/mesa-perla-listado.jpg",
+      "/products/mesa-perla-blanca-ambiente.jpg",
+      "/products/mesa-perla-blanca-ambiente-alt.jpg",
+      "/products/mesa-perla-blanca-base.jpg",
+      "/products/mesa-perla-blanca-detalle-tablero.jpg",
     ],
     ficha: {
       Alto: "74 cm",
@@ -45,15 +49,15 @@ export const products: Product[] = [
       "Grosor del tablero": "1,8 cm",
       "Peso de la pieza": "8,3 kg",
       "Material tablero": "Piedra sinterizada, acabado marmoleado tono hueso",
-      "Material base": "Acero, pedestal único, recubrimiento en polvo negro",
+      "Material base": "Acero, pedestal único, recubrimiento en polvo",
       "Protección de piso": "Sí, borde plástico en la base",
       Ensamble: "Requiere ensamble, herramientas incluidas",
-      "Colores disponibles": "Tablero marmoleado hueso / Base negra",
+      "Colores disponibles": "Tablero marmoleado hueso / Base negra — también disponible con base blanca",
     },
     descripcionCorta:
-      "Mesa redonda de pedestal con tablero marmoleado en tono hueso y base en acero negro. Compacta, resistente y lista para combinar con el resto de la familia.",
+      "Mesa redonda de pedestal con tablero marmoleado en tono hueso, disponible con base en acero negro o blanco. Compacta, resistente y lista para combinar con el resto de la familia.",
     descripcionLarga:
-      'Redonda, marmoleada, de pedestal — la protagonista compacta de cualquier montaje. Una mesa de líneas limpias pensada para espacios donde cada centímetro cuenta. Su tablero de 80 cm de diámetro con acabado marmoleado en tono hueso se apoya sobre una base pedestal única en acero negro, liberando espacio y facilitando el movimiento a su alrededor. Tablero en piedra sinterizada, resistente a golpes, calor, humedad y manchas. Base en acero con recubrimiento en polvo, antióxido, con protectores de piso que evitan rayones en porcelanato o madera. Ensamble sencillo con herramientas incluidas, lista para usar en minutos.',
+      'Redonda, marmoleada, de pedestal — la protagonista compacta de cualquier montaje. Una mesa de líneas limpias pensada para espacios donde cada centímetro cuenta. Su tablero de 80 cm de diámetro con acabado marmoleado en tono hueso se apoya sobre una base pedestal única, disponible en acero negro o en blanco, liberando espacio y facilitando el movimiento a su alrededor. Tablero en piedra sinterizada, resistente a golpes, calor, humedad y manchas. Base en acero con recubrimiento en polvo, antióxido, con protectores de piso que evitan rayones en porcelanato o madera. Ensamble sencillo con herramientas incluidas, lista para usar en minutos.',
   },
   {
     slug: "silla-barril",
@@ -61,11 +65,13 @@ export const products: Product[] = [
     ref: "SB-02",
     category: "Sillas",
     detail: "Asiento curvo tapizado camel, patas de metal",
-    // Foto real de producto (fondo blanco); se usa para ambos bloques
-    // mientras no haya fotografía de estudio con fondo cálido.
+    // Foto real de producto (fondo blanco) para la ficha; para el bloque
+    // inmersivo se usa la foto conceptual que muestra los dos colores
+    // (camel y gris oscuro) juntos en un comedor real.
     image: "/products/silla-barril.jpg",
-    scene: "/products/silla-barril.jpg",
+    scene: "/products/silla-barril-concepto.jpg",
     galeria: [
+      "/products/silla-barril-concepto.jpg",
       "/products/silla-barril-camel-alt.jpg",
       "/products/silla-barril-camel-espalda.jpg",
       "/products/silla-barril-camel-detalle.jpg",
@@ -130,6 +136,8 @@ export const products: Product[] = [
       "/products/silla-abanico-espalda.jpg",
       "/products/silla-abanico-detalle-herraje.jpg",
       "/products/silla-abanico-medidas.jpg",
+      "/products/silla-abanico-gris.jpg",
+      "/products/silla-abanico-gris-alt.jpg",
     ],
     ficha: {
       "Alto total": "77 cm",
@@ -138,26 +146,29 @@ export const products: Product[] = [
       "Alto de asiento": "46 cm",
       "Material asiento/respaldo": "Símil cuero",
       "Material patas": "Metal",
-      Color: "Negro",
+      "Colores disponibles": "Negro y gris claro",
       Brazos: "Incluidos",
     },
     descripcionCorta:
-      "Silla de comedor con brazos y respaldo abierto, tapizada en símil cuero negro sobre patas de metal. Cómoda, moderna y lista para combinar con el resto de la familia.",
+      "Silla de comedor con brazos y respaldo abierto, tapizada en símil cuero negro o gris claro sobre patas de metal. Cómoda, moderna y lista para combinar con el resto de la familia.",
     descripcionLarga:
-      "Respaldo abierto, brazos que abrazan: comodidad con carácter. Sus brazos y respaldo abierto aligeran visualmente cualquier montaje sin renunciar al soporte. Tapizada en símil cuero negro sobre una estructura de patas en metal, combina un perfil moderno con la comodidad de tener dónde apoyar los brazos durante comidas largas. El tapizado en símil cuero es resistente y fácil de limpiar con un paño húmedo, la estructura en metal negro es estable y de bajo mantenimiento, y el diseño con brazos y respaldo abierto aporta comodidad sin verse pesada en el espacio.",
+      "Respaldo abierto, brazos que abrazan: comodidad con carácter. Sus brazos y respaldo abierto aligeran visualmente cualquier montaje sin renunciar al soporte. Tapizada en símil cuero negro o gris claro sobre una estructura de patas en metal, combina un perfil moderno con la comodidad de tener dónde apoyar los brazos durante comidas largas. El tapizado en símil cuero es resistente y fácil de limpiar con un paño húmedo, la estructura en metal es estable y de bajo mantenimiento, y el diseño con brazos y respaldo abierto aporta comodidad sin verse pesada en el espacio.",
   },
   {
     slug: "silla-alta",
     name: "Silla Alta",
     ref: "SL-05",
     category: "Sillas",
-    detail: "Giratoria, con brazos, base beige — set x2",
+    detail: "Giratoria, con brazos, en beige o verde — set x2",
     image: "/products/silla-alta.jpg",
     scene: "/products/silla-alta.jpg",
     galeria: [
       "/products/silla-alta-frente.jpg",
       "/products/silla-alta-espalda.jpg",
       "/products/silla-alta-base.jpg",
+      "/products/silla-alta-verde.jpg",
+      "/products/silla-alta-verde-alt.jpg",
+      "/products/silla-alta-medidas-referencia.jpg",
     ],
     ficha: {
       "Alto máximo": "105 cm",
@@ -167,15 +178,15 @@ export const products: Product[] = [
       "Peso máximo soportado": "120 kg",
       "Material asiento": "Vinil piel + espuma de poliuretano, sobre estructura interna en madera de pino",
       "Material estructura": "Acero, acabado laqueado y pintura epoxi",
-      Color: "Beige",
+      "Colores disponibles": "Beige y verde",
       Apoyabrazos: "Sí",
       "Rotación 360°": "Sí",
       Presentación: "Set de 2 unidades",
     },
     descripcionCorta:
-      "Silla alta giratoria con brazos, asiento en vinil piel sobre estructura de madera de pino y base en acero laqueado beige. Set de 2 unidades, lista para combinar con el resto de la familia.",
+      "Silla alta giratoria con brazos, asiento en vinil piel sobre estructura de madera de pino y base en acero laqueado, disponible en beige o verde. Set de 2 unidades, lista para combinar con el resto de la familia.",
     descripcionLarga:
-      "Giro de 360°, brazos incluidos: la barra nunca se sintió tan cómoda. Pensada para barras de cocina y desayunadores, con asiento en vinil piel relleno de espuma de poliuretano sobre una estructura interna en madera de pino, montada sobre una base de acero con acabado laqueado en beige y pintura epoxi. Su giro de 360° y sus apoyabrazos la hacen especialmente cómoda para sesiones largas en la barra. El asiento en vinil piel es fácil de limpiar y resistente al uso diario, la base en acero con pintura epoxi resiste la corrosión, y soporta hasta 120 kg de peso. Se vende en set de 2 unidades.",
+      "Giro de 360°, brazos incluidos: la barra nunca se sintió tan cómoda. Pensada para barras de cocina y desayunadores, con asiento en vinil piel relleno de espuma de poliuretano sobre una estructura interna en madera de pino, montada sobre una base de acero con acabado laqueado en beige o verde y pintura epoxi. Su giro de 360° y sus apoyabrazos la hacen especialmente cómoda para sesiones largas en la barra. El asiento en vinil piel es fácil de limpiar y resistente al uso diario, la base en acero con pintura epoxi resiste la corrosión, y soporta hasta 120 kg de peso. Se vende en set de 2 unidades.",
   },
   {
     slug: "silla-trama",
