@@ -21,9 +21,12 @@ const { product } = Astro.props as { product: Product };
 
 // Descripciones con respaldo mientras no llegue la ficha completa de cada pieza.
 const resumen = product.descripcionCorta ?? product.detail;
-const relacionados = products
-  .filter((p) => p.category === product.category && p.slug !== product.slug)
-  .slice(0, 3);
+// Primero se intenta recomendar piezas de la misma categoría; si no hay
+// suficientes (p. ej. cuando sólo hay 1-2 mesas en el catálogo), se
+// completa con el resto de la colección para no dejar la sección vacía.
+const mismaCategoria = products.filter((p) => p.category === product.category && p.slug !== product.slug);
+const otras = products.filter((p) => p.category !== product.category);
+const relacionados = [...mismaCategoria, ...otras].slice(0, 3);
 
 const galeria = [product.image, ...(product.galeria ?? [])];
 
@@ -176,7 +179,7 @@ const jsonLd = {
         <div class="contenedor">
           <p class="etiqueta reveal">Combina con</p>
           <h2 id="relacionados-titulo" class="titular relacionados__titulo reveal">
-            Otras piezas de {product.category.toLowerCase()}.
+            Otras piezas de la colección.
           </h2>
 
           <div class="relacionados__grid">
