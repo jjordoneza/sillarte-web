@@ -17,7 +17,7 @@ const {
   type = "website",
 } = Astro.props;
 
-const ogImage = new URL(image, Astro.site ?? "https://sillarte.co").toString();
+const ogImage = new URL(image, Astro.site ?? "https://www.sillarte.co").toString();
 
 // Datos estructurados de la organización (schema.org/Organization), una sola
 // vez por página vía el layout base, para reforzar la identidad de marca
@@ -26,8 +26,8 @@ const organizationJsonLd = {
   "@context": "https://schema.org",
   "@type": "Organization",
   name: siteConfig.name,
-  url: (Astro.site ?? new URL("https://sillarte.co")).toString(),
-  logo: new URL("/marca/icono-sillarte.png", Astro.site ?? "https://sillarte.co").toString(),
+  url: (Astro.site ?? new URL("https://www.sillarte.co")).toString(),
+  logo: new URL("/marca/icono-sillarte.png", Astro.site ?? "https://www.sillarte.co").toString(),
   sameAs: [siteConfig.instagram, siteConfig.tiktok].filter(Boolean),
 };
 ---
