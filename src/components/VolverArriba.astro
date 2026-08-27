@@ -1,0 +1,85 @@
+---
+// Botón flotante para volver al inicio de la página, visible solo tras
+// hacer scroll (útil en la página de producto, que puede quedar larga).
+// Se ubica a la izquierda para no chocar con el botón de WhatsApp.
+---
+
+<button type="button" class="volver-arriba" data-volver-arriba aria-label="Volver arriba" hidden>
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <line x1="12" y1="19" x2="12" y2="5" />
+    <polyline points="5 12 12 5 19 12" />
+  </svg>
+</button>
+
+<style>
+  .volver-arriba {
+    position: fixed;
+    left: 1.5rem;
+    bottom: 1.5rem;
+    z-index: 40;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: none;
+    background: var(--carbon);
+    color: var(--hueso);
+    box-shadow: 0 6px 20px rgba(20, 18, 16, 0.35);
+    opacity: 0;
+    transform: translateY(8px);
+    pointer-events: none;
+    transition: opacity 0.25s var(--ease), transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
+  }
+
+  .volver-arriba--visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .volver-arriba svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .volver-arriba:hover,
+  .volver-arriba:focus-visible {
+    background: var(--dorado);
+    box-shadow: 0 8px 24px rgba(20, 18, 16, 0.45);
+  }
+
+  @media (max-width: 640px) {
+    .volver-arriba {
+      left: 1rem;
+      bottom: 1rem;
+      width: 42px;
+      height: 42px;
+    }
+
+    .volver-arriba svg {
+      width: 19px;
+      height: 19px;
+    }
+  }
+</style>
+
+<script>
+  const boton = document.querySelector<HTMLButtonElement>("[data-volver-arriba]");
+
+  if (boton) {
+    boton.hidden = false;
+
+    const actualizarVisibilidad = () => {
+      boton.classList.toggle("volver-arriba--visible", window.scrollY > 600);
+    };
+
+    actualizarVisibilidad();
+    window.addEventListener("scroll", actualizarVisibilidad, { passive: true });
+
+    boton.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  }
+</script>
