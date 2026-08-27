@@ -9,6 +9,9 @@ export type Product = {
   detail: string;
   image: string;
   scene: string;
+  // Precio al detal (venta por unidad), en pesos colombianos.
+  // El precio de mayoreo no se publica: se cotiza por WhatsApp según cantidad.
+  price: number;
   // Ficha técnica y descripciones completas (opcionales): se van llenando
   // pieza por pieza a medida que llega la información real de cada producto.
   // Aún no se muestran en la landing; quedan listas para una futura página
@@ -33,6 +36,7 @@ export const products: Product[] = [
     // fotografía de estudio con fondo cálido.
     image: "/products/mesa-perla.jpg",
     scene: "/products/mesa-perla.jpg",
+    price: 400000,
     galeria: [
       "/products/mesa-perla-alt.jpg",
       "/products/mesa-perla-detalle-tablero.jpg",
@@ -70,6 +74,7 @@ export const products: Product[] = [
     // fotografía propia con fondo cálido de esta pieza.
     image: "/products/mesa-marfil.jpg",
     scene: "/products/mesa-marfil-escena.webp",
+    price: 590000,
     galeria: ["/products/mesa-marfil-escena.webp", "/products/mesa-marfil-medidas.webp"],
     ficha: {
       Largo: "120 cm",
@@ -96,6 +101,7 @@ export const products: Product[] = [
     // (camel y gris oscuro) juntos en un comedor real.
     image: "/products/silla-barril.jpg",
     scene: "/products/silla-barril-concepto.jpg",
+    price: 220000,
     galeria: [
       "/products/silla-barril-concepto.jpg",
       "/products/silla-barril-camel-alt.jpg",
@@ -131,6 +137,7 @@ export const products: Product[] = [
     detail: "Asiento en cuero negro, patas de metal",
     image: "/products/silla-concha.jpg",
     scene: "/products/silla-concha.jpg",
+    price: 220000,
     galeria: ["/products/silla-concha-espalda.jpg"],
     ficha: {
       Alto: "91 cm",
@@ -156,6 +163,7 @@ export const products: Product[] = [
     // Esta pieza sí tiene fotos de escena reales (ambientadas, no de
     // fondo blanco) — se usa una para los bloques inmersivos.
     scene: "/products/silla-abanico-escena.jpg",
+    price: 315000,
     galeria: [
       "/products/silla-abanico-escena-alt.jpg",
       "/products/silla-abanico-escena-dupla.jpg",
@@ -188,6 +196,7 @@ export const products: Product[] = [
     detail: "Fija, con brazos, en beige o negro",
     image: "/products/silla-alta.jpg",
     scene: "/products/silla-alta.jpg",
+    price: 340000,
     galeria: [
       "/products/silla-alta-frente.jpg",
       "/products/silla-alta-espalda.jpg",
@@ -223,6 +232,7 @@ export const products: Product[] = [
     detail: "Tejido calado blanco, base fija en tijera",
     image: "/products/silla-trama.jpg",
     scene: "/products/silla-trama.jpg",
+    price: 150000,
     galeria: [
       "/products/silla-trama-alt.jpg",
       "/products/silla-trama-perfil.jpg",
