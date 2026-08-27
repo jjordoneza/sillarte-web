@@ -48,7 +48,7 @@ const jsonLd = {
   sku: product.ref,
   category: product.category,
   description: descripcionSeo,
-  image: new URL(product.image, Astro.site ?? "https://sillarte.co").toString(),
+  image: new URL(product.image, Astro.site ?? "https://www.sillarte.co").toString(),
   brand: {
     "@type": "Brand",
     name: siteConfig.name,
@@ -58,7 +58,7 @@ const jsonLd = {
     availability: "https://schema.org/InStock",
     itemCondition: "https://schema.org/NewCondition",
     priceCurrency: "COP",
-    url: new URL(`/productos/${product.slug}/`, Astro.site ?? "https://sillarte.co").toString(),
+    url: new URL(`/productos/${product.slug}/`, Astro.site ?? "https://www.sillarte.co").toString(),
   },
 };
 
@@ -68,9 +68,9 @@ const breadcrumbJsonLd = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   itemListElement: [
-    { "@type": "ListItem", position: 1, name: "Colección 2026", item: new URL("/", Astro.site ?? "https://sillarte.co").toString() },
-    { "@type": "ListItem", position: 2, name: product.category, item: new URL(categoriaUrl, Astro.site ?? "https://sillarte.co").toString() },
-    { "@type": "ListItem", position: 3, name: product.name, item: new URL(`/productos/${product.slug}/`, Astro.site ?? "https://sillarte.co").toString() },
+    { "@type": "ListItem", position: 1, name: "Colección 2026", item: new URL("/", Astro.site ?? "https://www.sillarte.co").toString() },
+    { "@type": "ListItem", position: 2, name: product.category, item: new URL(categoriaUrl, Astro.site ?? "https://www.sillarte.co").toString() },
+    { "@type": "ListItem", position: 3, name: product.name, item: new URL(`/productos/${product.slug}/`, Astro.site ?? "https://www.sillarte.co").toString() },
   ],
 };
 ---
