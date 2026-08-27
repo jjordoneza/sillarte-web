@@ -34,13 +34,19 @@ const tituloSeo = `${product.name} — Colección 2026 | ${siteConfig.name}`;
 const descripcionSeo = `${resumen} Ref. ${product.ref}. Disponible al detal y al por mayor desde 6 unidades, envíos a todo Colombia.`;
 
 const mensajeWhatsapp = `Hola, quiero cotizar la pieza ${product.name} (ref. ${product.ref}) de la colección 2026 de Sillarte.`;
+const mensajeWhatsappMayoreo = `Hola, quiero cotizar al por mayor la pieza ${product.name} (ref. ${product.ref}) de la colección 2026 de Sillarte. ¿Me pasas el precio según cantidad?`;
+
+// Precio al detal, formateado en pesos colombianos (p. ej. "$400.000").
+// Se arma a mano en vez de usar { style: "currency" } porque el formato de
+// moneda de Intl para es-CO inserta un espacio entre "$" y el número.
+const precioFormateado = `$${new Intl.NumberFormat("es-CO").format(product.price)}`;
 
 // URL de la categoría de esta pieza, para la miga de pan y el breadcrumb JSON-LD.
 const categoriaUrl = categories.find((c) => c.name === product.category)?.href ?? "/#categorias";
 
 // Datos estructurados para buscadores (schema.org/Product).
-// Se omite el precio a propósito porque todavía no se publica en el sitio;
-// sí se declara disponibilidad para que el rich snippet muestre "En stock".
+// El precio publicado es el de venta al detal (por unidad); el de mayoreo
+// se cotiza aparte por WhatsApp según la cantidad, así que no se declara aquí.
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Product",
@@ -55,9 +61,10 @@ const jsonLd = {
   },
   offers: {
     "@type": "Offer",
+    price: product.price,
+    priceCurrency: "COP",
     availability: "https://schema.org/InStock",
     itemCondition: "https://schema.org/NewCondition",
-    priceCurrency: "COP",
     url: new URL(`/productos/${product.slug}/`, Astro.site ?? "https://www.sillarte.co").toString(),
   },
 };
@@ -143,7 +150,13 @@ const breadcrumbJsonLd = {
             <p class="etiqueta reveal">{product.category} · Ref. {product.ref}</p>
             <h1 class="titular producto__titulo reveal">{product.name}</h1>
             <p class="producto__precio reveal">
-              $— <span>según cantidad y condición de compra</span>
+              {precioFormateado} <span>al detal, por unidad</span>
+            </p>
+            <p class="producto__precio-mayoreo reveal">
+              Para precios al por mayor,{" "}
+              <a href={whatsappLink(mensajeWhatsappMayoreo)} target="_blank" rel="noopener noreferrer">
+                cotiza la cantidad por WhatsApp
+              </a>.
             </p>
             <p class="producto__resumen reveal">{resumen}</p>
 
@@ -408,6 +421,18 @@ const breadcrumbJsonLd = {
     font-size: 0.75rem;
     color: var(--gris);
     margin-top: 0.2rem;
+  }
+
+  .producto__precio-mayoreo {
+    margin-top: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--gris);
+  }
+
+  .producto__precio-mayoreo a {
+    color: var(--dorado-texto);
+    font-weight: 600;
+    text-decoration: underline;
   }
 
   .producto__resumen {
