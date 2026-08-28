@@ -11,8 +11,8 @@ import { clients } from "@/data/clients";
     </div>
   </div>
 
-  <div class="clientes__pista-envoltorio reveal">
-    <div class="clientes__pista">
+  <div class="clientes__pista-envoltorio reveal" data-clientes-carrusel>
+    <div class="clientes__pista" data-clientes-pista>
       {[...clients, ...clients].map((client) => (
         <a
           class="clientes__tarjeta"
@@ -50,9 +50,17 @@ import { clients } from "@/data/clients";
   }
 
   .clientes__pista-envoltorio {
-    overflow: hidden;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-x;
+    scrollbar-width: none;
     mask-image: linear-gradient(to right, transparent, black 4%, black 96%, transparent);
     -webkit-mask-image: linear-gradient(to right, transparent, black 4%, black 96%, transparent);
+  }
+
+  .clientes__pista-envoltorio::-webkit-scrollbar {
+    display: none;
   }
 
   .clientes__pista {
@@ -60,11 +68,6 @@ import { clients } from "@/data/clients";
     width: max-content;
     gap: 1.5rem;
     padding-inline: 1.5rem;
-    animation: clientes-desplazar 36s linear infinite;
-  }
-
-  .clientes__pista:hover {
-    animation-play-state: paused;
   }
 
   .clientes__tarjeta {
@@ -110,18 +113,64 @@ import { clients } from "@/data/clients";
     color: var(--dorado-texto);
   }
 
-  @keyframes clientes-desplazar {
-    from {
-      transform: translateX(0);
-    }
-    to {
-      transform: translateX(-50%);
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .clientes__pista {
-      animation: none;
-    }
-  }
 </style>
+
+<script>
+  // Antes el carrusel sólo avanzaba con una animación CSS (transform),
+  // lo que en móvil no se podía pausar ni mover con el dedo. Ahora la
+  // pista es un contenedor con scroll nativo (overflow-x: auto) que el
+  // usuario puede arrastrar/deslizar libremente, y el auto-desplazamiento
+  // se hace por JS moviendo scrollLeft, pausándose mientras hay
+  // interacción táctil, con mouse o con la rueda.
+  const envoltorio = document.querySelector<HTMLElement>("[data-clientes-carrusel]");
+  const pista = document.querySelector<HTMLElement>("[data-clientes-pista]");
+  const prefiereMenosMovimiento = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (envoltorio && pista && !prefiereMenosMovimiento) {
+    const velocidad = 0.45; // px por frame
+    let pausado = false;
+    // scrollLeft se redondea a pixeles enteros: si sumáramos el
+    // incremento sub-pixel directo sobre scrollLeft, el navegador lo
+    // trunca en cada frame y el carrusel nunca avanza. Por eso llevamos
+    // la posición real en esta variable flotante aparte.
+    let posicion = envoltorio.scrollLeft;
+    let reanudarTimeout: ReturnType<typeof setTimeout>;
+
+    const pausarTemporalmente = () => {
+      pausado = true;
+      clearTimeout(reanudarTimeout);
+      reanudarTimeout = setTimeout(() => {
+        pausado = false;
+      }, 2500);
+    };
+
+    envoltorio.addEventListener("pointerdown", pausarTemporalmente);
+    envoltorio.addEventListener("touchstart", pausarTemporalmente, { passive: true });
+    envoltorio.addEventListener("wheel", pausarTemporalmente, { passive: true });
+    envoltorio.addEventListener("mouseenter", () => {
+      clearTimeout(reanudarTimeout);
+      pausado = true;
+    });
+    envoltorio.addEventListener("mouseleave", () => {
+      pausado = false;
+    });
+
+    const avanzar = () => {
+      if (pausado) {
+        // Mientras el usuario arrastra o el mouse está encima, seguimos
+        // la posición real para retomar suave cuando se reanude.
+        posicion = envoltorio.scrollLeft;
+      } else {
+        const mitad = pista.scrollWidth / 2;
+        posicion += velocidad;
+        if (posicion >= mitad) {
+          posicion -= mitad;
+        }
+        envoltorio.scrollLeft = posicion;
+      }
+      requestAnimationFrame(avanzar);
+    };
+
+    requestAnimationFrame(avanzar);
+  }
+</script>
