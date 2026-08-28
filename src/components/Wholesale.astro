@@ -8,6 +8,12 @@ const beneficios = [
   "Stock permanente, sin tiempos de espera por importación",
   "Despachos a todo el país con seguimiento del pedido",
 ];
+
+// Acepta un teléfono (7+ dígitos, con espacios/guiones/+ opcionales) o un
+// correo. Se arma como variable JS (en vez de escribirlo directo en el
+// atributo pattern) porque Astro serializa los atributos estáticos como
+// string de JS y se come las barras invertidas de \s, \-, \. y \+.
+const contactoPattern = "^(\\+?[0-9][0-9\\s\\-]{6,14}|[^\\s@]+@[^\\s@]+\\.[^\\s@]+)$";
 ---
 
 <section class="mayoreo seccion seccion--oscura sobre-oscuro" id="mayoreo">
@@ -43,7 +49,15 @@ const beneficios = [
 
       <div class="mayoreo__campo">
         <label for="telefono-contacto">Teléfono o correo de contacto</label>
-        <input type="text" id="telefono-contacto" name="contacto" required autocomplete="tel" />
+        <input
+          type="text"
+          id="telefono-contacto"
+          name="contacto"
+          required
+          autocomplete="tel"
+          pattern={contactoPattern}
+          title="Escribe un número de teléfono válido (mínimo 7 dígitos) o un correo electrónico."
+        />
       </div>
 
       <div class="mayoreo__campo">
