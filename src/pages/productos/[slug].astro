@@ -165,12 +165,32 @@ const breadcrumbJsonLd = {
             </p>
             <p class="producto__resumen reveal">{resumen}</p>
 
+            <div class="producto__carrito reveal">
+              <div class="producto__cantidad">
+                <button type="button" data-cantidad-restar aria-label="Restar unidad">−</button>
+                <input type="number" min="1" value="1" data-cantidad-input aria-label="Cantidad" />
+                <button type="button" data-cantidad-sumar aria-label="Sumar unidad">+</button>
+              </div>
+              <button
+                type="button"
+                class="boton boton--dorado"
+                data-agregar-carrito
+                data-producto-slug={product.slug}
+                data-producto-nombre={product.name}
+                data-producto-ref={product.ref}
+                data-producto-precio={product.price}
+                data-producto-imagen={product.image}
+              >
+                Agregar al carrito
+              </button>
+            </div>
+
             <div class="producto__acciones reveal">
               <a
                 href={whatsappLink(mensajeWhatsapp)}
                 target="_blank"
                 rel="noopener noreferrer"
-                class="boton boton--dorado"
+                class="boton boton--linea"
               >
                 Cotizar esta pieza
               </a>
@@ -448,8 +468,52 @@ const breadcrumbJsonLd = {
     max-width: 46ch;
   }
 
-  .producto__acciones {
+  .producto__carrito {
     margin-top: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .producto__cantidad {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    border: 1px solid var(--linea);
+    border-radius: 999px;
+    padding: 0.4rem 0.9rem;
+  }
+
+  .producto__cantidad button {
+    width: 24px;
+    height: 24px;
+    background: transparent;
+    border: none;
+    color: var(--carbon);
+    font-size: 1.1rem;
+    line-height: 1;
+  }
+
+  .producto__cantidad input {
+    width: 2.5ch;
+    border: none;
+    background: transparent;
+    text-align: center;
+    font-family: var(--font-ui);
+    font-size: 0.95rem;
+    color: var(--carbon);
+    -moz-appearance: textfield;
+  }
+
+  .producto__cantidad input::-webkit-outer-spin-button,
+  .producto__cantidad input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  .producto__acciones {
+    margin-top: 1rem;
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
@@ -840,5 +904,47 @@ const breadcrumbJsonLd = {
       mostrarFoto(indiceActual + 1);
       actualizarImagenLightbox();
     }
+  });
+</script>
+
+<script>
+  import { agregarAlCarrito } from "@/lib/carrito";
+
+  const cantidadInput = document.querySelector<HTMLInputElement>("[data-cantidad-input]");
+  const botonAgregar = document.querySelector<HTMLButtonElement>("[data-agregar-carrito]");
+
+  document.querySelector("[data-cantidad-restar]")?.addEventListener("click", () => {
+    if (!cantidadInput) return;
+    cantidadInput.value = String(Math.max(1, Number(cantidadInput.value || 1) - 1));
+  });
+
+  document.querySelector("[data-cantidad-sumar]")?.addEventListener("click", () => {
+    if (!cantidadInput) return;
+    cantidadInput.value = String(Math.max(1, Number(cantidadInput.value || 1) + 1));
+  });
+
+  botonAgregar?.addEventListener("click", () => {
+    const { productoSlug, productoNombre, productoRef, productoPrecio, productoImagen } = botonAgregar.dataset;
+    if (!productoSlug || !productoNombre || !productoRef || !productoPrecio || !productoImagen) return;
+
+    const cantidad = Math.max(1, Number(cantidadInput?.value || 1));
+    agregarAlCarrito(
+      {
+        slug: productoSlug,
+        nombre: productoNombre,
+        ref: productoRef,
+        precio: Number(productoPrecio),
+        imagen: productoImagen,
+      },
+      cantidad
+    );
+
+    const textoOriginal = botonAgregar.textContent;
+    botonAgregar.textContent = "Agregado ✓";
+    botonAgregar.disabled = true;
+    setTimeout(() => {
+      botonAgregar.textContent = textoOriginal;
+      botonAgregar.disabled = false;
+    }, 1500);
   });
 </script>
