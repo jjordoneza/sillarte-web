@@ -45,6 +45,7 @@
     <img class="carrito-item__imagen" alt="" loading="lazy" onerror="this.style.visibility='hidden'" />
     <div class="carrito-item__info">
       <span class="carrito-item__nombre"></span>
+      <span class="carrito-item__color" data-carrito-color hidden></span>
       <span class="carrito-item__precio"></span>
       <div class="carrito-item__cantidad">
         <button type="button" data-carrito-restar aria-label="Quitar una unidad">−</button>
@@ -163,6 +164,20 @@
   .carrito-item__nombre {
     font-family: var(--font-display);
     font-size: 1rem;
+  }
+
+  .carrito-item__color {
+    display: inline-block;
+    width: fit-content;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--dorado-texto);
+  }
+
+  .carrito-item__color[hidden] {
+    display: none;
   }
 
   .carrito-item__precio {
@@ -314,17 +329,22 @@
       img.alt = item.nombre;
 
       nodo.querySelector(".carrito-item__nombre")!.textContent = item.nombre;
+      const colorEl = nodo.querySelector<HTMLElement>("[data-carrito-color]")!;
+      if (item.color) {
+        colorEl.textContent = item.color;
+        colorEl.hidden = false;
+      }
       nodo.querySelector(".carrito-item__precio")!.textContent = `${formatearPrecio(item.precio)} c/u`;
       nodo.querySelector("[data-carrito-cantidad]")!.textContent = String(item.cantidad);
 
       nodo.querySelector("[data-carrito-restar]")!.addEventListener("click", () => {
-        actualizarCantidad(item.slug, item.cantidad - 1);
+        actualizarCantidad(item.slug, item.color, item.cantidad - 1);
       });
       nodo.querySelector("[data-carrito-sumar]")!.addEventListener("click", () => {
-        actualizarCantidad(item.slug, item.cantidad + 1);
+        actualizarCantidad(item.slug, item.color, item.cantidad + 1);
       });
       nodo.querySelector("[data-carrito-quitar]")!.addEventListener("click", () => {
-        quitarDelCarrito(item.slug);
+        quitarDelCarrito(item.slug, item.color);
       });
 
       lista.appendChild(nodo);

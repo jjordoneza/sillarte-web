@@ -165,6 +165,26 @@ const breadcrumbJsonLd = {
             </p>
             <p class="producto__resumen reveal">{resumen}</p>
 
+            {product.colores && product.colores.length > 1 && (
+              <div class="producto__colores reveal" role="radiogroup" aria-label={`Color de ${product.name}`}>
+                <span class="producto__colores-etiqueta">Color:</span>
+                <div class="producto__colores-opciones" data-color-opciones>
+                  {product.colores.map((color, index) => (
+                    <button
+                      type="button"
+                      class="producto__color-boton"
+                      data-color-boton
+                      data-color={color}
+                      role="radio"
+                      aria-checked={index === 0 ? "true" : "false"}
+                    >
+                      {color}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+
             <div class="producto__carrito reveal">
               <div class="producto__cantidad">
                 <button type="button" data-cantidad-restar aria-label="Restar unidad">−</button>
@@ -466,6 +486,42 @@ const breadcrumbJsonLd = {
     line-height: 1.7;
     color: var(--gris);
     max-width: 46ch;
+  }
+
+  .producto__colores {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .producto__colores-etiqueta {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--gris);
+  }
+
+  .producto__colores-opciones {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .producto__color-boton {
+    padding: 0.5rem 1rem;
+    border-radius: 999px;
+    border: 1px solid var(--linea);
+    background: transparent;
+    color: var(--carbon);
+    font-family: var(--font-ui);
+    font-size: 0.8rem;
+  }
+
+  .producto__color-boton[aria-checked="true"] {
+    border-color: var(--carbon);
+    background: var(--carbon);
+    color: var(--hueso);
   }
 
   .producto__carrito {
@@ -912,6 +968,7 @@ const breadcrumbJsonLd = {
 
   const cantidadInput = document.querySelector<HTMLInputElement>("[data-cantidad-input]");
   const botonAgregar = document.querySelector<HTMLButtonElement>("[data-agregar-carrito]");
+  const botonesColor = document.querySelectorAll<HTMLButtonElement>("[data-color-boton]");
 
   document.querySelector("[data-cantidad-restar]")?.addEventListener("click", () => {
     if (!cantidadInput) return;
@@ -923,9 +980,18 @@ const breadcrumbJsonLd = {
     cantidadInput.value = String(Math.max(1, Number(cantidadInput.value || 1) + 1));
   });
 
+  botonesColor.forEach((boton) => {
+    boton.addEventListener("click", () => {
+      botonesColor.forEach((otro) => otro.setAttribute("aria-checked", String(otro === boton)));
+    });
+  });
+
   botonAgregar?.addEventListener("click", () => {
     const { productoSlug, productoNombre, productoRef, productoPrecio, productoImagen } = botonAgregar.dataset;
     if (!productoSlug || !productoNombre || !productoRef || !productoPrecio || !productoImagen) return;
+
+    const colorSeleccionado = document.querySelector<HTMLButtonElement>('[data-color-boton][aria-checked="true"]')
+      ?.dataset.color;
 
     const cantidad = Math.max(1, Number(cantidadInput?.value || 1));
     agregarAlCarrito(
@@ -935,6 +1001,7 @@ const breadcrumbJsonLd = {
         ref: productoRef,
         precio: Number(productoPrecio),
         imagen: productoImagen,
+        color: colorSeleccionado,
       },
       cantidad
     );
