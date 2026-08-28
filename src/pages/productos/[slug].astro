@@ -139,7 +139,12 @@ const breadcrumbJsonLd = {
                     data-src={src}
                     aria-label={`Ver foto ${index + 1} de ${product.name}`}
                   >
-                    <img src={src} alt="" loading="lazy" onerror="this.closest('.producto__miniatura').style.display='none'" />
+                    <img
+                      src={src}
+                      alt={`${product.name}, ${product.detail} — foto ${index + 1} de ${galeria.length}`}
+                      loading="lazy"
+                      onerror="this.closest('.producto__miniatura').style.display='none'"
+                    />
                   </button>
                 ))}
               </div>
@@ -753,6 +758,14 @@ const breadcrumbJsonLd = {
   // Lista completa de fotos: las miniaturas ya representan toda la galería
   // (incluida la foto principal); si no hay miniaturas, solo queda esa foto.
   const fotos = miniaturas.length > 0 ? miniaturas.map((b) => b.dataset.src ?? "") : principal ? [principal.src] : [];
+  // Mismo orden que `fotos`, para que el lightbox tenga un alt descriptivo
+  // (en vez de uno vacío) en vez de repetir el de la miniatura activa.
+  const altsFotos =
+    miniaturas.length > 0
+      ? miniaturas.map((b) => b.querySelector("img")?.getAttribute("alt") ?? "")
+      : principal
+        ? [principal.alt]
+        : [];
   let indiceActual = 0;
   let elementoConFocoPrevio: HTMLElement | null = null;
 
@@ -771,6 +784,7 @@ const breadcrumbJsonLd = {
   function actualizarImagenLightbox() {
     if (!lightboxImagen || fotos.length === 0) return;
     lightboxImagen.src = fotos[indiceActual];
+    lightboxImagen.alt = altsFotos[indiceActual] ?? "";
     lightboxImagen.classList.remove("lightbox__imagen--zoom");
   }
 
