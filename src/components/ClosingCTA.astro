@@ -1,17 +1,8 @@
 ---
-import Medio from "@/components/Medio.astro";
 import { whatsappLink } from "@/data/site";
 ---
 
 <section class="cierre" aria-label="Invitación final a explorar la colección">
-  <Medio
-    src="/scenes/closing.jpg"
-    alt='Mesa "Perla" de la colección 2026 en un espacio con luz natural'
-    marcador="Escena de estudio — Cierre, mesa Perla"
-    class="cierre__medio medio--sobre-oscuro"
-  />
-  <div class="cierre__degradado" aria-hidden="true"></div>
-
   <div class="cierre__contenido contenedor sobre-oscuro">
     <h2 class="titular cierre__titulo reveal">Tu espacio <em class="acento-dorado">ideal</em> te espera.</h2>
     <div class="cierre__acciones reveal">
@@ -36,26 +27,13 @@ import { whatsappLink } from "@/data/site";
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    background: var(--carbon);
     color: var(--hueso);
     text-align: center;
   }
 
-  .cierre :global(.cierre__medio) {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-  }
-
-  .cierre__degradado {
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    background: rgba(20, 18, 16, 0.55);
-  }
-
   .cierre__contenido {
     position: relative;
-    z-index: 2;
     display: flex;
     flex-direction: column;
     align-items: center;
