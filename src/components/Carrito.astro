@@ -1,0 +1,369 @@
+---
+// Panel del carrito de compra. El botón que lo abre vive en el Nav (hay
+// una versión de escritorio y otra en el menú móvil); ambos llevan el
+// atributo `data-carrito-abrir` y este panel escucha clics sobre
+// cualquier elemento con ese atributo, sin necesidad de que Nav.astro
+// conozca este componente.
+---
+
+<div class="carrito-overlay" data-carrito-overlay hidden></div>
+
+<aside class="carrito-panel" data-carrito-panel aria-hidden="true" aria-label="Carrito de compra" hidden>
+  <div class="carrito-panel__cabecera">
+    <h2>Tu selección</h2>
+    <button type="button" class="carrito-panel__cerrar" data-carrito-cerrar aria-label="Cerrar carrito">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+        <line x1="5" y1="5" x2="19" y2="19"></line>
+        <line x1="19" y1="5" x2="5" y2="19"></line>
+      </svg>
+    </button>
+  </div>
+
+  <p class="carrito-panel__vacio" data-carrito-vacio>
+    Todavía no has agregado piezas. Explora la colección y dale a "Agregar al carrito" en la que te guste.
+  </p>
+
+  <ul class="carrito-panel__lista" data-carrito-lista></ul>
+
+  <div class="carrito-panel__pie" data-carrito-pie hidden>
+    <div class="carrito-panel__total">
+      <span>Total estimado</span>
+      <strong data-carrito-total>$0</strong>
+    </div>
+    <a class="boton boton--dorado carrito-panel__enviar" data-carrito-enviar target="_blank" rel="noopener noreferrer">
+      Enviar pedido por WhatsApp
+    </a>
+    <button type="button" class="carrito-panel__vaciar" data-carrito-vaciar>Vaciar selección</button>
+    <p class="carrito-panel__nota">
+      Precios al detal, por unidad. Para mayoreo, cotiza cantidades desde la sección de mayoreo.
+    </p>
+  </div>
+</aside>
+
+<template data-carrito-item-plantilla>
+  <li class="carrito-item">
+    <img class="carrito-item__imagen" alt="" loading="lazy" onerror="this.style.visibility='hidden'" />
+    <div class="carrito-item__info">
+      <span class="carrito-item__nombre"></span>
+      <span class="carrito-item__precio"></span>
+      <div class="carrito-item__cantidad">
+        <button type="button" data-carrito-restar aria-label="Quitar una unidad">−</button>
+        <span data-carrito-cantidad></span>
+        <button type="button" data-carrito-sumar aria-label="Agregar una unidad">+</button>
+      </div>
+    </div>
+    <button type="button" class="carrito-item__quitar" data-carrito-quitar aria-label="Quitar del carrito">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+        <line x1="5" y1="5" x2="19" y2="19"></line>
+        <line x1="19" y1="5" x2="5" y2="19"></line>
+      </svg>
+    </button>
+  </li>
+</template>
+
+<style>
+  .carrito-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 75;
+    background: rgba(20, 18, 16, 0.55);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s var(--ease);
+  }
+
+  .carrito-overlay:not([hidden]) {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .carrito-panel {
+    position: fixed;
+    inset: 0 0 0 auto;
+    z-index: 80;
+    width: min(420px, 100%);
+    background: var(--hueso);
+    color: var(--carbon);
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem;
+    transform: translateX(100%);
+    transition: transform 0.35s var(--ease);
+    overflow-y: auto;
+  }
+
+  .carrito-panel:not([hidden]) {
+    transform: translateX(0);
+  }
+
+  .carrito-panel__cabecera {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .carrito-panel__cabecera h2 {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+  }
+
+  .carrito-panel__cerrar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid var(--linea);
+    background: transparent;
+    color: var(--carbon);
+  }
+
+  .carrito-panel__cerrar svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .carrito-panel__vacio {
+    margin-top: 2rem;
+    color: var(--gris);
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+
+  .carrito-panel__lista {
+    margin-top: 1.5rem;
+    display: grid;
+    gap: 1.25rem;
+  }
+
+  .carrito-item {
+    display: grid;
+    grid-template-columns: 64px 1fr auto;
+    gap: 0.85rem;
+    align-items: center;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid var(--linea);
+  }
+
+  .carrito-item__imagen {
+    width: 64px;
+    height: 64px;
+    object-fit: cover;
+    border-radius: 0.6rem;
+    background: var(--hueso-2);
+  }
+
+  .carrito-item__info {
+    display: grid;
+    gap: 0.3rem;
+    min-width: 0;
+  }
+
+  .carrito-item__nombre {
+    font-family: var(--font-display);
+    font-size: 1rem;
+  }
+
+  .carrito-item__precio {
+    font-size: 0.8rem;
+    color: var(--gris);
+  }
+
+  .carrito-item__cantidad {
+    margin-top: 0.3rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    border: 1px solid var(--linea);
+    border-radius: 999px;
+    padding: 0.2rem 0.7rem;
+    width: fit-content;
+  }
+
+  .carrito-item__cantidad button {
+    width: 20px;
+    height: 20px;
+    background: transparent;
+    border: none;
+    color: var(--carbon);
+    font-size: 1rem;
+    line-height: 1;
+  }
+
+  .carrito-item__quitar {
+    align-self: start;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    color: var(--gris);
+  }
+
+  .carrito-item__quitar svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .carrito-item__quitar:hover {
+    color: var(--carbon);
+  }
+
+  .carrito-panel__pie {
+    margin-top: auto;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--linea);
+    display: grid;
+    gap: 0.85rem;
+  }
+
+  /* Igual que el contador del Nav: el display:grid de arriba pisa el
+     [hidden] del navegador si no se anula explícitamente. */
+  .carrito-panel__pie[hidden] {
+    display: none;
+  }
+
+  .carrito-panel__total {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    font-family: var(--font-display);
+  }
+
+  .carrito-panel__total span {
+    font-family: var(--font-ui);
+    font-size: 0.8rem;
+    color: var(--gris);
+  }
+
+  .carrito-panel__total strong {
+    font-size: 1.4rem;
+  }
+
+  .carrito-panel__enviar {
+    width: 100%;
+  }
+
+  .carrito-panel__vaciar {
+    background: transparent;
+    border: none;
+    color: var(--gris);
+    font-size: 0.8rem;
+    text-decoration: underline;
+    justify-self: center;
+  }
+
+  .carrito-panel__nota {
+    font-size: 0.75rem;
+    color: var(--gris);
+    text-align: center;
+  }
+</style>
+
+<script>
+  import {
+    obtenerCarrito,
+    actualizarCantidad,
+    quitarDelCarrito,
+    vaciarCarrito,
+    totalCarrito,
+    contarUnidades,
+    alCambiarCarrito,
+    formatearPrecio,
+    mensajeWhatsappCarrito,
+    type ItemCarrito,
+  } from "@/lib/carrito";
+  import { siteConfig } from "@/data/site";
+
+  const overlay = document.querySelector<HTMLElement>("[data-carrito-overlay]");
+  const panel = document.querySelector<HTMLElement>("[data-carrito-panel]");
+  const lista = document.querySelector<HTMLUListElement>("[data-carrito-lista]");
+  const vacio = document.querySelector<HTMLElement>("[data-carrito-vacio]");
+  const pie = document.querySelector<HTMLElement>("[data-carrito-pie]");
+  const totalEl = document.querySelector<HTMLElement>("[data-carrito-total]");
+  const enviarEl = document.querySelector<HTMLAnchorElement>("[data-carrito-enviar]");
+  const vaciarBtn = document.querySelector<HTMLButtonElement>("[data-carrito-vaciar]");
+  const plantilla = document.querySelector<HTMLTemplateElement>("[data-carrito-item-plantilla]");
+  const contadores = document.querySelectorAll<HTMLElement>("[data-carrito-contador]");
+
+  function actualizarContadores(items: ItemCarrito[]) {
+    const unidades = contarUnidades(items);
+    contadores.forEach((el) => {
+      el.textContent = String(unidades);
+      el.hidden = unidades === 0;
+    });
+  }
+
+  function renderizar(items: ItemCarrito[]) {
+    if (!lista || !vacio || !pie || !totalEl || !enviarEl) return;
+
+    lista.innerHTML = "";
+    const hayItems = items.length > 0;
+    vacio.hidden = hayItems;
+    pie.hidden = !hayItems;
+
+    items.forEach((item) => {
+      if (!plantilla) return;
+      const nodo = plantilla.content.cloneNode(true) as HTMLElement;
+
+      const img = nodo.querySelector<HTMLImageElement>(".carrito-item__imagen")!;
+      img.src = item.imagen;
+      img.alt = item.nombre;
+
+      nodo.querySelector(".carrito-item__nombre")!.textContent = item.nombre;
+      nodo.querySelector(".carrito-item__precio")!.textContent = `${formatearPrecio(item.precio)} c/u`;
+      nodo.querySelector("[data-carrito-cantidad]")!.textContent = String(item.cantidad);
+
+      nodo.querySelector("[data-carrito-restar]")!.addEventListener("click", () => {
+        actualizarCantidad(item.slug, item.cantidad - 1);
+      });
+      nodo.querySelector("[data-carrito-sumar]")!.addEventListener("click", () => {
+        actualizarCantidad(item.slug, item.cantidad + 1);
+      });
+      nodo.querySelector("[data-carrito-quitar]")!.addEventListener("click", () => {
+        quitarDelCarrito(item.slug);
+      });
+
+      lista.appendChild(nodo);
+    });
+
+    totalEl.textContent = formatearPrecio(totalCarrito(items));
+    enviarEl.href = `https://wa.me/${siteConfig.whatsappNumber}?text=${encodeURIComponent(mensajeWhatsappCarrito(items))}`;
+
+    actualizarContadores(items);
+  }
+
+  function abrirCarrito() {
+    if (!overlay || !panel) return;
+    overlay.hidden = false;
+    panel.hidden = false;
+    panel.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+  }
+
+  function cerrarCarrito() {
+    if (!overlay || !panel) return;
+    overlay.hidden = true;
+    panel.hidden = true;
+    panel.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+  }
+
+  document.querySelectorAll("[data-carrito-abrir]").forEach((boton) => {
+    boton.addEventListener("click", abrirCarrito);
+  });
+
+  document.querySelector("[data-carrito-cerrar]")?.addEventListener("click", cerrarCarrito);
+  overlay?.addEventListener("click", cerrarCarrito);
+  vaciarBtn?.addEventListener("click", vaciarCarrito);
+
+  window.addEventListener("keydown", (evento) => {
+    if (evento.key === "Escape") cerrarCarrito();
+  });
+
+  alCambiarCarrito(renderizar);
+  renderizar(obtenerCarrito());
+</script>

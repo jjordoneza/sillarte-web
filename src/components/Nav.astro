@@ -37,6 +37,15 @@ const links = [
     </nav>
 
     <div class="nav__acciones">
+      <button type="button" class="nav__carrito" data-carrito-abrir aria-label="Abrir carrito de compra">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="9" cy="21" r="1"></circle>
+          <circle cx="19" cy="21" r="1"></circle>
+          <path d="M2.5 3h2l2.6 12.4a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.6L21 8H6"></path>
+        </svg>
+        <span class="nav__carrito-contador" data-carrito-contador hidden>0</span>
+      </button>
+
       <a
         class="boton boton--dorado nav__cta"
         href={whatsappLink("Hola, quiero cotizar al por mayor la colección 2026 de Sillarte.")}
@@ -156,6 +165,48 @@ const links = [
     display: flex;
     align-items: center;
     gap: 1rem;
+  }
+
+  .nav__carrito {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: transparent;
+    border: 1px solid rgba(242, 235, 222, 0.35);
+    border-radius: 50%;
+    color: var(--hueso);
+  }
+
+  .nav__carrito svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .nav__carrito-contador {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 18px;
+    height: 18px;
+    padding-inline: 4px;
+    border-radius: 999px;
+    background: var(--dorado);
+    color: var(--carbon);
+    font-size: 0.65rem;
+    font-weight: 700;
+  }
+
+  /* El [hidden] del navegador pierde contra el display:flex de arriba
+     (misma especificidad, pero el nuestro va después): sin esto, el
+     contador en 0 se seguía viendo. */
+  .nav__carrito-contador[hidden] {
+    display: none;
   }
 
   .nav__cta {

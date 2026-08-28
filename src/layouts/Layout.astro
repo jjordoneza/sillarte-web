@@ -3,6 +3,7 @@ import "@/styles/global.css";
 import { siteConfig } from "@/data/site";
 import WhatsAppFlotante from "@/components/WhatsAppFlotante.astro";
 import VolverArriba from "@/components/VolverArriba.astro";
+import Carrito from "@/components/Carrito.astro";
 
 interface Props {
   title?: string;
@@ -77,5 +78,6 @@ const organizationJsonLd = {
     <slot />
     <WhatsAppFlotante />
     <VolverArriba />
+    <Carrito />
   </body>
 </html>
