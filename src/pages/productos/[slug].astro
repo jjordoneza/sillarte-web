@@ -174,11 +174,12 @@ const breadcrumbJsonLd = {
                       type="button"
                       class="producto__color-boton"
                       data-color-boton
-                      data-color={color}
+                      data-color={color.nombre}
+                      data-imagen={color.imagen}
                       role="radio"
                       aria-checked={index === 0 ? "true" : "false"}
                     >
-                      {color}
+                      {color.nombre}
                     </button>
                   ))}
                 </div>
@@ -901,6 +902,18 @@ const breadcrumbJsonLd = {
     boton.addEventListener("click", () => mostrarFoto(indice));
   });
 
+  // Elegir un color también cambia la foto principal a la de ESE color
+  // (cuando existe entre las fotos de la galería), para que la miniatura
+  // que se ve en el carrito coincida con el color que en verdad se pidió.
+  const botonesColor = Array.from(document.querySelectorAll<HTMLButtonElement>("[data-color-boton]"));
+  botonesColor.forEach((boton) => {
+    boton.addEventListener("click", () => {
+      botonesColor.forEach((otro) => otro.setAttribute("aria-checked", String(otro === boton)));
+      const indiceFoto = fotos.indexOf(boton.dataset.imagen ?? "");
+      if (indiceFoto !== -1) mostrarFoto(indiceFoto);
+    });
+  });
+
   function actualizarImagenLightbox() {
     if (!lightboxImagen || fotos.length === 0) return;
     lightboxImagen.src = fotos[indiceActual];
@@ -968,7 +981,6 @@ const breadcrumbJsonLd = {
 
   const cantidadInput = document.querySelector<HTMLInputElement>("[data-cantidad-input]");
   const botonAgregar = document.querySelector<HTMLButtonElement>("[data-agregar-carrito]");
-  const botonesColor = document.querySelectorAll<HTMLButtonElement>("[data-color-boton]");
 
   document.querySelector("[data-cantidad-restar]")?.addEventListener("click", () => {
     if (!cantidadInput) return;
@@ -980,18 +992,15 @@ const breadcrumbJsonLd = {
     cantidadInput.value = String(Math.max(1, Number(cantidadInput.value || 1) + 1));
   });
 
-  botonesColor.forEach((boton) => {
-    boton.addEventListener("click", () => {
-      botonesColor.forEach((otro) => otro.setAttribute("aria-checked", String(otro === boton)));
-    });
-  });
-
   botonAgregar?.addEventListener("click", () => {
     const { productoSlug, productoNombre, productoRef, productoPrecio, productoImagen } = botonAgregar.dataset;
     if (!productoSlug || !productoNombre || !productoRef || !productoPrecio || !productoImagen) return;
 
-    const colorSeleccionado = document.querySelector<HTMLButtonElement>('[data-color-boton][aria-checked="true"]')
-      ?.dataset.color;
+    const botonColorActivo = document.querySelector<HTMLButtonElement>('[data-color-boton][aria-checked="true"]');
+    const colorSeleccionado = botonColorActivo?.dataset.color;
+    // Con color elegido, la miniatura del carrito debe ser LA FOTO DE ESE
+    // color (no la foto por defecto del producto).
+    const imagenSeleccionada = botonColorActivo?.dataset.imagen || productoImagen;
 
     const cantidad = Math.max(1, Number(cantidadInput?.value || 1));
     agregarAlCarrito(
@@ -1000,7 +1009,7 @@ const breadcrumbJsonLd = {
         nombre: productoNombre,
         ref: productoRef,
         precio: Number(productoPrecio),
-        imagen: productoImagen,
+        imagen: imagenSeleccionada,
         color: colorSeleccionado,
       },
       cantidad

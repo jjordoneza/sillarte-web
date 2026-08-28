@@ -12,11 +12,13 @@ export type Product = {
   // Precio al detal (venta por unidad), en pesos colombianos.
   // El precio de mayoreo no se publica: se cotiza por WhatsApp según cantidad.
   price: number;
-  // Colores reales en los que existe la pieza (sólo cuando hay más de
-  // una opción real). Se usa para el selector de color del carrito: sin
-  // esto no habría forma de saber cuál color pidió el cliente cuando el
-  // modelo tiene varios.
-  colores?: string[];
+  // Colores reales en los que existe la pieza (sólo cuando hay más de una
+  // opción real), cada uno con la foto real de ESE color (de `image` o
+  // `galeria`). Se usa para el selector de color: además de guardar cuál
+  // color pidió el cliente, cambia la foto principal y la miniatura del
+  // carrito para que coincidan con el color elegido, no con la foto por
+  // defecto del producto.
+  colores?: { nombre: string; imagen: string }[];
   // Ficha técnica y descripciones completas (opcionales): se van llenando
   // pieza por pieza a medida que llega la información real de cada producto.
   // Aún no se muestran en la landing; quedan listas para una futura página
@@ -42,7 +44,10 @@ export const products: Product[] = [
     image: "/products/mesa-perla.jpg",
     scene: "/products/mesa-perla.jpg",
     price: 400000,
-    colores: ["Base negra", "Base blanca"],
+    colores: [
+      { nombre: "Base negra", imagen: "/products/mesa-perla.jpg" },
+      { nombre: "Base blanca", imagen: "/products/mesa-perla-blanca-ambiente.jpg" },
+    ],
     galeria: [
       "/products/mesa-perla-alt.jpg",
       "/products/mesa-perla-detalle-tablero.jpg",
@@ -108,7 +113,10 @@ export const products: Product[] = [
     image: "/products/silla-barril.jpg",
     scene: "/products/silla-barril-concepto.jpg",
     price: 220000,
-    colores: ["Camel", "Gris oscuro"],
+    colores: [
+      { nombre: "Camel", imagen: "/products/silla-barril.jpg" },
+      { nombre: "Gris oscuro", imagen: "/products/silla-barril-negro.jpg" },
+    ],
     galeria: [
       "/products/silla-barril-concepto.jpg",
       "/products/silla-barril-camel-alt.jpg",
@@ -171,7 +179,10 @@ export const products: Product[] = [
     // fondo blanco) — se usa una para los bloques inmersivos.
     scene: "/products/silla-abanico-escena.jpg",
     price: 315000,
-    colores: ["Negro", "Gris claro"],
+    colores: [
+      { nombre: "Negro", imagen: "/products/silla-abanico.jpg" },
+      { nombre: "Gris claro", imagen: "/products/silla-abanico-gris.jpg" },
+    ],
     galeria: [
       "/products/silla-abanico-escena-alt.jpg",
       "/products/silla-abanico-escena-dupla.jpg",
@@ -205,7 +216,10 @@ export const products: Product[] = [
     image: "/products/silla-alta.jpg",
     scene: "/products/silla-alta.jpg",
     price: 340000,
-    colores: ["Beige", "Negro"],
+    colores: [
+      { nombre: "Beige", imagen: "/products/silla-alta.jpg" },
+      { nombre: "Negro", imagen: "/products/silla-alta-negra.jpg" },
+    ],
     galeria: [
       "/products/silla-alta-frente.jpg",
       "/products/silla-alta-espalda.jpg",
@@ -242,7 +256,11 @@ export const products: Product[] = [
     image: "/products/silla-trama.jpg",
     scene: "/products/silla-trama.jpg",
     price: 150000,
-    colores: ["Blanco", "Rojo", "Verde"],
+    colores: [
+      { nombre: "Blanco", imagen: "/products/silla-trama.jpg" },
+      { nombre: "Rojo", imagen: "/products/silla-trama-rojo.jpg" },
+      { nombre: "Verde", imagen: "/products/silla-trama-verde.jpg" },
+    ],
     galeria: [
       "/products/silla-trama-alt.jpg",
       "/products/silla-trama-perfil.jpg",
