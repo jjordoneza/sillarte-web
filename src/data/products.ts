@@ -315,4 +315,24 @@ export const faq = [
     answer:
       "Sí, puedes descargar el catálogo PDF con medidas, materiales y estructura de precios de mayoreo desde el botón en la sección Mayoreo.",
   },
+  {
+    question: "¿Cuál es la diferencia entre la piedra sinterizada y el mármol natural?",
+    answer:
+      "La piedra sinterizada es un material fabricado que imita el veteado del mármol, pero es mucho más resistente: no se mancha, no se raya con facilidad y soporta calor directo sin dañarse, algo que el mármol natural no logra. Por eso la usamos en los tableros de nuestras mesas: mismo aspecto de lujo, sin los cuidados que exige la piedra natural.",
+  },
+  {
+    question: "¿Qué es el símil cuero que usan en algunas sillas?",
+    answer:
+      "Es un tapizado sintético que imita la textura y apariencia del cuero real, pero es más resistente al desgaste diario, más fácil de limpiar con un paño húmedo y no se agrieta con el tiempo. Lo usamos en piezas como la Silla Concha y la Silla Abanico.",
+  },
+  {
+    question: "¿Qué es el polipropileno tejido de la Silla Trama?",
+    answer:
+      "Es un plástico técnico resistente a la intemperie, los rayones y la humedad, tejido en un patrón tipo cesta que le da un aire cálido sin perder su bajo mantenimiento. Es liviano, fácil de limpiar y no se deteriora con el uso diario.",
+  },
+  {
+    question: "¿Desde dónde despachan los pedidos?",
+    answer:
+      "Importamos directamente y despachamos desde nuestra bodega en Yumbo, Valle del Cauca. Desde ahí enviamos a cualquier ciudad de Colombia.",
+  },
 ];
