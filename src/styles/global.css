@@ -158,6 +158,7 @@ textarea:focus-visible {
   font-weight: 400;
 }
 
+.sobre-oscuro .titular em,
 .sobre-oscuro .acento-dorado {
   color: var(--dorado-claro);
 }
