@@ -60,23 +60,35 @@ const contactoPattern = "^(\\+?[0-9][0-9\\s\\-]{6,14}|[^\\s@]+@[^\\s@]+\\.[^\\s@
         />
       </div>
 
-      <div class="mayoreo__campo">
-        <label for="interes">Pieza de interés</label>
-        <select id="interes" name="interes" required>
-          <option value="">Selecciona una opción</option>
-          {products.map((product) => (
-            <option value={`${product.name} (${product.ref})`}>
-              {product.name} ({product.ref})
-            </option>
-          ))}
-          <option value="Toda la colección">Toda la colección</option>
-        </select>
+      <span class="mayoreo__filas-etiqueta">Piezas de interés y cantidad aproximada</span>
+      <div class="mayoreo__filas" data-filas>
+        <div class="mayoreo__fila" data-fila>
+          <div class="mayoreo__campo mayoreo__campo--pieza">
+            <label class="solo-lectores">Pieza de interés</label>
+            <select data-fila-producto required>
+              <option value="">Selecciona una pieza</option>
+              {products.map((product) => (
+                <option value={`${product.name} (${product.ref})`}>
+                  {product.name} ({product.ref})
+                </option>
+              ))}
+              <option value="Toda la colección">Toda la colección</option>
+            </select>
+          </div>
+          <div class="mayoreo__campo mayoreo__campo--cantidad">
+            <label class="solo-lectores">Cantidad aproximada</label>
+            <input type="number" data-fila-cantidad min="1" placeholder="Cant." required />
+          </div>
+          <button type="button" class="mayoreo__quitar-fila" data-quitar-fila aria-label="Quitar esta pieza" hidden>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+              <line x1="5" y1="5" x2="19" y2="19"></line>
+              <line x1="19" y1="5" x2="5" y2="19"></line>
+            </svg>
+          </button>
+        </div>
       </div>
 
-      <div class="mayoreo__campo">
-        <label for="cantidad">Cantidad aproximada</label>
-        <input type="number" id="cantidad" name="cantidad" min="1" required />
-      </div>
+      <button type="button" class="mayoreo__agregar-fila" data-agregar-fila>+ Agregar otra pieza</button>
 
       <div class="mayoreo__acciones">
         <button type="submit" class="boton boton--dorado" data-envio="whatsapp">Enviar por WhatsApp</button>
@@ -87,6 +99,33 @@ const contactoPattern = "^(\\+?[0-9][0-9\\s\\-]{6,14}|[^\\s@]+@[^\\s@]+\\.[^\\s@
     </form>
   </div>
 </section>
+
+<template data-fila-plantilla>
+  <div class="mayoreo__fila" data-fila>
+    <div class="mayoreo__campo mayoreo__campo--pieza">
+      <label class="solo-lectores">Pieza de interés</label>
+      <select data-fila-producto required>
+        <option value="">Selecciona una pieza</option>
+        {products.map((product) => (
+          <option value={`${product.name} (${product.ref})`}>
+            {product.name} ({product.ref})
+          </option>
+        ))}
+        <option value="Toda la colección">Toda la colección</option>
+      </select>
+    </div>
+    <div class="mayoreo__campo mayoreo__campo--cantidad">
+      <label class="solo-lectores">Cantidad aproximada</label>
+      <input type="number" data-fila-cantidad min="1" placeholder="Cant." required />
+    </div>
+    <button type="button" class="mayoreo__quitar-fila" data-quitar-fila aria-label="Quitar esta pieza">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+        <line x1="5" y1="5" x2="19" y2="19"></line>
+        <line x1="19" y1="5" x2="5" y2="19"></line>
+      </svg>
+    </button>
+  </div>
+</template>
 
 <style>
   .mayoreo__grid {
@@ -183,6 +222,70 @@ const contactoPattern = "^(\\+?[0-9][0-9\\s\\-]{6,14}|[^\\s@]+@[^\\s@]+\\.[^\\s@
     color: var(--gris);
   }
 
+  .mayoreo__filas-etiqueta {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--hueso-suave);
+  }
+
+  .mayoreo__filas {
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .mayoreo__fila {
+    display: grid;
+    grid-template-columns: 1fr 5.5rem auto;
+    gap: 0.6rem;
+    align-items: center;
+  }
+
+  .mayoreo__campo--pieza,
+  .mayoreo__campo--cantidad {
+    gap: 0;
+  }
+
+  .mayoreo__quitar-fila {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 1px solid rgba(242, 235, 222, 0.22);
+    background: transparent;
+    color: var(--hueso-suave);
+  }
+
+  .mayoreo__quitar-fila[hidden] {
+    display: none;
+  }
+
+  .mayoreo__quitar-fila svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .mayoreo__quitar-fila:hover {
+    color: var(--hueso);
+    border-color: rgba(242, 235, 222, 0.4);
+  }
+
+  .mayoreo__agregar-fila {
+    justify-self: start;
+    background: transparent;
+    border: none;
+    color: var(--dorado-claro);
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+
+  .mayoreo__agregar-fila:hover {
+    text-decoration: underline;
+  }
+
   .mayoreo__acciones {
     display: flex;
     flex-wrap: wrap;
@@ -209,12 +312,67 @@ const contactoPattern = "^(\\+?[0-9][0-9\\s\\-]{6,14}|[^\\s@]+@[^\\s@]+\\.[^\\s@
       grid-template-columns: 1.05fr 0.95fr;
     }
   }
+
+  @media (max-width: 420px) {
+    .mayoreo__fila {
+      grid-template-columns: 1fr auto;
+      grid-template-areas:
+        "producto producto"
+        "cantidad quitar";
+    }
+
+    .mayoreo__campo--pieza {
+      grid-area: producto;
+    }
+
+    .mayoreo__campo--cantidad {
+      grid-area: cantidad;
+    }
+
+    .mayoreo__quitar-fila {
+      grid-area: quitar;
+    }
+  }
 </style>
 
 <script is:inline define:vars={{ whatsappNumber: siteConfig.whatsappNumber, email: siteConfig.email }}>
   // Envía la solicitud de cotización por WhatsApp o correo, según el botón usado.
+  // Permite varias piezas (con su propia cantidad) en un mismo envío: cada
+  // fila se agrega/quita dinámicamente y se lista aparte en el mensaje.
   // NOTA: `whatsappNumber` y `email` vienen de src/data/site.ts — actualizarlos ahí.
   const form = document.getElementById("form-cotizacion");
+  const filasContenedor = document.querySelector("[data-filas]");
+  const plantillaFila = document.querySelector("[data-fila-plantilla]");
+  const botonAgregarFila = document.querySelector("[data-agregar-fila]");
+
+  function actualizarBotonesQuitar() {
+    if (!filasContenedor) return;
+    const filas = filasContenedor.querySelectorAll("[data-fila]");
+    filas.forEach((fila) => {
+      const boton = fila.querySelector("[data-quitar-fila]");
+      if (boton) boton.hidden = filas.length <= 1;
+    });
+  }
+
+  function activarQuitarFila(fila) {
+    fila.querySelector("[data-quitar-fila]")?.addEventListener("click", () => {
+      fila.remove();
+      actualizarBotonesQuitar();
+    });
+  }
+
+  if (filasContenedor) {
+    filasContenedor.querySelectorAll("[data-fila]").forEach(activarQuitarFila);
+  }
+
+  botonAgregarFila?.addEventListener("click", () => {
+    if (!filasContenedor || !plantillaFila) return;
+    const nuevaFila = plantillaFila.content.firstElementChild.cloneNode(true);
+    filasContenedor.appendChild(nuevaFila);
+    activarQuitarFila(nuevaFila);
+    actualizarBotonesQuitar();
+    nuevaFila.querySelector("[data-fila-producto]")?.focus();
+  });
 
   form?.addEventListener("submit", (event) => {
     const submitter = event.submitter;
@@ -224,15 +382,23 @@ const contactoPattern = "^(\\+?[0-9][0-9\\s\\-]{6,14}|[^\\s@]+@[^\\s@]+\\.[^\\s@
     const data = new FormData(form);
     const nombre = data.get("nombre-negocio");
     const contacto = data.get("contacto");
-    const interes = data.get("interes");
-    const cantidad = data.get("cantidad");
+
+    const piezas = Array.from(filasContenedor?.querySelectorAll("[data-fila]") ?? [])
+      .map((fila) => ({
+        producto: fila.querySelector("[data-fila-producto]")?.value ?? "",
+        cantidad: fila.querySelector("[data-fila-cantidad]")?.value ?? "",
+      }))
+      .filter((fila) => fila.producto && fila.cantidad);
+
+    const listadoPiezas = piezas
+      .map((fila, indice) => `${indice + 1}. ${fila.producto} — ${fila.cantidad} unidades aprox.`)
+      .join("\n");
 
     const mensaje =
       `Hola, quiero cotizar al por mayor la colección 2026 de Sillarte.\n` +
       `Nombre/negocio: ${nombre}\n` +
-      `Contacto: ${contacto}\n` +
-      `Interés: ${interes}\n` +
-      `Cantidad aproximada: ${cantidad}`;
+      `Contacto: ${contacto}\n\n` +
+      `Piezas de interés:\n${listadoPiezas}`;
 
     if (via === "mail") {
       window.location.href = `mailto:${email}?subject=${encodeURIComponent(
