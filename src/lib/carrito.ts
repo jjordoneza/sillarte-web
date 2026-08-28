@@ -9,10 +9,19 @@ export interface ItemCarrito {
   precio: number;
   imagen: string;
   cantidad: number;
+  // Sólo presente en piezas con más de un color real (ver
+  // `Product.colores` en products.ts). Dos líneas del mismo modelo pero
+  // con color distinto se tratan como ítems separados: si no, no habría
+  // forma de saber cuál color pidió el cliente.
+  color?: string;
 }
 
 const CLAVE_ALMACENAMIENTO = "sillarte-carrito";
 const EVENTO_CAMBIO = "carrito:cambio";
+
+function mismaLinea(a: Pick<ItemCarrito, "slug" | "color">, b: Pick<ItemCarrito, "slug" | "color">): boolean {
+  return a.slug === b.slug && (a.color ?? null) === (b.color ?? null);
+}
 
 export function obtenerCarrito(): ItemCarrito[] {
   try {
@@ -35,7 +44,7 @@ function guardarCarrito(items: ItemCarrito[]) {
 
 export function agregarAlCarrito(item: Omit<ItemCarrito, "cantidad">, cantidad = 1) {
   const items = obtenerCarrito();
-  const existente = items.find((i) => i.slug === item.slug);
+  const existente = items.find((i) => mismaLinea(i, item));
   if (existente) {
     existente.cantidad += cantidad;
   } else {
@@ -44,20 +53,20 @@ export function agregarAlCarrito(item: Omit<ItemCarrito, "cantidad">, cantidad =
   guardarCarrito(items);
 }
 
-export function actualizarCantidad(slug: string, cantidad: number) {
+export function actualizarCantidad(slug: string, color: string | undefined, cantidad: number) {
   const items = obtenerCarrito();
-  const item = items.find((i) => i.slug === slug);
+  const item = items.find((i) => mismaLinea(i, { slug, color }));
   if (!item) return;
   if (cantidad <= 0) {
-    guardarCarrito(items.filter((i) => i.slug !== slug));
+    guardarCarrito(items.filter((i) => !mismaLinea(i, { slug, color })));
   } else {
     item.cantidad = cantidad;
     guardarCarrito(items);
   }
 }
 
-export function quitarDelCarrito(slug: string) {
-  guardarCarrito(obtenerCarrito().filter((i) => i.slug !== slug));
+export function quitarDelCarrito(slug: string, color: string | undefined) {
+  guardarCarrito(obtenerCarrito().filter((i) => !mismaLinea(i, { slug, color })));
 }
 
 export function vaciarCarrito() {
@@ -83,10 +92,10 @@ export function formatearPrecio(valor: number): string {
 }
 
 export function mensajeWhatsappCarrito(items: ItemCarrito[]): string {
-  const lineas = items.map(
-    (item, indice) =>
-      `${indice + 1}. ${item.nombre} (Ref. ${item.ref}) — ${item.cantidad} x ${formatearPrecio(item.precio)} = ${formatearPrecio(item.precio * item.cantidad)}`
-  );
+  const lineas = items.map((item, indice) => {
+    const colorTexto = item.color ? ` — Color: ${item.color}` : "";
+    return `${indice + 1}. ${item.nombre}${colorTexto} (Ref. ${item.ref}) — ${item.cantidad} x ${formatearPrecio(item.precio)} = ${formatearPrecio(item.precio * item.cantidad)}`;
+  });
   return (
     `Hola, quiero hacer un pedido con estas piezas de Sillarte:\n\n` +
     `${lineas.join("\n")}\n\n` +
