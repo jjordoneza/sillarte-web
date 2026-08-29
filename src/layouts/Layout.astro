@@ -4,6 +4,7 @@ import { siteConfig } from "@/data/site";
 import WhatsAppFlotante from "@/components/WhatsAppFlotante.astro";
 import VolverArriba from "@/components/VolverArriba.astro";
 import Carrito from "@/components/Carrito.astro";
+import Analytics from "@vercel/analytics/astro";
 
 interface Props {
   title?: string;
@@ -79,5 +80,6 @@ const organizationJsonLd = {
     <WhatsAppFlotante />
     <VolverArriba />
     <Carrito />
+    <Analytics />
   </body>
 </html>
