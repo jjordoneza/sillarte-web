@@ -12,6 +12,10 @@ export const siteConfig = {
   instagram: "https://www.instagram.com/sillarte_/",
   tiktok: "https://www.tiktok.com/@sillarte_",
   facebook: "",
+  // Contenedor de Google Tag Manager (tagmanager.google.com) — desde ahí se
+  // agrega la etiqueta de Google Analytics (GA4) y cualquier otra a futuro
+  // (Meta Pixel, etc.) sin volver a tocar el código del sitio.
+  gtmId: "GTM-TSBCSL52",
 };
 
 // Genera un enlace de WhatsApp con mensaje precargado.
